@@ -1,3 +1,7 @@
+mcdh_hotel:
+    resource: "@MCDHHotelBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: @AppBundle/Controller/
     type:     annotation

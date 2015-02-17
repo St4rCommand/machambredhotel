@@ -1,0 +1,3 @@
+mcdh_hotel_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: MCDHHotelBundle:Default:index }
