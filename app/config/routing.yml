@@ -1,6 +1,6 @@
 mcdh_hotel:
     resource: "@MCDHHotelBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /hotel
 
 app:
     resource: @AppBundle/Controller/
