@@ -1,0 +1,25 @@
+{%  extends "MCDHHotelBundle::layout.html.twig" %}
+
+{% block title %}
+  Accueil - {{ parent() }}
+{% endblock %}
+
+{% block mcdh_hotel_body %}
+
+  <h2>Liste des hotels</h2>
+
+  <ul>
+    {% for advert in listHotels %}
+      <li>
+        <a href="{{ path('mcdh_hotel_view', {'id': hotel.id}) }}">
+          {{ hotel.name }}
+        </a>
+        à {{ hotel.city }} ({{ hotel.country }}),
+        ajouté le {{ hotel.date|date('d/m/Y') }}
+      </li>
+    {% else %}
+      <li>Pas (encore !) d'hôtels</li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}
