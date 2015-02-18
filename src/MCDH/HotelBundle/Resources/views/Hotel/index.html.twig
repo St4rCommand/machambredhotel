@@ -9,7 +9,7 @@
   <h2>Liste des hotels</h2>
 
   <ul>
-    {% for advert in listHotels %}
+    {% for hotel in listHotels %}
       <li>
         <a href="{{ path('mcdh_hotel_view', {'id': hotel.id}) }}">
           {{ hotel.name }}

@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * @author Romain
  *
  */
-class DefaultController extends Controller
+class HotelController extends Controller
 {
 	/**
 	 * Homepage for HotelBundle
@@ -32,11 +32,11 @@ class DefaultController extends Controller
     	}
     	
     	$listHotels = array(
-    		array('id' => 1, 'name' => 'Carlton', 'city' => 'Lille', 'country' => 'France', 'date' => '17/02/2015')
+    		array('id' => 1, 'name' => 'Carlton', 'city' => 'Lille', 'country' => 'France', 'date' => '17022015')
     	);
     	
     	//affichage de la page demandée (liste des hôtels)
-        return $this->render('MCDHHotelBundle:Default:index.html.twig', array(
+        return $this->render('MCDHHotelBundle:Hotel:index.html.twig', array(
         	'listHotels' => $listHotels
         ));
     }
@@ -60,7 +60,7 @@ class DefaultController extends Controller
     	}
     	
     	//affichage du formulaire de saisie d'un nouvel hôtel
-    	return $this->render('MCDHHotelBundle:Default:add.html.twig');
+    	return $this->render('MCDHHotelBundle:Hotel:add.html.twig');
     }
     
     /**
@@ -86,7 +86,7 @@ class DefaultController extends Controller
      */
     public function viewAction($id){
     	
-    	return $this->render('MCDHHotelBundle:Default:view.html.twig', array(
+    	return $this->render('MCDHHotelBundle:Hotel:view.html.twig', array(
       		'id' => $id
    		));
     }
@@ -111,6 +111,6 @@ class DefaultController extends Controller
 		}
 		
 		//affichage du formulaire de saisie d'un nouvel hôtel complété des informations de l'hôtel
-    	return $this->render('MCDHHotelBundle:Default:edit.html.twig');
+    	return $this->render('MCDHHotelBundle:Hotel:edit.html.twig');
     }
 }
