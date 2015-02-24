@@ -48,7 +48,7 @@ Changer la variable d'environnement pour pouvoir executer les commandes Git dans
 - Se déplacer jusqu'au dossier où télécharger le projet (par exemple *C:\wamp\www*)
 - Taper la commande `git clone https://github.com/St4rCommand/machambredhotel.git`
 
-###4.3. Depuis l'interface de GitHub (pour collaborateurs du projet)
+###4.2. Depuis l'interface de GitHub (pour collaborateurs du projet)
 - Depuis l'interface GitHub, cliquer sur le *+* en haut à gauche de la fenêtre
 - Cliquer ensuite sur *Clone*
 - Cliquer sur le projet *machambredhotel*
@@ -57,4 +57,4 @@ Changer la variable d'environnement pour pouvoir executer les commandes Git dans
 
 ##5. Mettre à jour symfony
 Il est nécessaire de télécharger les bibliothèques de Symfony afin que le projet fonctionne sur votre ordinateur.
-Pour cela, il faut se placer dans le dossier de votre projet et executer la commande `php ../composer.phar install` (dans le cas où composer est installer une branche plus haut que le projet).
+Pour cela, il faut se placer dans le dossier de votre projet et executer la commande `php ..\composer.phar install` (dans le cas où composer est installer une branche plus haut que le projet).
