@@ -14,11 +14,11 @@
         <a href="{{ path('mcdh_hotel_view', {'id': hotel.id}) }}">
           {{ hotel.name }}
         </a>
-        à {{ hotel.city }} ({{ hotel.country }}),
-        ajouté le {{ hotel.date|date('d/m/Y') }}
+         {{ hotel.city }} ({{ hotel.country }}),
+        ajoutÃ© le {{ hotel.date|date('d/m/Y') }}
       </li>
     {% else %}
-      <li>Pas (encore !) d'hôtels</li>
+      <li>Pas (encore !) d'hÃ´tels</li>
     {% endfor %}
   </ul>
 
