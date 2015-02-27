@@ -3,6 +3,7 @@
 namespace MCDH\HotelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Translation\Tests\String;
 
 /**
  * Hotel
@@ -41,6 +42,13 @@ class Hotel
      * @ORM\Column(name="postcode", type="string", length=5)
      */
     private $postcode;
+    
+    /**
+     * @var String
+     * 
+     * @ORM\Column(name="city", type="string", length=50)
+     */
+    private $city;
 
     /**
      * @var string
@@ -180,5 +188,28 @@ class Hotel
     public function getAddedDate()
     {
         return $this->added_date;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     * @return Hotel
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string 
+     */
+    public function getCity()
+    {
+        return $this->city;
     }
 }

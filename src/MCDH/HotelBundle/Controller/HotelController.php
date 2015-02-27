@@ -5,6 +5,7 @@ namespace MCDH\HotelBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use MCDH\HotelBundle\Entity\Hotel;
 
 /**
  * Main controller for HotelBundle
@@ -24,10 +25,10 @@ class HotelController extends Controller
     public function indexAction($page)
     {
     	
-    	//si la page demandée n'existe pas
+    	//si la page demandÃ©e n'existe pas
     	if ($page < 1) {
     		
-    		//exception levée
+    		//exception levÃ©e
     		throw new NotFoundHttpException('Page "'.$page.'" inexistante.'); // Traduction ?
     	}
     	
@@ -35,7 +36,7 @@ class HotelController extends Controller
     		array('id' => 1, 'name' => 'Carlton', 'city' => 'Lille', 'country' => 'France', 'date' => '17022015')
     	);
     	
-    	//affichage de la page demandée (liste des hôtels)
+    	//affichage de la page demandÃ©e (liste des hï¿½tels)
         return $this->render('MCDHHotelBundle:Hotel:index.html.twig', array(
         	'listHotels' => $listHotels
         ));
@@ -49,17 +50,36 @@ class HotelController extends Controller
      */
     public function addAction(Request $request){
     	
-    	//si le formulaire est validé
+    	//instanciation de l'entitÃ©
+    	$hotel = new Hotel();
+    	$hotel->setName("Carlton");
+    	$hotel->setAddress("Place centrale");
+    	$hotel->setPostCode("59000");
+    	$hotel->setCity("Lille");
+    	$hotel->setCountry("France");
+    	$hotel->setAddedDate(new \DateTime());
+    	
+    	//rÃ©cuprÃ©ation de l'Entity Manager
+    	$em = $this->getDoctrine()->getManager();
+    	
+    	//persitance de l'entitÃ©
+    	$em->persist($hotel);
+    	
+    	//flush de l'entitÃ©
+    	$em->flush();
+
+    	
+    	//si le formulaire est validÃ©
     	if ($request->isMethod('POST')){
     		
-    		//affichage d'un message pour confirmer l'enregistrement de l'hôtel
-    		$request->getSession()->getFlashBag()->add('notice', 'Hôtel bien enregistré.'); //Traduction ?
+    		//affichage d'un message pour confirmer l'enregistrement de l'hÃ´tel
+    		$request->getSession()->getFlashBag()->add('notice', 'HÃ´tel bien enregistrÃ©.'); //Traduction ?
     		
-    		//redirection vers la page de visualisation de l'hôtel
+    		//redirection vers la page de visualisation de l'hÃ´tel
     		return $this->redirect($this->generateUrl('mcdh_hotel_view', array('id' => 5)));
     	}
     	
-    	//affichage du formulaire de saisie d'un nouvel hôtel
+    	//affichage du formulaire de saisie d'un nouvel hÃ´tel
     	return $this->render('MCDHHotelBundle:Hotel:add.html.twig');
     }
     
@@ -71,8 +91,8 @@ class HotelController extends Controller
      */
     public function deleteAction($id, Request $request){
     	
-    	//affichage d'un message pour confirmer la suppression de l'hôtel
-    	$request->getSession()->getFlashBag()->add('notice', 'Hôtel supprimé.'); //Traduction ?
+    	//affichage d'un message pour confirmer la suppression de l'hÃ´tel
+    	$request->getSession()->getFlashBag()->add('notice', 'Hï¿½tel supprimï¿½.'); //Traduction ?
     	
     	//redirection vers la page d'accueil du bundle
     	return $this->redirect($this->generateUrl('mcdh_hotel_homepage'));
@@ -86,8 +106,20 @@ class HotelController extends Controller
      */
     public function viewAction($id){
     	
+
+
+    	$repository = $this->getDoctrine()
+    	->getManager()
+    	->getRepository('MCDHHotelBundle:Hotel');
+    	 
+    	$hotel = $repository->find($id);
+    	
+    	if($hotel == null){
+    		throw new NotFoundHttpException("L'hÃ´tel portant l'identifiant ".$id." ne peut Ãªtre affichÃ© car il n'existe pas. ");
+    	}
+    	
     	return $this->render('MCDHHotelBundle:Hotel:view.html.twig', array(
-      		'id' => $id
+      		'hotel' => $hotel
    		));
     }
     
@@ -100,17 +132,17 @@ class HotelController extends Controller
      */
     public function editAction($id, Request $request){
     	
-    	//si le formulaire est validé
+    	//si le formulaire est validÃ©
     	if ($request->isMethod('POST')){
     		
-    		//affichage d'un message pour confirmer l'enregistrement de l'hôtel
-    		$request->getSession()->getFlashBag()->add('notice', 'Hôtel modifié.'); //Traduction ?
+    		//affichage d'un message pour confirmer l'enregistrement de l'hÃ´tel
+    		$request->getSession()->getFlashBag()->add('notice', 'Hï¿½tel modifiï¿½.'); //Traduction ?
     		
-    		//redirection vers la page de visualisation de l'hôtel
+    		//redirection vers la page de visualisation de l'hï¿½tel
     		return $this->redirect($this->generateUrl('mcdh_hotel_view', array('id' => 5)));
 		}
 		
-		//affichage du formulaire de saisie d'un nouvel hôtel complété des informations de l'hôtel
+		//affichage du formulaire de saisie d'un nouvel hÃ´tel complÃ©tÃ© des informations de l'hÃ´tel
     	return $this->render('MCDHHotelBundle:Hotel:edit.html.twig');
     }
 }
