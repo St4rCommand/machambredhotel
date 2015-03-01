@@ -24,21 +24,26 @@ class HotelController extends Controller
 	 */
     public function indexAction($page)
     {
-    	
     	//si la page demandée n'existe pas
     	if ($page < 1) {
-    		
+    	
     		//exception levée
     		throw new NotFoundHttpException('Page "'.$page.'" inexistante.'); // Traduction ?
     	}
     	
-    	$listHotels = array(
-    		array('id' => 1, 'name' => 'Carlton', 'city' => 'Lille', 'country' => 'France', 'date' => '17022015')
-    	);
+    	$em = $this->getDoctrine()->getManager();
+
+    	$hotels = $em->getRepository('MCDHHotelBundle:Hotel')->findAll();
+    	
+    	if (null === $hotels) {
+    		throw new NotFoundHttpException("Aucun hôtel n'est présent dans la base de données");
+    	}
+    	
     	
     	//affichage de la page demandée (liste des h�tels)
         return $this->render('MCDHHotelBundle:Hotel:index.html.twig', array(
-        	'listHotels' => $listHotels
+        	'hotels' => $hotels,
+        	'page' => $page
         ));
     }
     

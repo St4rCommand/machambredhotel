@@ -9,17 +9,19 @@
   <h2>Liste des hotels</h2>
 
   <ul>
-    {% for hotel in listHotels %}
+    {% for hotel in hotels %}
       <li>
         <a href="{{ path('mcdh_hotel_view', {'id': hotel.id}) }}">
           {{ hotel.name }}
         </a>
          {{ hotel.city }} ({{ hotel.country }}),
-        ajouté le {{ hotel.date|date('d/m/Y') }}
+        ajouté le {{ hotel.addedDate|date('d-m-Y') }}
       </li>
     {% else %}
       <li>Pas (encore !) d'hôtels</li>
     {% endfor %}
   </ul>
+  
+  <p> Page {{ page }}. </p>
 
 {% endblock %}
