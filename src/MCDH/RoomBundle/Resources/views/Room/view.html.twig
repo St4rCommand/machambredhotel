@@ -1,0 +1,12 @@
+{% extends "MCDHRoomBundle::layout.html.twig" %}
+
+{% block title %}
+	Chambre n°{{ room.num }} - {{ parent() }}
+{% endblock %}
+
+	{% block mcdh_room_body %}
+	
+	<p>	Chambre n°{{ room.num }}</p>
+	<p>	étage n°{{ room.floor }}</p>
+	
+	{% endblock %}
