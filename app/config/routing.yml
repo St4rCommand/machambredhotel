@@ -1,0 +1,4 @@
+mcdh_room:
+    resource: "@MCDHRoomBundle/Resources/config/routing.yml"
+    prefix:   /
+
