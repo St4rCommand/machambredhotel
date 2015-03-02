@@ -30,10 +30,12 @@ class HotelController extends Controller
     		//exception levée
     		throw new NotFoundHttpException('Page "'.$page.'" inexistante.'); // Traduction ?
     	}
-    	
-    	$em = $this->getDoctrine()->getManager();
 
-    	$hotels = $em->getRepository('MCDHHotelBundle:Hotel')->findAll();
+    	$hotels = $this
+    		->getDoctrine()
+    		->getManager()
+    		->getRepository('MCDHHotelBundle:Hotel')
+    		->findAll();
     	
     	if (null === $hotels) {
     		throw new NotFoundHttpException("Aucun hôtel n'est présent dans la base de données");

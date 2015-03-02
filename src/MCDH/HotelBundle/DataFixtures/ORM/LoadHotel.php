@@ -18,11 +18,23 @@ class LoadHotel implements FixtureInterface{
 				"city"=>"Lille",
 				"country"=>"France"),
 			array(
-					"name" => "Les Pieds dans l'Eau",
-					"address"=>"28, chemin de la Folle Entreprise",
-					"postcode"=>"61400",
-					"city"=>"Saint-Langis-lès-Mortagne",
-					"country"=>"France")
+				"name" => "Hôtel du tribunal",
+				"address"=>"Place du tribunal",
+				"postcode"=>"61400",
+				"city"=>"Mortagne au Perche",
+				"country"=>"France"),
+			array(
+				"name" => "The Bryant Park Hotel",
+				"address"=>"40 West 40th Street",
+				"postcode"=>"NY 10018",
+				"city"=>"New York",
+				"country"=>"USA"),
+			array(
+				"name" => "George V Paris",
+				"address"=>"31 avenue George V",
+				"postcode"=>"75008",
+				"city"=>"Paris",
+				"country"=>"France")
 		);
 		
 		foreach ($hotels as $hotel){
