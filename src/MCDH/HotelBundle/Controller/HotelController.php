@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use MCDH\HotelBundle\Entity\Hotel;
+use MCDH\HotelBundle\Form\HotelType;
 
 /**
  * Main controller for HotelBundle
@@ -59,35 +60,29 @@ class HotelController extends Controller
     	
     	//instanciation de l'entité
     	$hotel = new Hotel();
-    	$hotel->setName("Carlton");
-    	$hotel->setAddress("Place centrale");
-    	$hotel->setPostCode("59000");
-    	$hotel->setCity("Lille");
-    	$hotel->setCountry("France");
-    	$hotel->setAddedDate(new \DateTime());
+    	$form = $this->get('form.factory')->create(new HotelType(), $hotel);
     	
-    	//récupréation de l'Entity Manager
-    	$em = $this->getDoctrine()->getManager();
-    	
-    	//persitance de l'entité
-    	$em->persist($hotel);
-    	
-    	//flush de l'entité
-    	$em->flush();
-
-    	
-    	//si le formulaire est validé
-    	if ($request->isMethod('POST')){
+    	if($form->handleRequest($request)->isValid()){
     		
-    		//affichage d'un message pour confirmer l'enregistrement de l'hôtel
-    		$request->getSession()->getFlashBag()->add('notice', 'Hôtel bien enregistré.'); //Traduction ?
+    		//récupréation de l'Entity Manager
+    		$em = $this->getDoctrine()->getManager();
+    		 
+    		//persitance de l'entité
+    		$em->persist($hotel);
+    		$hotel->setAddedDate(new \Datetime());
+    		 
+    		//flush de l'entité
+    		$em->flush();
     		
-    		//redirection vers la page de visualisation de l'hôtel
-    		return $this->redirect($this->generateUrl('mcdh_hotel_view', array('id' => 5)));
+    		$request->getSession()->getFlashBag()->add('notice','Annonce bien enregistrée.');
+    		
+    		return $this->redirect($this->generateUrl('mcdh_hotel_view', array('id' => $hotel->getId())));
+    		
     	}
     	
-    	//affichage du formulaire de saisie d'un nouvel hôtel
-    	return $this->render('MCDHHotelBundle:Hotel:add.html.twig');
+    	return $this->render('MCDHHotelBundle:Hotel:add.html.twig',array(
+    			'form' => $form->createView(),
+    	));
     }
     
     /**
@@ -98,11 +93,25 @@ class HotelController extends Controller
      */
     public function deleteAction($id, Request $request){
     	
-    	//affichage d'un message pour confirmer la suppression de l'hôtel
-    	$request->getSession()->getFlashBag()->add('notice', 'H�tel supprim�.'); //Traduction ?
+    	$em = $this->getDoctrine()->getManager();
+    	
+    	$hotel = $em->getRepository('MCDHHotelBundle:Hotel')->find($id);
+    	
+    	if($hotel == null){
+    		throw $this->createNotFoundException("L'hôtel portant l'identifiant ".$id." n'existe pas. ");
+    	}
+    	
+    	if($request->isMethod('POST')){
+    		//affichage d'un message pour confirmer la suppression de l'hôtel
+    		$request->getSession()->getFlashBag()->add('info', 'Hôtel supprimé.');
+    		
+    		return $this->redirect($this->generateUrl('mcdh_hotel_homepage'));
+    	}
     	
     	//redirection vers la page d'accueil du bundle
-    	return $this->redirect($this->generateUrl('mcdh_hotel_homepage'));
+    	return $this->render('MCDHHotelBundle:Hotel:delete.html.twig', array(
+      		'hotel' => $hotel
+   		));
     }
     
     /**
@@ -138,6 +147,41 @@ class HotelController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function editAction($id, Request $request){
+    	
+    	$repository = $this->getDoctrine()
+    	->getManager()
+    	->getRepository('MCDHHotelBundle:Hotel');
+    	
+    	$hotel = $repository->find($id);
+    	
+    	$form = $this->get('form.factory')->create(new HotelType(), $hotel);
+    	 
+    	if($form->handleRequest($request)->isValid()){
+    	
+    		//récupréation de l'Entity Manager
+    		$em = $this->getDoctrine()->getManager();
+    		 
+    		//persitance de l'entité
+    		$em->persist($hotel);
+    		$hotel->setAddedDate(new \Datetime());
+    		 
+    		//flush de l'entité
+    		$em->flush();
+    	
+    		$request->getSession()->getFlashBag()->add('notice','Annonce bien enregistrée.');
+    	
+    		return $this->redirect($this->generateUrl('mcdh_hotel_view', array('id' => $hotel->getId())));
+    	
+    	}
+    	 
+    	return $this->render('MCDHHotelBundle:Hotel:add.html.twig',array(
+    			'form' => $form->createView(),
+    	));
+    	
+    	
+    	
+    	
+    	
     	
     	//si le formulaire est validé
     	if ($request->isMethod('POST')){
