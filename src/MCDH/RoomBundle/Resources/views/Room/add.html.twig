@@ -1,0 +1,9 @@
+{% extends "MCDHRoomBundle::layout.html.twig" %}
+
+{% block title %}
+	Chambre - {{ parent() }}
+{% endblock %}
+
+	{% block mcdh_room_body %}
+{{ form(form) }}	
+	{% endblock %}

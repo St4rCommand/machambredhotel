@@ -42,19 +42,7 @@ class Room
      */
     private $person;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="beds", type="integer")
-     */
-    private $beds;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="status", type="boolean")
-     */
-    private $status;
 
     /**
      * @var string
@@ -85,12 +73,12 @@ class Room
     /**
      * Set nom
      *
-     * @param string $nom
+     * @param string $name
      * @return Room
      */
-    public function setNom($nom)
+    public function setName($name)
     {
-        $this->nom = $nom;
+        $this->nom = $name;
 
         return $this;
     }
@@ -100,9 +88,9 @@ class Room
      *
      * @return string 
      */
-    public function getNom()
+    public function getName()
     {
-        return $this->nom;
+        return $this->name;
     }
 
     /**
@@ -151,53 +139,7 @@ class Room
         return $this->person;
     }
 
-    /**
-     * Set beds
-     *
-     * @param integer $beds
-     * @return Room
-     */
-    public function setBeds($beds)
-    {
-        $this->beds = $beds;
-
-        return $this;
-    }
-
-    /**
-     * Get beds
-     *
-     * @return integer 
-     */
-    public function getBeds()
-    {
-        return $this->beds;
-    }
-
-    /**
-     * Set status
-     *
-     * @param boolean $status
-     * @return Room
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return boolean 
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
+      /**
      * Set orientation
      *
      * @param string $orientation
