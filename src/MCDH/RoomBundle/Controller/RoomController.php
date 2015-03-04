@@ -4,6 +4,7 @@ namespace MCDH\RoomBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MCDH\RoomBundle\Entity\Room;
+use Symfony\Component\HttpFoundation\Request;
 
 
 class RoomController extends Controller{
@@ -12,7 +13,7 @@ class RoomController extends Controller{
 	
 	}
 	
-	public function addAction(){
+	public function addAction(Request $request){
 		// On crée un objet room
 		$room = new Room();
 		
@@ -24,13 +25,30 @@ class RoomController extends Controller{
 		->add('name',      'text')
 		->add('floor',     'integer')
 		->add('price',    'text')
-		->add('orientation', 'choice')
+		->add('orientation', 'text')
 		->add('person', 'integer')
 		->add('save',      'submit')
 		;
 		
 		// À partir du formBuilder, on génère le formulaire
 		$form = $formBuilder->getForm();
+		
+		if($form->handleRequest($request)->isValid()){
+			
+			//on récup le manager
+			$em = $this->getDoctrine()->getManager();
+			
+			
+		//persistance de l'entité room (sauvegarder dans la base).
+			
+			$em->persist($room);
+			
+			$em->flush();
+			
+			return $this->redirect($this->generateUrl('mcdh_room_view',array('id' => $room->getId())));
+			
+		}
+		
 		
 		// On passe la méthode createView() du formulaire à la vue
 		// afin qu'elle puisse afficher le formulaire toute seule
@@ -45,10 +63,9 @@ class RoomController extends Controller{
 	
 	public function viewAction($id){
 		
-		$room = array(
-			"num" => 203,
-			"floor" => 2,
-		);
+		$repository = $this->getDoctrine()->getManager()->getRepository("MCDHRoomBundle:Room");
+		$room = $repository->find($id);
+		
 		
 		return $this->render('MCDHRoomBundle:Room:view.html.twig', array(
 				'room' => $room
