@@ -4,6 +4,8 @@ namespace MCDH\HotelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Translation\Tests\String;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Config\Definition\IntegerNode;
 
 /**
  * Hotel
@@ -44,7 +46,7 @@ class Hotel
     private $postcode;
     
     /**
-     * @var String
+     * @var string
      * 
      * @ORM\Column(name="city", type="string", length=50)
      */
@@ -63,7 +65,41 @@ class Hotel
      * @ORM\Column(name="added_date", type="date")
      */
     private $added_date;
+    
+   	/**
+   	 * @var string
+   	 * 
+   	 * @ORM\Column(name="website", type="string", length=255, unique=true, nullable=true)
+   	 */
+    private $website;
+    
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="phone", type="string", length=15, nullable=true)
+     */
+    private $phone_number;
 
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="email", type="string", length=255, unique=true, nullable=true)
+     */
+    private $email;
+    
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="description", type="text", length=500)
+     */
+    private $description;
+    
+    /**
+     * @var integer
+     * 
+     * @ORM\Column(name="floor", type="integer")
+     */
+    private $floor;
 
     /**
      * Get id
@@ -211,5 +247,120 @@ class Hotel
     public function getCity()
     {
         return $this->city;
+    }
+
+    /**
+     * Set website
+     *
+     * @param string $website
+     * @return Hotel
+     */
+    public function setWebsite($website)
+    {
+        $this->website = $website;
+
+        return $this;
+    }
+
+    /**
+     * Get website
+     *
+     * @return string 
+     */
+    public function getWebsite()
+    {
+        return $this->website;
+    }
+
+    /**
+     * Set phone_number
+     *
+     * @param integer $phoneNumber
+     * @return Hotel
+     */
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->phone_number = $phoneNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get phone_number
+     *
+     * @return integer 
+     */
+    public function getPhoneNumber()
+    {
+        return $this->phone_number;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Hotel
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Hotel
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set floor
+     *
+     * @param integer $floor
+     * @return Hotel
+     */
+    public function setFloor($floor)
+    {
+        $this->floor = $floor;
+
+        return $this;
+    }
+
+    /**
+     * Get floor
+     *
+     * @return integer 
+     */
+    public function getFloor()
+    {
+        return $this->floor;
     }
 }
