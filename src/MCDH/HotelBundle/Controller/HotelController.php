@@ -101,17 +101,13 @@ class HotelController extends Controller
     		throw $this->createNotFoundException("L'hôtel portant l'identifiant ".$id." n'existe pas. ");
     	}
     	
-    	if($request->isMethod('POST')){
-    		//affichage d'un message pour confirmer la suppression de l'hôtel
-    		$request->getSession()->getFlashBag()->add('info', 'Hôtel supprimé.');
+    	$em->remove($hotel);
+    	$em->flush();
     		
-    		return $this->redirect($this->generateUrl('mcdh_hotel_homepage'));
-    	}
-    	
-    	//redirection vers la page d'accueil du bundle
-    	return $this->render('MCDHHotelBundle:Hotel:delete.html.twig', array(
-      		'hotel' => $hotel
-   		));
+    	//affichage d'un message pour confirmer la suppression de l'hôtel
+    	$request->getSession()->getFlashBag()->add('info', 'Hôtel supprimé.');
+    		
+    	return $this->redirect($this->generateUrl('mcdh_hotel_homepage'));
     }
     
     /**
@@ -174,8 +170,9 @@ class HotelController extends Controller
     	
     	}
     	 
-    	return $this->render('MCDHHotelBundle:Hotel:add.html.twig',array(
+    	return $this->render('MCDHHotelBundle:Hotel:edit.html.twig',array(
     			'form' => $form->createView(),
+    			'hotel' => $hotel
     	));
     	
     	
