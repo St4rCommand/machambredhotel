@@ -1,0 +1,27 @@
+mcdh_hotel_homepage:
+    path:     /{page}
+    defaults: { _controller: MCDHHotelBundle:Hotel:index, page: 1 }
+    requirements:
+        page: \d*
+    
+mcdh_hotel_add:
+    path:     /add
+    defaults: { _controller: MCDHHotelBundle:Hotel:add }
+    
+mcdh_hotel_delete:
+    path:     /delete/{id}
+    defaults: { _controller: MCDHHotelBundle:Hotel:delete }
+    requirements:
+        id: \d+
+    
+mcdh_hotel_edit:
+    path:     /edit/{id}
+    defaults: { _controller: MCDHHotelBundle:Hotel:edit }
+    requirements:
+        id: \d*
+
+mcdh_hotel_view:
+    path:     /view/{id}
+    defaults: { _controller: MCDHHotelBundle:Hotel:view }
+    requirements:
+        id: \d+

@@ -1,0 +1,36 @@
+{%  extends "MCDHHotelBundle::layout.html.twig" %}
+
+{% block title %}
+  {{ parent() }}
+{% endblock %}
+
+{% block mcdh_hotel_body %}
+
+	<h2>Liste des hotels</h2>
+	
+		<a href="{{ path('mcdh_hotel_add') }}">Ajouter</a>
+
+		<ul>
+		    {% for hotel in hotels %}
+		      <li>
+		        <a href="{{ path('mcdh_hotel_view', {'id': hotel.id}) }}"> {{ hotel.name }}</a>
+				
+		    	{{ hotel.city }} ({{ hotel.country }}),
+		        ajouté le {{ hotel.addedDate|date('d-m-Y') }}
+		        
+		        <a href="{{ path('mcdh_hotel_edit', {'id':hotel.id}) }}">Editer</a>
+		        <a href="{{ path('mcdh_hotel_delete', {'id':hotel.id}) }}">Supprimer</a>
+		      </li>
+		    {% else %}
+		      <li>Pas (encore !) d'hôtels</li>
+		    {% endfor %}
+		</ul>
+  
+		<ul>
+			{% for p in range(1,nbPages) %}
+				<li {% if p == page %} class="active"{% endif %}>
+					<a href="{{ path('mcdh_hotel_homepage', {'page':p}) }}">{{ p }}</a></li>
+			{% endfor %}
+		</ul>
+
+{% endblock %}

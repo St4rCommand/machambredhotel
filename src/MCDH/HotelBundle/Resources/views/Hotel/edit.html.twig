@@ -1,0 +1,14 @@
+{%  extends "MCDHHotelBundle::layout.html.twig" %}
+
+{% block title %}
+  {{ hotel.name }} - {{ parent() }}
+{% endblock %}
+
+{% block mcdh_hotel_body %}
+
+  	<h2>Edition un hôtel</h2>
+	<a href="{{ path('mcdh_hotel_delete', {'id':hotel.id}) }}">Supprimer</a>
+
+	{{ form(form) }}
+  
+{% endblock %}
