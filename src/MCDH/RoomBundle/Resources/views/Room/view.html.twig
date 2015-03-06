@@ -9,4 +9,7 @@
 	<p>Chambre {{ room.name }}, {{ room.floor }}ème étage</p>
 	<p>{{ room.floor }} personne(s), {{ room.orientation }}</p>
 	
+	<a href="{{ path('mcdh_room_edit', {'id':room.id}) }}">Editer</a>
+	<a href="{{ path('mcdh_room_delete', {'id':room.id}) }}">Supprimer</a>
+	
 	{% endblock %}

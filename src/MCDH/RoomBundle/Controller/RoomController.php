@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MCDH\RoomBundle\Entity\Room;
 use Symfony\Component\HttpFoundation\Request;
 use MCDH\RoomBundle\Form\RoomType;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Main controller for RoomBundle
@@ -98,8 +99,41 @@ class RoomController extends Controller{
 	 * 
 	 * @param unknown $id
 	 */
-	public function deleteAction($id){
+	public function deleteAction($id, Request $request){
 		
+		//récupération de l'Entity Manager
+		$em = $this->getDoctrine()->getManager();
+		
+		//récupération dans la base de données de la chambre à supprimer
+		$room = $em->getRepository('MCDHRoomBundle:Room')->find($id);
+		
+		//affichage d'une erreur si la chambre n'existe pas
+		if($room == null){
+			throw $this->createNotFoundException("Aucune chambre ne porte l'identifiant ".$id);
+		}
+		
+		//création d'un formulaire de validation
+		$form = $this->createFormBuilder()
+		->add('delete', 'submit')
+		->getForm();
+		
+		//si le formulaire a été validé
+		if($form->handleRequest($request)->isValid()){
+			//suppression de la chambre
+			$em->remove($room);
+			$em->flush();
+			
+			//affichage d'un message pour confirmer la suppression de la chambre
+			$request->getSession()->getFlashBag()->add('info', 'Chambre supprimée.');
+			
+			//retour à la page d'accueil
+			return $this->redirect($this->generateUrl('mcdh_room_add'));
+		}
+		
+		return $this->render('MCDHRoomBundle:Room:delete.html.twig',array(
+				'room'=>$room,
+				'form'=>$form->createView()
+		));
 	}
 	
 	/**
@@ -114,6 +148,10 @@ class RoomController extends Controller{
 		//récupération dans la base de la chambre à afficher
 		$room = $this->getDoctrine()->getManager()->getRepository("MCDHRoomBundle:Room")->find($id);
 		
+		//affichage d'une erreur si la chambre n'existe pas
+		if($room == null){
+			throw new NotFoundHttpException("Aucune chambre ne porte l'identifiant ".$id);
+		}
 		
 		return $this->render('MCDHRoomBundle:Room:view.html.twig', array(
 				'room' => $room
