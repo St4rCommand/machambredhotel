@@ -43,7 +43,6 @@ class Room
     private $person;
 
 
-
     /**
      * @var string
      *
@@ -52,11 +51,10 @@ class Room
     private $orientation;
 
     /**
-     * @var integer
+     * @var decimal
      *
-     * @ORM\Column(name="price", type="integer")
+     * @ORM\Column(name="price", type="decimal", scale=2)
      */
-    
     private $price;
     
     

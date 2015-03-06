@@ -5,48 +5,56 @@ namespace MCDH\RoomBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MCDH\RoomBundle\Entity\Room;
 use Symfony\Component\HttpFoundation\Request;
+use MCDH\RoomBundle\Form\RoomType;
 
-
+/**
+ * Main controller for RoomBundle
+ * 
+ * @author Simon
+ *
+ */
 class RoomController extends Controller{
 
+	/**
+	 * Edit a room
+	 * 
+	 * @param unknown $id
+	 */
 	public function editAction($id){
 	
 	}
 	
+	/**
+	 * Add a room
+	 * 
+	 * @param Request $request
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+	 */
 	public function addAction(Request $request){
-		// On crée un objet room
+		
+		//création d'un objet room
 		$room = new Room();
 		
-		// On crée le FormBuilder grâce au service form factory
-		$formBuilder = $this->get('form.factory')->createBuilder('form', $room);
+		//création du formulaire
+		$form = $this->get('form.factory')->create(new RoomType(), $room);
 		
-		// On ajoute les champs de l'entité que l'on veut à notre formulaire
-		$formBuilder
-		->add('name',      'text')
-		->add('floor',     'integer')
-		->add('price',    'text')
-		->add('orientation', 'text')
-		->add('person', 'integer')
-		->add('save',      'submit')
-		;
-		
-		// À partir du formBuilder, on génère le formulaire
-		$form = $formBuilder->getForm();
-		
+		//si le formulaire a été validé
 		if($form->handleRequest($request)->isValid()){
 			
-			//on récup le manager
+			//récupération de l'Entity Manager
 			$em = $this->getDoctrine()->getManager();
 			
-			
-		//persistance de l'entité room (sauvegarder dans la base).
-			
+			//persistance de l'entité room (sauvegarder dans la base)
 			$em->persist($room);
 			
+			$request->getSession()->getFlashBag()->add('notice','Chambre bien enregistrée.');
+			
+			//flush de l'entité
 			$em->flush();
 			
-			return $this->redirect($this->generateUrl('mcdh_room_view',array('id' => $room->getId())));
 			
+			//redirection vers la chambre ajoutée
+			return $this->redirect($this->generateUrl('mcdh_room_view',array('id' => $room->getId())));
 		}
 		
 		
@@ -57,10 +65,22 @@ class RoomController extends Controller{
 		));
 	}
 	
+	/**
+	 * Delete a room
+	 * 
+	 * @param unknown $id
+	 */
 	public function deleteAction($id){
 		
 	}
 	
+	/**
+	 * 
+	 * View a room
+	 * 
+	 * @param unknown $id
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
 	public function viewAction($id){
 		
 		$repository = $this->getDoctrine()->getManager()->getRepository("MCDHRoomBundle:Room");
