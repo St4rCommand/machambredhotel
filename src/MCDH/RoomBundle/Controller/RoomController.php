@@ -20,8 +20,36 @@ class RoomController extends Controller{
 	 * 
 	 * @param unknown $id
 	 */
-	public function editAction($id){
-	
+	public function editAction($id, Request $request){
+		
+		//récupération de la chmabre dans la base de données
+		$room = $this->getDoctrine()->getManager()->getRepository('MCDHRoomBundle:Room')->find($id);
+		
+		//création du formulaire
+		$form = $this->get('form.factory')->create(new RoomType(), $room);
+		
+		//si le formulaire a été validé
+		if($form->handleRequest($request)->isValid()){
+			
+			//récupération de l'Entity Mangager
+			$em = $this->getDoctrine()->getManager();
+			
+			//flush de l'entité
+			$em->flush();
+			
+			//affichage d'un message pour confirmer l'enregistrement des modifications
+			$request->getSession()->getFlashBag()->add('notice','Les modifications de la chambre ont bien été prise en compte');
+					
+			//redirection vers la page affichant la chambre
+			return $this->redirect($this->generateUrl('mcdh_room_view', array(
+				'id'=>$room->getId()
+			)));
+		}
+		
+		return $this->render('MCDHRoomBundle:Room:edit.html.twig', array(
+			'form' => $form->createView(),
+			'room' => $room
+		));
 	}
 	
 	/**
@@ -83,8 +111,8 @@ class RoomController extends Controller{
 	 */
 	public function viewAction($id){
 		
-		$repository = $this->getDoctrine()->getManager()->getRepository("MCDHRoomBundle:Room");
-		$room = $repository->find($id);
+		//récupération dans la base de la chambre à afficher
+		$room = $this->getDoctrine()->getManager()->getRepository("MCDHRoomBundle:Room")->find($id);
 		
 		
 		return $this->render('MCDHRoomBundle:Room:view.html.twig', array(

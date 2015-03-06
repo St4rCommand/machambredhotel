@@ -6,7 +6,7 @@
 
 	{% block mcdh_room_body %}
 	
-	<p>	Chambre {{ room.name }}</p>
-	<p>	étage n°{{ room.floor }}</p>
+	<p>Chambre {{ room.name }}, {{ room.floor }}ème étage</p>
+	<p>{{ room.floor }} personne(s), {{ room.orientation }}</p>
 	
 	{% endblock %}
