@@ -31,23 +31,33 @@ class HotelController extends Controller
     		//exception levée
     		throw new NotFoundHttpException('Page "'.$page.'" inexistante.'); // Traduction ?
     	}
+    	
+    	$nbPerPage = 1;
 
     	//récupération des hotels de la base de données
     	$hotels = $this
     		->getDoctrine()
     		->getManager()
     		->getRepository('MCDHHotelBundle:Hotel')
-    		->findAll();
+    		->getHotels($page,$nbPerPage);
     	
     	//exception si aucun hotel trouvé
     	if (null === $hotels) {
     		throw new NotFoundHttpException("Aucun hôtel n'est présent dans la base de données");
     	}
     	
+    	//calcul du nombre de pages
+    	$nbPages = ceil(count($hotels)/$nbPerPage);
+    	
+    	//si la page demandée est supérieur au nombre de page
+    	if ($page > $nbPages) {
+    		throw $this->createNotFoundException("Page ".$page." inexistante.");
+    	}
     	
     	//affichage de la liste des hôtels
         return $this->render('MCDHHotelBundle:Hotel:index.html.twig', array(
         	'hotels' => $hotels,
+        	'nbPages' => $nbPages,
         	'page' => $page
         ));
     }
