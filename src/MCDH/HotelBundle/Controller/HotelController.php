@@ -111,15 +111,28 @@ class HotelController extends Controller
     		throw $this->createNotFoundException("L'hôtel portant l'identifiant ".$id." n'existe pas. ");
     	}
     	
-    	//suppression de l'hôtel
-    	$em->remove($hotel);
-    	$em->flush();
-    		
-    	//affichage d'un message pour confirmer la suppression de l'hôtel
-    	$request->getSession()->getFlashBag()->add('info', 'Hôtel supprimé.');
+    	//création d'un formulaire de validation
+    	$form = $this->createFormBuilder()
+    		->add('delete',	'submit')
+    		->getForm();
     	
-    	//retour à la page d'accueil
-    	return $this->redirect($this->generateUrl('mcdh_hotel_homepage'));
+    	//si le formulaire a été validé
+    	if($form->handleRequest($request)->isValid()){
+    		//suppression de l'hôtel
+    		$em->remove($hotel);
+    		$em->flush();
+    		
+    		//affichage d'un message pour confirmer la suppression de l'hôtel
+    		$request->getSession()->getFlashBag()->add('info', 'Hôtel supprimé.');
+    		 
+    		//retour à la page d'accueil
+    		return $this->redirect($this->generateUrl('mcdh_hotel_homepage'));
+    	}
+
+    	return $this->render('MCDHHotelBundle:Hotel:delete.html.twig',array(
+    		'hotel'=>$hotel,
+    		'form'=>$form->createView()
+    	));
     }
     
     /**
@@ -176,7 +189,6 @@ class HotelController extends Controller
     	
     	}
     	
-    	//affichage du formulaire
     	return $this->render('MCDHHotelBundle:Hotel:edit.html.twig',array(
     			'form' => $form->createView(),
     			'hotel' => $hotel

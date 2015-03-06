@@ -1,0 +1,16 @@
+{%  extends "MCDHHotelBundle::layout.html.twig" %}
+
+{% block title %}
+  Ajout - {{ parent() }}
+{% endblock %}
+
+{% block mcdh_hotel_body %}
+
+  	<h2>Suppression d'un hôtel</h2>
+  
+	<p>Etes-vous sur de vouloir supprimer {{ hotel.name }} ?</p>
+  	
+  	<a href="{{ path('mcdh_hotel_homepage') }}">Annuler</a>
+  	{{ form(form) }}
+  	
+{% endblock %}

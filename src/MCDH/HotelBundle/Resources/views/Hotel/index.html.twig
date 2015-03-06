@@ -20,7 +20,7 @@
         <a href="{{ path('mcdh_hotel_delete', {'id':hotel.id}) }}">Supprimer</a>
       </li>
     {% else %}
-      <li>Pas (encore !) d'hôtels</li>
+      <li>Pas (encore !) d'hôtels <a href="{{ path('mcdh_hotel_add') }}">Ajouter</a></li>
     {% endfor %}
   </ul>
   
