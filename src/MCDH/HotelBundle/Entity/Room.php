@@ -57,6 +57,14 @@ class Room
      */
     private $price;
     
+    /**
+     * @var hotel
+     * 
+     * @ORM\ManyToOne(targetEntity="MCDH\HotelBundle\Entity\Hotel")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $hotel;
+    
     
     /**
      * Get id
@@ -183,5 +191,28 @@ class Room
     public function getPrice()
     {
         return $this->price;
+    }
+
+    /**
+     * Set hotel
+     *
+     * @param \MCDH\HotelBundle\Entity\Hotel $hotel
+     * @return Room
+     */
+    public function setHotel(\MCDH\HotelBundle\Entity\Hotel $hotel)
+    {
+        $this->hotel = $hotel;
+
+        return $this;
+    }
+
+    /**
+     * Get hotel
+     *
+     * @return \MCDH\HotelBundle\Entity\Hotel 
+     */
+    public function getHotel()
+    {
+        return $this->hotel;
     }
 }

@@ -64,7 +64,7 @@ class Hotel
      * 
      * @ORM\Column(name="added_date", type="date")
      */
-    private $added_date;
+    private $addedDate;
     
    	/**
    	 * @var string
@@ -76,9 +76,9 @@ class Hotel
     /**
      * @var string
      * 
-     * @ORM\Column(name="phone", type="string", length=15, nullable=true)
+     * @ORM\Column(name="phone_number", type="string", length=15, nullable=true)
      */
-    private $phone_number;
+    private $phoneNumber;
 
     /**
      * @var string
@@ -204,26 +204,26 @@ class Hotel
     }
 
     /**
-     * Set added_date
+     * Set addedDate
      *
      * @param \DateTime $addedDate
      * @return Hotel
      */
     public function setAddedDate($addedDate)
     {
-        $this->added_date = $addedDate;
+        $this->addedDate = $addedDate;
 
         return $this;
     }
 
     /**
-     * Get added_date
+     * Get addedDate
      *
      * @return \DateTime 
      */
     public function getAddedDate()
     {
-        return $this->added_date;
+        return $this->addedDate;
     }
 
     /**
@@ -273,26 +273,26 @@ class Hotel
     }
 
     /**
-     * Set phone_number
+     * Set phoneNumber
      *
      * @param integer $phoneNumber
      * @return Hotel
      */
     public function setPhoneNumber($phoneNumber)
     {
-        $this->phone_number = $phoneNumber;
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }
 
     /**
-     * Get phone_number
+     * Get phoneNumber
      *
      * @return integer 
      */
     public function getPhoneNumber()
     {
-        return $this->phone_number;
+        return $this->phoneNumber;
     }
 
     /**
