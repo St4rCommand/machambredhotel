@@ -21,7 +21,7 @@ class RoomController extends Controller{
 	 * 
 	 * @param unknown $idRoom
 	 */
-	public function editAction($idHotel, $idRoom, Request $request){
+	public function editAction($idRoom, Request $request){
 		
 		//récupération de la chmabre dans la base de données
 		$room = $this->getDoctrine()->getManager()->getRepository('MCDHHotelBundle:Room')->find($idRoom);
@@ -43,7 +43,6 @@ class RoomController extends Controller{
 					
 			//redirection vers la page affichant la chambre
 			return $this->redirect($this->generateUrl('mcdh_hotel_view_room', array(
-				'idHotel'=>$idHotel,
 				'idRoom'=>$room->getId()
 			)));
 		}
@@ -62,17 +61,26 @@ class RoomController extends Controller{
 	 */
 	public function addAction($idHotel, Request $request){
 		
+		//récupération de l'Entity Manager
+		$em = $this->getDoctrine()->getManager();
+		 
+		//récupération dans la base de données de l'hôtel à supprimer
+		$hotel = $em->getRepository('MCDHHotelBundle:Hotel')->find($idHotel);
+		 
+		//affichage d'une erreur si l'hôtel n'existe pas
+		if($hotel == null){
+			throw $this->createNotFoundException("L'hôtel portant l'identifiant ".$idHotel." n'existe pas. ");
+		}
+		
 		//création d'un objet room
 		$room = new Room();
+		$room->setHotel($hotel);
 		
 		//création du formulaire
 		$form = $this->get('form.factory')->create(new RoomType(), $room);
 		
 		//si le formulaire a été validé
 		if($form->handleRequest($request)->isValid()){
-			
-			//récupération de l'Entity Manager
-			$em = $this->getDoctrine()->getManager();
 			
 			//persistance de l'entité room (sauvegarder dans la base)
 			$em->persist($room);
@@ -85,7 +93,6 @@ class RoomController extends Controller{
 			
 			//redirection vers la chambre ajoutée
 			return $this->redirect($this->generateUrl('mcdh_hotel_view_room',array(
-				'idHotel'=>$idHotel,
 				'idRoom' => $room->getId())));
 		}
 		
@@ -94,6 +101,7 @@ class RoomController extends Controller{
 		// afin qu'elle puisse afficher le formulaire toute seule
 		return $this->render('MCDHHotelBundle:Room:add.html.twig', array(
 				'form' => $form->createView(),
+				'hotel' => $hotel
 		));
 	}
 	
@@ -102,7 +110,7 @@ class RoomController extends Controller{
 	 * 
 	 * @param unknown $idRoom
 	 */
-	public function deleteAction($idHotel, $idRoom, Request $request){
+	public function deleteAction($idRoom, Request $request){
 		
 		//récupération de l'Entity Manager
 		$em = $this->getDoctrine()->getManager();
@@ -148,7 +156,7 @@ class RoomController extends Controller{
 	 * @param unknown $idRoom
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	public function viewAction($idHotel, $idRoom){
+	public function viewAction($idRoom){
 		
 		//récupération dans la base de la chambre à afficher
 		$room = $this->getDoctrine()->getManager()->getRepository("MCDHHotelBundle:Room")->find($idRoom);

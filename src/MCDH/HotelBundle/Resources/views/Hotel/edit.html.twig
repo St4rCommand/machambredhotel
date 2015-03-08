@@ -5,10 +5,15 @@
 {% endblock %}
 
 {% block mcdh_hotel_body %}
-
-  	<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':hotel.id}) }}">{{ hotel.name }}</a></h2>
-	<a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}">Supprimer</a>
-
-	{{ form(form) }}
+	
+	{% block mcdh_hotel_page %}
+  		{{ parent() }} <a href="{{ path('mcdh_hotel_view',{'idHotel':hotel.id}) }}">Revenir à l'hôtel</a>
+  		<a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}">Supprimer</a>
+		<a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}">Ajouter une chambre</a>
+  	{% endblock %}
+  	
+	{% block mcdh_hotel_content %}
+		{{ form(form) }}
+	{% endblock %}
   
 {% endblock %}

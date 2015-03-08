@@ -5,12 +5,12 @@
 {% endblock %}
 
 {% block mcdh_hotel_body %}
-
-  	<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':hotel.id}) }}">{{ hotel.name }}</a></h2>
-  
-	<p>Etes-vous sur de vouloir supprimer {{ hotel.name }} ?</p>
   	
-  	<a href="{{ path('mcdh_hotel_homepage') }}">Annuler</a>
-  	{{ form(form) }}
+	{% block mcdh_hotel_content %}
+		<p>Etes-vous sur de vouloir supprimer {{ hotel.name }} ?</p>
+  	
+  		<a href="{{ path('mcdh_hotel_view',{'idHotel':hotel.id}) }}">Revenir à l'hôtel</a>
+  		{{ form(form) }}
+	{% endblock %}
   	
 {% endblock %}

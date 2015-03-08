@@ -4,12 +4,14 @@
 	Chambre {{ room.name }} - {{ parent() }}
 {% endblock %}
 
-	{% block mcdh_room_body %}
-	
-	<p>Chambre {{ room.name }}, {{ room.floor }}ème étage</p>
-	<p>{{ room.floor }} personne(s), {{ room.orientation }}</p>
-	
-	<a href="{{ path('mcdh_hotel_edit_room', {'idHotel':2,'idRoom':room.id}) }}">Editer</a>
-	<a href="{{ path('mcdh_hotel_delete_room', {'idHotel':2,'idRoom':room.id}) }}">Supprimer</a>
-	
+{% block mcdh_hotel_body %}
+
+	{% block mcdh_hotel_content %}
+  		<p>Chambre {{ room.name }}, {{ room.floor }}ème étage</p>
+		<p>{{ room.person }} personne(s), {{ room.orientation }}</p>
+		
+		<a href="{{ path('mcdh_hotel_edit_room', {'idRoom':room.id}) }}">Editer</a>
+		<a href="{{ path('mcdh_hotel_delete_room', {'idRoom':room.id}) }}">Supprimer</a>
 	{% endblock %}
+	
+{% endblock %}

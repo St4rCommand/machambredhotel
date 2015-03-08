@@ -5,9 +5,16 @@
 {% endblock %}
 
 {% block mcdh_room_body %}
-	<h2>Suppression d'une chambre</h2>
+
+
+	{% block mcdh_hotel_content %}
 	
-	<p>Etes-vous sur de vouloir supprimer la chambre {{ room.name }} ?</p>
-	<a href="{{ path('mcdh_hotel_view_room', {'idHotel':2,'idRoom':room.id}) }}">Annuler</a>
-	{{ form(form) }}
+		<h2>Suppression d'une chambre</h2>
+		
+		<p>Etes-vous sur de vouloir supprimer la chambre {{ room.name }} ?</p>
+		<a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}">Revenir à la chambre</a>
+		{{ form(form) }}
+	
+	{% endblock %}
+	
 {% endblock %}

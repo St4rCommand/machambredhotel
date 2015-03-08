@@ -6,13 +6,21 @@
 
 {% block body %}
 
-  <h1><a href="{{ path('mcdh_hotel_homepage') }}">Hôtels</a></h1>
+	<h1><a href="{{ path('mcdh_hotel_homepage') }}">Hôtels</a></h1>
 
-  {% block mcdh_hotel_body %}
-  	
-  {% endblock %}
+	{% block mcdh_hotel_page %}
+		{% if hotel is defined %}
+			<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':hotel.id}) }}">{{ hotel.name }}</a></h2>
+		{% elseif room is defined %}
+			<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':room.hotel.id}) }}">{{ room.hotel.name }}</a></h2>
+		{% else %}
+		
+		{% endif %}
+	{% endblock %}
   
-  {% block mcdh_room_body %}
-  {% endblock %}
+  
+	{% block mcdh_hotel_content %}
+  	
+	{% endblock %}
 
 {% endblock %}

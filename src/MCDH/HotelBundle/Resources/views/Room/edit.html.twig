@@ -4,11 +4,15 @@
 	Chambre - {{ parent() }}
 {% endblock %}
 
-{% block mcdh_room_body %}
+{% block mcdh_hotel_body %}
 
-	<h2>Edition d'une chambre</h2>
-	<a href="{{ path('mcdh_hotel_delete_room', {'idHotel':2,'idRoom':room.id}) }}">Supprimer</a>
+	{% block mcdh_hotel_content %}
+	
+  		<h2>Edition d'une chambre</h2> <a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}">Revenir à la chambre</a>
+		<a href="{{ path('mcdh_hotel_delete_room', {'idRoom':room.id}) }}">Supprimer</a>
 
-	{{ form(form) }}
+		{{ form(form) }}
+	
+	{% endblock %}
 	
 {% endblock %}

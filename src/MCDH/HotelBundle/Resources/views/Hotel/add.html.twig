@@ -6,8 +6,12 @@
 
 {% block mcdh_hotel_body %}
 
-  	<h2>Ajout d'un hôtel</h2>
-  
-  	{{ form(form) }}
+	{% block mcdh_hotel_page %}
+  		<h2>Ajout d'un hôtel</h2>
+  	{% endblock %}
+  	
+	{% block mcdh_hotel_content %}
+		{{ form(form) }}
+	{% endblock %}
   	
 {% endblock %}

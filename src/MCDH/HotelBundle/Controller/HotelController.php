@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use MCDH\HotelBundle\Entity\Hotel;
 use MCDH\HotelBundle\Form\HotelType;
+use MCDH\HotelBundle\Entity\Room;
 
 /**
  * Main controller for HotelBundle
@@ -153,17 +154,22 @@ class HotelController extends Controller
      */
     public function viewAction($idHotel){
     	
+    	$em = $this->getDoctrine()->getManager();
+    	
     	//récupération dans la base de l'hôtel à afficher
-    	$hotel = $this->getDoctrine()->getManager()->getRepository('MCDHHotelBundle:Hotel')->find($idHotel);
+    	$hotel = $em->getRepository('MCDHHotelBundle:Hotel')->find($idHotel);
     	
     	//affichage d'une erreur si l'hôtel n'existe pas
     	if($hotel == null){
     		throw new NotFoundHttpException("L'hôtel portant l'identifiant ".$idHotel." ne peut être affiché car il n'existe pas. ");
     	}
     	
+    	$rooms = $em->getRepository('MCDHHotelBundle:Room')->findBy(array('hotel' => $hotel));
+    	
     	//affichage des caractéristiques de l'hôtel
     	return $this->render('MCDHHotelBundle:Hotel:view.html.twig', array(
-      		'hotel' => $hotel
+      		'hotel' => $hotel,
+    		'rooms' => $rooms
    		));
     }
     

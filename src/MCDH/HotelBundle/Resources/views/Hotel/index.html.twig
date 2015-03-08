@@ -6,8 +6,11 @@
 
 {% block mcdh_hotel_body %}
 
+	{% block mcdh_hotel_page %}
+		<a href="{{ path('mcdh_hotel_add') }}">Ajouter un hôtel</a>
+	{% endblock %}
 	
-		<a href="{{ path('mcdh_hotel_add') }}">Ajouter</a>
+	{% block mcdh_hotel_content %}
 
 		<ul>
 		    {% for hotel in hotels %}
@@ -32,5 +35,7 @@
 					<a href="{{ path('mcdh_hotel_homepage', {'page':p}) }}">{{ p }}</a></li>
 			{% endfor %}
 		</ul>
+		
+	{% endblock %}
 
 {% endblock %}
