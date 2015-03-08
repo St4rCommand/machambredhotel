@@ -1,0 +1,14 @@
+{% extends "MCDHRoomBundle::layout.html.twig" %}
+
+{% block title %}
+	Chambre - {{ parent() }}
+{% endblock %}
+
+{% block mcdh_room_body %}
+
+	<h2>Edition d'une chambre</h2>
+	<a href="{{ path('mcdh_room_delete', {'id':room.id}) }}">Supprimer</a>
+
+	{{ form(form) }}
+	
+{% endblock %}
