@@ -6,7 +6,7 @@
 
 {% block mcdh_hotel_body %}
 
-  	<h2>Suppression d'un hôtel</h2>
+  	<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':hotel.id}) }}">{{ hotel.name }}</a></h2>
   
 	<p>Etes-vous sur de vouloir supprimer {{ hotel.name }} ?</p>
   	
