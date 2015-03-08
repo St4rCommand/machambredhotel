@@ -1,7 +1,3 @@
 mcdh_hotel:
     resource: "@MCDHHotelBundle/Resources/config/routing.yml"
     prefix:   /hotel
-
-mcdh_room:
-    resource: "@MCDHRoomBundle/Resources/config/routing.yml"
-    prefix:   /room
