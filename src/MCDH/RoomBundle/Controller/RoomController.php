@@ -20,6 +20,7 @@ class RoomController extends Controller{
 	 * Edit a room
 	 * 
 	 * @param unknown $id
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
 	 */
 	public function editAction($id, Request $request){
 		
@@ -47,6 +48,7 @@ class RoomController extends Controller{
 			)));
 		}
 		
+		//affichage du formulaire d'édition d'une chambre
 		return $this->render('MCDHRoomBundle:Room:edit.html.twig', array(
 			'form' => $form->createView(),
 			'room' => $room
@@ -87,8 +89,7 @@ class RoomController extends Controller{
 		}
 		
 		
-		// On passe la méthode createView() du formulaire à la vue
-		// afin qu'elle puisse afficher le formulaire toute seule
+		//affichage du formulaire d'ajout d'une chambre
 		return $this->render('MCDHRoomBundle:Room:add.html.twig', array(
 				'form' => $form->createView(),
 		));
@@ -98,6 +99,8 @@ class RoomController extends Controller{
 	 * Delete a room
 	 * 
 	 * @param unknown $id
+	 * @param Request $request
+	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
 	public function deleteAction($id, Request $request){
 		
@@ -130,6 +133,7 @@ class RoomController extends Controller{
 			return $this->redirect($this->generateUrl('mcdh_room_add'));
 		}
 		
+		//affichage du formulaire de validation de suppression
 		return $this->render('MCDHRoomBundle:Room:delete.html.twig',array(
 				'room'=>$room,
 				'form'=>$form->createView()
@@ -137,7 +141,6 @@ class RoomController extends Controller{
 	}
 	
 	/**
-	 * 
 	 * View a room
 	 * 
 	 * @param unknown $id
@@ -153,6 +156,7 @@ class RoomController extends Controller{
 			throw new NotFoundHttpException("Aucune chambre ne porte l'identifiant ".$id);
 		}
 		
+		//affichage de la chambre demandée
 		return $this->render('MCDHRoomBundle:Room:view.html.twig', array(
 				'room' => $room
 		));
