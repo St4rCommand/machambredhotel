@@ -1,6 +1,6 @@
 <?php
 
-namespace MCDH\RoomBundle\Entity;
+namespace MCDH\HotelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Room
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="MCDH\RoomBundle\Entity\RoomRepository")
+ * @ORM\Entity(repositoryClass="MCDH\HotelBundle\Entity\RoomRepository")
  */
 class Room
 {

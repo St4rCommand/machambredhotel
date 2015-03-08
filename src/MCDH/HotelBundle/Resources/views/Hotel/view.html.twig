@@ -7,8 +7,8 @@
 {% block mcdh_hotel_body %}
 
   	<h2>{{ hotel.name }}</h2>
-  	<a href="{{ path('mcdh_hotel_edit', {'id':hotel.id}) }}">Editer</a>
-  	<a href="{{ path('mcdh_hotel_delete', {'id':hotel.id}) }}">Supprimer</a>
+  	<a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}">Editer</a>
+  	<a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}">Supprimer</a>
   	
 	<h3>{{ hotel.city }}, {{ hotel.country }}</h3>
 	<p>{{ hotel.description }}</p>

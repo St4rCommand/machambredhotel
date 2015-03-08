@@ -24,7 +24,7 @@ class HotelType extends AbstractType
             ->add('email',			'email')
             ->add('phone_number',	'text')
             ->add('floor',			'integer')
-            ->add('description',	'text')
+            ->add('description',	'textarea')
             ->add('save',      		'submit')
         ;
     }

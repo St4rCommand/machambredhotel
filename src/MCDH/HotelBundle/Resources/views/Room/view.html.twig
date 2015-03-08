@@ -1,4 +1,4 @@
-{% extends "MCDHRoomBundle::layout.html.twig" %}
+{% extends "MCDHHotelBundle::layout.html.twig" %}
 
 {% block title %}
 	Chambre {{ room.name }} - {{ parent() }}
@@ -9,7 +9,7 @@
 	<p>Chambre {{ room.name }}, {{ room.floor }}ème étage</p>
 	<p>{{ room.floor }} personne(s), {{ room.orientation }}</p>
 	
-	<a href="{{ path('mcdh_room_edit', {'id':room.id}) }}">Editer</a>
-	<a href="{{ path('mcdh_room_delete', {'id':room.id}) }}">Supprimer</a>
+	<a href="{{ path('mcdh_hotel_edit_room', {'idHotel':2,'idRoom':room.id}) }}">Editer</a>
+	<a href="{{ path('mcdh_hotel_delete_room', {'idHotel':2,'idRoom':room.id}) }}">Supprimer</a>
 	
 	{% endblock %}

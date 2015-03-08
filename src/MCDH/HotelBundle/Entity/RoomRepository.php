@@ -1,6 +1,6 @@
 <?php
 
-namespace MCDH\RoomBundle\Entity;
+namespace MCDH\HotelBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 

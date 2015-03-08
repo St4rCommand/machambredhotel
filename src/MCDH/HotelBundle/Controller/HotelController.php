@@ -32,7 +32,7 @@ class HotelController extends Controller
     		throw new NotFoundHttpException('Page "'.$page.'" inexistante.'); // Traduction ?
     	}
     	
-    	$nbPerPage = 1;
+    	$nbPerPage = 4;
 
     	//récupération des hotels de la base de données
     	$hotels = $this
@@ -92,7 +92,7 @@ class HotelController extends Controller
     		$request->getSession()->getFlashBag()->add('notice','Annonce bien enregistrée.');
     		
     		//redirection vers l'hôtel ajouté
-    		return $this->redirect($this->generateUrl('mcdh_hotel_view', array('id' => $hotel->getId())));
+    		return $this->redirect($this->generateUrl('mcdh_hotel_view', array('idHotel' => $hotel->getId())));
     		
     	}
     	
@@ -105,20 +105,20 @@ class HotelController extends Controller
     /**
      * Delete an hotel
      * 
-     * @param unknown $id
+     * @param unknown $idHotel
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function deleteAction($id, Request $request){
+    public function deleteAction($idHotel, Request $request){
     	
     	//récupération de l'Entity Manager
     	$em = $this->getDoctrine()->getManager();
     	
     	//récupération dans la base de données de l'hôtel à supprimer
-    	$hotel = $em->getRepository('MCDHHotelBundle:Hotel')->find($id);
+    	$hotel = $em->getRepository('MCDHHotelBundle:Hotel')->find($idHotel);
     	
     	//affichage d'une erreur si l'hôtel n'existe pas
     	if($hotel == null){
-    		throw $this->createNotFoundException("L'hôtel portant l'identifiant ".$id." n'existe pas. ");
+    		throw $this->createNotFoundException("L'hôtel portant l'identifiant ".$idHotel." n'existe pas. ");
     	}
     	
     	//création d'un formulaire de validation
@@ -148,17 +148,17 @@ class HotelController extends Controller
     /**
      * View an hotel
      * 
-     * @param unknown $id
+     * @param unknown $idHotel
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction($id){
+    public function viewAction($idHotel){
     	
     	//récupération dans la base de l'hôtel à afficher
-    	$hotel = $this->getDoctrine()->getManager()->getRepository('MCDHHotelBundle:Hotel')->find($id);
+    	$hotel = $this->getDoctrine()->getManager()->getRepository('MCDHHotelBundle:Hotel')->find($idHotel);
     	
     	//affichage d'une erreur si l'hôtel n'existe pas
     	if($hotel == null){
-    		throw new NotFoundHttpException("L'hôtel portant l'identifiant ".$id." ne peut être affiché car il n'existe pas. ");
+    		throw new NotFoundHttpException("L'hôtel portant l'identifiant ".$idHotel." ne peut être affiché car il n'existe pas. ");
     	}
     	
     	//affichage des caractéristiques de l'hôtel
@@ -170,14 +170,14 @@ class HotelController extends Controller
     /**
      * Edit an hotel
      * 
-     * @param unknown $id
+     * @param unknown $idHotel
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function editAction($id, Request $request){
+    public function editAction($idHotel, Request $request){
     	
     	//récupération dans la base de données de l'hôtel à éditer
-    	$hotel = $this->getDoctrine()->getManager()->getRepository('MCDHHotelBundle:Hotel')->find($id);
+    	$hotel = $this->getDoctrine()->getManager()->getRepository('MCDHHotelBundle:Hotel')->find($idHotel);
     	
     	//création du formulaire
     	$form = $this->get('form.factory')->create(new HotelType(), $hotel);
@@ -195,7 +195,7 @@ class HotelController extends Controller
     		$request->getSession()->getFlashBag()->add('notice','Les modifications ont bien été prise en compte.');
     	
     		//redirection vers la page affichant l'hôtel
-    		return $this->redirect($this->generateUrl('mcdh_hotel_view', array('id' => $hotel->getId())));
+    		return $this->redirect($this->generateUrl('mcdh_hotel_view', array('idHotel' => $hotel->getId())));
     	
     	}
     	

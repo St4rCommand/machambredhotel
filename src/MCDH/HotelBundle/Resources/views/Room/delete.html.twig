@@ -1,4 +1,4 @@
-{% extends "MCDHRoomBundle::layout.html.twig" %}
+{% extends "MCDHHotelBundle::layout.html.twig" %}
 
 {% block title %}
 	Suppression - {{ parent() }}
@@ -8,6 +8,6 @@
 	<h2>Suppression d'une chambre</h2>
 	
 	<p>Etes-vous sur de vouloir supprimer la chambre {{ room.name }} ?</p>
-	<a href="{{ path('mcdh_room_view', {'id':room.id}) }}">Annuler</a>
+	<a href="{{ path('mcdh_hotel_view_room', {'idHotel':2,'idRoom':room.id}) }}">Annuler</a>
 	{{ form(form) }}
 {% endblock %}

@@ -13,13 +13,13 @@
 		<ul>
 		    {% for hotel in hotels %}
 		      <li>
-		        <a href="{{ path('mcdh_hotel_view', {'id': hotel.id}) }}"> {{ hotel.name }}</a>
+		        <a href="{{ path('mcdh_hotel_view', {'idHotel': hotel.id}) }}"> {{ hotel.name }}</a>
 				
 		    	{{ hotel.city }} ({{ hotel.country }}),
 		        ajouté le {{ hotel.addedDate|date('d-m-Y') }}
 		        
-		        <a href="{{ path('mcdh_hotel_edit', {'id':hotel.id}) }}">Editer</a>
-		        <a href="{{ path('mcdh_hotel_delete', {'id':hotel.id}) }}">Supprimer</a>
+		        <a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}">Editer</a>
+		        <a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}">Supprimer</a>
 		      </li>
 		    {% else %}
 		      <li>Pas (encore !) d'hôtels</li>

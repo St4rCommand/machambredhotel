@@ -1,6 +1,6 @@
 <?php
 
-namespace MCDH\RoomBundle\Form;
+namespace MCDH\HotelBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,7 +30,7 @@ class RoomType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MCDH\RoomBundle\Entity\Room'
+            'data_class' => 'MCDH\HotelBundle\Entity\Room'
         ));
     }
 
@@ -39,6 +39,6 @@ class RoomType extends AbstractType
      */
     public function getName()
     {
-        return 'mcdh_roombundle_room';
+        return 'mcdh_hotelbundle_room';
     }
 }

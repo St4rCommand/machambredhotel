@@ -7,7 +7,7 @@
 {% block mcdh_hotel_body %}
 
   	<h2>Edition un hôtel</h2>
-	<a href="{{ path('mcdh_hotel_delete', {'id':hotel.id}) }}">Supprimer</a>
+	<a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}">Supprimer</a>
 
 	{{ form(form) }}
   
