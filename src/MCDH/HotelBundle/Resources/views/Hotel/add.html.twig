@@ -1,13 +1,13 @@
 {%  extends "MCDHHotelBundle::layout.html.twig" %}
 
 {% block title %}
-  Ajout - {{ parent() }}
+  {{ 'hotel.ajout.onglet'|trans}} - {{ parent() }}
 {% endblock %}
 
 {% block mcdh_hotel_body %}
 
 	{% block mcdh_hotel_page %}
-  		<h2>Ajout d'un hôtel</h2>
+  		<h2>{{ 'hotel.ajout.titre'|trans }}</h2>
   	{% endblock %}
   	
 	{% block mcdh_hotel_content %}

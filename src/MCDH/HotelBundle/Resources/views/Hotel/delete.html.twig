@@ -1,15 +1,15 @@
 {%  extends "MCDHHotelBundle::layout.html.twig" %}
 
 {% block title %}
-  Ajout - {{ parent() }}
+  {{ 'hotel.suppression.onglet'|trans}} - {{ parent() }}
 {% endblock %}
 
 {% block mcdh_hotel_body %}
   	
 	{% block mcdh_hotel_content %}
-		<p>Etes-vous sur de vouloir supprimer {{ hotel.name }} ?</p>
+		<p>{% trans %}hotel.suppression.titre{% endtrans %} {{ hotel.name }} ?</p>
   	
-  		<a href="{{ path('mcdh_hotel_view',{'idHotel':hotel.id}) }}">Revenir à l'hôtel</a>
+  		<a href="{{ path('mcdh_hotel_view',{'idHotel':hotel.id}) }}">{{'hotel.suppression.retour'|trans}}</a>
   		{{ form(form) }}
 	{% endblock %}
   	
