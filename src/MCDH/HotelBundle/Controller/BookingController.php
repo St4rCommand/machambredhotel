@@ -91,16 +91,11 @@ class BookingController extends Controller
 	
 		$form = $this->get('form.factory')->create(new BookingType(), $booking);
 	
-		//si le formulaire a été validé
 		if($form->handleRequest($request)->isValid()){
 				
-			//flush de l'entité
 			$em->flush();
-				
-			//affichage d'un message pour confirmer l'enregistrement des modifications
 			$request->getSession()->getFlashBag()->add('notice','Les modifications de la réservation ont bien été prise en compte');
 				
-			//redirection vers la page affichant la chambre
 			return $this->redirect($this->generateUrl('mcdh_hotel_view_booking', array(
 					'idBooking'=>$booking->getId()
 			)));
@@ -111,5 +106,40 @@ class BookingController extends Controller
 				'booking' => $booking
 		));
 	}
+	
+	/**
+	 * Delete a booking
+	 *
+	 * @param unknown $idRoom
+	 */
+	public function deleteAction($idBooking, Request $request){
+	
+		$em = $this->getDoctrine()->getManager();
+	
+		$booking = $em->getRepository('MCDHHotelBundle:Booking')->find($idBooking);
+	
+		if($booking == null){
+			throw $this->createNotFoundException("Aucune réservation ne porte l'identifiant ".$idBooking);
+		}
+	
+		$form = $this->createFormBuilder()
+		->add('delete', 'submit')
+		->getForm();
+	
+		if($form->handleRequest($request)->isValid()){
+			$em->remove($booking);
+			$em->flush();
+				
+			$request->getSession()->getFlashBag()->add('info', 'Réservation annulée.');
+				
+			return $this->redirect($this->generateUrl('mcdh_hotel_view', array(
+					'idHotel'=>$booking->getRoom()->getHotel()->getId()
+			)));
+		}
 		
+		return $this->render('MCDHHotelBundle:Booking:delete.html.twig',array(
+				'booking'=>$booking,
+				'form'=>$form->createView()
+		));
+	}
 }

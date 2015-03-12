@@ -138,8 +138,8 @@ class RoomController extends Controller{
 			$request->getSession()->getFlashBag()->add('info', 'Chambre supprimée.');
 			
 			//retour à la page d'accueil
-			return $this->redirect($this->generateUrl('mcdh_hotel_add_room', array(
-				'idHotel'=>$idHotel
+			return $this->redirect($this->generateUrl('mcdh_hotel_view', array(
+				'idHotel'=>$room->getHotel()->getId()
 			)));
 		}
 		
