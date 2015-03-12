@@ -78,5 +78,38 @@ class BookingController extends Controller
 		));
 	
 	}
+	
+	/**
+	 * Edit a booking
+	 *
+	 * @param unknown $idRoom
+	 */
+	public function editAction($idBooking, Request $request){
+	
+		$em = $this->getDoctrine()->getManager();
+		$booking = $em->getRepository('MCDHHotelBundle:Booking')->find($idBooking);
+	
+		$form = $this->get('form.factory')->create(new BookingType(), $booking);
+	
+		//si le formulaire a été validé
+		if($form->handleRequest($request)->isValid()){
+				
+			//flush de l'entité
+			$em->flush();
+				
+			//affichage d'un message pour confirmer l'enregistrement des modifications
+			$request->getSession()->getFlashBag()->add('notice','Les modifications de la réservation ont bien été prise en compte');
+				
+			//redirection vers la page affichant la chambre
+			return $this->redirect($this->generateUrl('mcdh_hotel_view_booking', array(
+					'idBooking'=>$booking->getId()
+			)));
+		}
+	
+		return $this->render('MCDHHotelBundle:Booking:edit.html.twig', array(
+				'form' => $form->createView(),
+				'booking' => $booking
+		));
+	}
 		
 }

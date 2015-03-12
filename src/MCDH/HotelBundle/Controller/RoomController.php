@@ -23,17 +23,17 @@ class RoomController extends Controller{
 	 */
 	public function editAction($idRoom, Request $request){
 		
+		//récupération de l'Entity Mangager
+		$em = $this->getDoctrine()->getManager();
+		
 		//récupération de la chmabre dans la base de données
-		$room = $this->getDoctrine()->getManager()->getRepository('MCDHHotelBundle:Room')->find($idRoom);
+		$room = $em->getRepository('MCDHHotelBundle:Room')->find($idRoom);
 		
 		//création du formulaire
 		$form = $this->get('form.factory')->create(new RoomType(), $room);
 		
 		//si le formulaire a été validé
 		if($form->handleRequest($request)->isValid()){
-			
-			//récupération de l'Entity Mangager
-			$em = $this->getDoctrine()->getManager();
 			
 			//flush de l'entité
 			$em->flush();

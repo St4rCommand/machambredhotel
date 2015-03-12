@@ -1,0 +1,18 @@
+{% extends "MCDHHotelBundle::layout.html.twig" %}
+
+{% block title %}
+	Réservation - {{ parent() }}
+{% endblock %}
+
+{% block mcdh_hotel_body %}
+
+	{% block mcdh_hotel_content %}
+	
+  		<h2>Edition d'une Réservation</h2> <a href="{{ path('mcdh_hotel_view_booking', {'idBooking':booking.id}) }}">Revenir à la chambre</a>
+		<a href="{{ path('mcdh_hotel_delete_booking', {'idBooking':booking.id}) }}">Supprimer</a>
+
+		{{ form(form) }}
+	
+	{% endblock %}
+	
+{% endblock %}
