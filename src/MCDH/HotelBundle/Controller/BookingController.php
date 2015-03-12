@@ -45,7 +45,7 @@ class BookingController extends Controller
 	
 			$request->getSession()->getFlashBag()->add('notice','Votre annonce a bien été prise en compte.');
 	
-			//return $this->redirect($this->generateUrl('mcdh_hotel_view', array('idHotel' => $hotel->getId())));
+			return $this->redirect($this->generateUrl('mcdh_hotel_view_booking', array('idBooking' => $booking->getId())));
 	
 		}
 		
@@ -54,6 +54,29 @@ class BookingController extends Controller
 				'booking' => $booking
 		));
 		
+	}
+	
+	/**
+	 *
+	 * View a booking
+	 *
+	 * @param unknown $idRoom
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function viewAction($idBooking){
+	
+		//récupération dans la base de la chambre à afficher
+		$booking = $this->getDoctrine()->getManager()->getRepository("MCDHHotelBundle:Booking")->find($idBooking);
+	
+		//affichage d'une erreur si la chambre n'existe pas
+		if($booking == null){
+			throw new NotFoundHttpException("Aucune réservation ne porte l'identifiant ".$idBooking);
+		}
+	
+		return $this->render('MCDHHotelBundle:Booking:view.html.twig', array(
+				'booking' => $booking
+		));
+	
 	}
 		
 }
