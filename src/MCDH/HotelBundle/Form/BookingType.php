@@ -19,7 +19,9 @@ class BookingType extends AbstractType
             ->add('endDate',	'date')
             ->add('price',		'money')
             ->add('people',		'integer')
-            ->add('breakfast',	'boolean')
+            ->add('breakfast',	'checkbox', array(
+   				'required'  => false))
+            ->add('save',      	'submit')
         ;
     }
     
