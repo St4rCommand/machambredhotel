@@ -38,9 +38,9 @@ class Room
     /**
      * @var integer
      *
-     * @ORM\Column(name="person", type="integer")
+     * @ORM\Column(name="people", type="integer")
      */
-    private $person;
+    private $people;
 
 
     /**
@@ -58,7 +58,7 @@ class Room
     private $price;
     
     /**
-     * @var hotel
+     * @var Hotel
      * 
      * @ORM\ManyToOne(targetEntity="MCDH\HotelBundle\Entity\Hotel")
      * @ORM\JoinColumn(nullable=false)
@@ -123,26 +123,26 @@ class Room
     }
 
     /**
-     * Set person
+     * Set people
      *
-     * @param integer $person
+     * @param integer $people
      * @return Room
      */
-    public function setPerson($person)
+    public function setPeople($people)
     {
-        $this->person = $person;
+        $this->people = $people;
 
         return $this;
     }
 
     /**
-     * Get person
+     * Get people
      *
      * @return integer 
      */
-    public function getPerson()
+    public function getPeople()
     {
-        return $this->person;
+        return $this->people;
     }
 
       /**
@@ -191,5 +191,28 @@ class Room
     public function getPrice()
     {
         return $this->price;
+    }
+
+    /**
+     * Set hotel
+     *
+     * @param \MCDH\HotelBundle\Entity\Hotel $hotel
+     * @return Room
+     */
+    public function setHotel(\MCDH\HotelBundle\Entity\Hotel $hotel)
+    {
+        $this->hotel = $hotel;
+
+        return $this;
+    }
+
+    /**
+     * Get hotel
+     *
+     * @return \MCDH\HotelBundle\Entity\Hotel 
+     */
+    public function getHotel()
+    {
+        return $this->hotel;
     }
 }

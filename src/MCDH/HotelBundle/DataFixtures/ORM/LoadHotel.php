@@ -76,7 +76,7 @@ class LoadHotel implements FixtureInterface{
 		$cComfort = new Room();
 		$cComfort->setName("Comfort");
 		$cComfort->setFloor(1);
-		$cComfort->setPerson(2);
+		$cComfort->setPeople(2);
 		$cComfort->setOrientation("ouest");
 		$cComfort->setPrice(80);
 		$cComfort->setHotel($tribunal);
@@ -84,7 +84,7 @@ class LoadHotel implements FixtureInterface{
 		$cComfortplus = new Room();
 		$cComfortplus->setName("Comfort +");
 		$cComfortplus->setFloor(2);
-		$cComfortplus->setPerson(2);
+		$cComfortplus->setPeople(2);
 		$cComfortplus->setOrientation("ouest");
 		$cComfortplus->setPrice(83);
 		$cComfortplus->setHotel($tribunal);
@@ -92,7 +92,7 @@ class LoadHotel implements FixtureInterface{
 		$cCharme = new Room();
 		$cCharme->setName("Charme");
 		$cCharme->setFloor(3);
-		$cCharme->setPerson(2);
+		$cCharme->setPeople(2);
 		$cCharme->setOrientation("ouest");
 		$cCharme->setPrice(90);
 		$cCharme->setHotel($tribunal);

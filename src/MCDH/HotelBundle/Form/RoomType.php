@@ -17,7 +17,7 @@ class RoomType extends AbstractType
         $builder
             ->add('name',			'text')
             ->add('floor',			'integer')
-            ->add('person',			'integer')
+            ->add('people',			'integer')
             ->add('orientation',	'text')
             ->add('price',			'money')
             ->add('save',      		'submit')
