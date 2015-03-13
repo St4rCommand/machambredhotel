@@ -14,8 +14,26 @@
 	{% endblock %}
 
 	{% block mcdh_hotel_content %}
-  		<p>Chambre {{ room.name }}, {{ room.floor }}ème étage</p>
-		<p>{{ room.people }} personne(s), {{ room.orientation }}</p>
+  		
+  		{% block mcdh_hotel_room %}
+  			<p>Chambre {{ room.name }}, {{ room.floor }}ème étage</p>
+			<p>{{ room.people }} personne(s), {{ room.orientation }}</p>
+		{% endblock %}
+		
+		{% block mcdh_hotel_bookings %}
+			{% for booking in bookings %}
+		      <li>
+		        <a href="{{ path('mcdh_hotel_view_booking', {'idBooking': booking.id}) }}"> Réservation n° {{ booking.id }}</a>
+				
+		    	du {{ booking.beginDate|date('d-m-Y') }} au {{ booking.endDate|date('d-m-Y') }}
+		        
+				<a href="{{ path('mcdh_hotel_edit_booking', {'idBooking': booking.id}) }}">Editer</a>
+				<a href="{{ path('mcdh_hotel_delete_booking', {'idBooking': booking.id}) }}">Supprimer</a>
+		      </li>
+		    {% else %}
+		      <li>Pas (encore !) de chambres pour cet hôtel.</li>
+		    {% endfor %}
+		{% endblock %}
 	{% endblock %}
 	
 {% endblock %}

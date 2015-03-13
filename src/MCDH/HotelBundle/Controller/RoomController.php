@@ -158,16 +158,21 @@ class RoomController extends Controller{
 	 */
 	public function viewAction($idRoom){
 		
+		$em = $this->getDoctrine()->getManager();
+		
 		//récupération dans la base de la chambre à afficher
-		$room = $this->getDoctrine()->getManager()->getRepository("MCDHHotelBundle:Room")->find($idRoom);
+		$room = $em->getRepository("MCDHHotelBundle:Room")->find($idRoom);
 		
 		//affichage d'une erreur si la chambre n'existe pas
 		if($room == null){
 			throw new NotFoundHttpException("Aucune chambre ne porte l'identifiant ".$idRoom);
 		}
 		
+		$bookings = $em->getRepository("MCDHHotelBundle:Booking")->findBy(array('room'=>$room));
+		
 		return $this->render('MCDHHotelBundle:Room:view.html.twig', array(
-				'room' => $room
+				'room' => $room,
+				'bookings' => $bookings
 		));
 		
 	}

@@ -12,7 +12,7 @@
 		<a href="{{ path('mcdh_hotel_edit_booking', {'idBooking': booking.id}) }}">Editer</a>
 		<a href="{{ path('mcdh_hotel_delete_booking', {'idBooking': booking.id}) }}">Supprimer</a>
 	{% endblock %}
-		
+
 	{% block mcdh_hotel_content %}
   		<p>Date d'arrivée : {{ booking.beginDate|date('d-m-Y') }}</p>
 		<p>Date de départ : {{ booking.endDate|date('d-m-Y') }}</p>
