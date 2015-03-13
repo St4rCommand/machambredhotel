@@ -5,11 +5,14 @@
 {% endblock %}
 
 {% block mcdh_hotel_body %}
-	<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':booking.room.hotel.id}) }}">{{ booking.room.hotel.name }}</a></h2>
-	<h3><a href="{{ path('mcdh_hotel_view_room', {'idHotel':booking.room.id}) }}">{{ booking.room.name }}</a></h3>
+
+	{% block mcdh_hotel_page %}
+		<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':booking.room.hotel.id}) }}">{{ booking.room.hotel.name }}</a></h2>
+		<h3><a href="{{ path('mcdh_hotel_view_room', {'idRoom':booking.room.id}) }}">{{ booking.room.name }}</a></h3>
+	{% endblock %}
 	
 	{% block mcdh_hotel_content %}
-  		<h2>Ajout d'une réservatione</h2>
+  		<h2>Ajout d'une réservation</h2>
 
 		{{ form(form) }}
 	{% endblock %}

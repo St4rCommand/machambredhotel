@@ -5,13 +5,17 @@
 {% endblock %}
 
 {% block mcdh_hotel_body %}
+	
+	{% block mcdh_hotel_page %}
+		<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':room.hotel.id}) }}">{{ room.hotel.name }}</a></h2>
+		<a href="{{ path('mcdh_hotel_edit_room', {'idRoom':room.id}) }}">Editer</a>
+		<a href="{{ path('mcdh_hotel_delete_room', {'idRoom':room.id}) }}">Supprimer</a>
+		<a href="{{ path('mcdh_hotel_add_booking', {'idRoom':room.id}) }}">Réserver</a>	
+	{% endblock %}
 
 	{% block mcdh_hotel_content %}
   		<p>Chambre {{ room.name }}, {{ room.floor }}ème étage</p>
 		<p>{{ room.people }} personne(s), {{ room.orientation }}</p>
-		
-		<a href="{{ path('mcdh_hotel_edit_room', {'idRoom':room.id}) }}">Editer</a>
-		<a href="{{ path('mcdh_hotel_delete_room', {'idRoom':room.id}) }}">Supprimer</a>
 	{% endblock %}
 	
 {% endblock %}

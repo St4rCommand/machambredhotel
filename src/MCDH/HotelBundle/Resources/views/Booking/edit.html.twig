@@ -6,6 +6,11 @@
 
 {% block mcdh_hotel_body %}
 
+	{% block mcdh_hotel_page %}
+		<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':booking.room.hotel.id}) }}">{{ booking.room.hotel.name }}</a></h2>
+		<h3><a href="{{ path('mcdh_hotel_view_room', {'idRoom':booking.room.id}) }}">{{ booking.room.name }}</a></h3>
+	{% endblock %}
+	
 	{% block mcdh_hotel_content %}
 	
   		<h2>Edition d'une Réservation</h2> <a href="{{ path('mcdh_hotel_view_booking', {'idBooking':booking.id}) }}">Revenir à la chambre</a>
