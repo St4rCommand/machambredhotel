@@ -3,6 +3,7 @@
 namespace MCDH\HotelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Room
@@ -24,7 +25,7 @@ class Room
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=15)
+     * @ORM\Column(name="name", type="string", length=15, nullable=false)
      */
     private $name;
 
@@ -38,7 +39,7 @@ class Room
     /**
      * @var integer
      *
-     * @ORM\Column(name="people", type="integer")
+     * @ORM\Column(name="people", type="integer", nullable=false)
      */
     private $people;
 
@@ -46,14 +47,14 @@ class Room
     /**
      * @var string
      *
-     * @ORM\Column(name="orientation", type="string", length=10)
+     * @ORM\Column(name="orientation", type="string", length=10, nullable=false)
      */
     private $orientation;
 
     /**
      * @var decimal
      *
-     * @ORM\Column(name="price", type="decimal", scale=2)
+     * @ORM\Column(name="price", type="decimal", scale=2, nullable=false)
      */
     private $price;
     

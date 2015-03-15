@@ -3,6 +3,7 @@
 namespace MCDH\HotelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Booking
@@ -24,40 +25,35 @@ class Booking
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="begin_date", type="date")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(name="begin_date", type="date", nullable=false)
      */
     private $beginDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="end_date", type="date")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(name="end_date", type="date", nullable=false)
      */
     private $endDate;
 
     /**
      * @var decimal
      *
-     * @ORM\Column(name="price", type="decimal", scale=2)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(name="price", type="decimal", scale=2, nullable=false)
      */
     private $price;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="people", type="integer")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(name="people", type="integer", nullable=false)
      */
     private $people;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="breakfast", type="boolean")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(name="breakfast", type="boolean", nullable=false)
      */
     private $breakfast;
     

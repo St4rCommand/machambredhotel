@@ -3,9 +3,7 @@
 namespace MCDH\HotelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Translation\Tests\String;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Config\Definition\IntegerNode;
 
 /**
  * Hotel
@@ -27,42 +25,54 @@ class Hotel
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=50)
+     * @ORM\Column(name="name", type="string", length=50, nullable=false)
+     * @Assert\NotBlank(message="L'hôtel doit porter un nom")
+     * @Assert\Length(max=50, maxMessage="Le nom de l'hôtel ne doit pas dépasser {{ limit }} caractères.")
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=50)
+     * @ORM\Column(name="address", type="string", length=50, nullable=false)
+     * @Assert\NotBlank(message="L'hôtel doit avoir une adresse.")
+     * @Assert\Length(max=50, maxMessage="L'adresse de l'hôtel ne doit pas excéder {{ limit }} caractères.")
      */
     private $address;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="postcode", type="string", length=10)
+     * @ORM\Column(name="postcode", type="string", length=10, nullable=false)
+     * @Assert\NotBlank(message="L'hôtel doit avoir un code postal.")
+     * @Assert\Length(max=10, maxMessage="Le code postal de l'hôtel ne doit pas dépasser {{ limit }} caractères.")
      */
     private $postcode;
     
     /**
      * @var string
      * 
-     * @ORM\Column(name="city", type="string", length=50)
+     * @ORM\Column(name="city", type="string", length=50, nullable=false)
+     * @Assert\NotBlank(message="L'hôtel doit avoir une ville.")
+     * @Assert\Length(max=50, maxMessage="La ville de l'hôtel ne doit pas dépasser {{ limit }} caractères.")
      */
     private $city;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string", length=25)
+     * @ORM\Column(name="country", type="string", length=25, nullable=false)
+     * @Assert\NotBlank(message="L'hôtel doit avoir un pays.")
+     * @Assert\Length(max=25, maxMessage="Le pays de l'hôtel ne doit pas dépasser {{ limit }} caractères.")
      */
     private $country;
     
     /**
-     * @var date
+     * @var \DateTime
      * 
-     * @ORM\Column(name="added_date", type="date")
+     * @ORM\Column(name="added_date", type="date", nullable=false)
+     * @Assert\NotBlank(message="L'hôtel doit avoir une date d'ajout.")
+     * @Assert\Date()
      */
     private $addedDate;
     
@@ -70,13 +80,16 @@ class Hotel
    	 * @var string
    	 * 
    	 * @ORM\Column(name="website", type="string", length=255, unique=true, nullable=true)
+   	 * @Assert\Url(message="L'adresse du site internet de l'hôtel doit être une url valide")
    	 */
     private $website;
     
     /**
      * @var string
      * 
-     * @ORM\Column(name="phone_number", type="string", length=15, nullable=true)
+     * @ORM\Column(name="phone_number", type="string", length=15, nullable=false)
+     * @Assert\NotBlank(message="L'hôtel doit avoir un numéro de téléphone.")
+     * @Assert\Length(max=15, maxMessage="Le numéro de téléphone de l'hôtel ne doit pas dépasser {{ limit }} caractères.")
      */
     private $phoneNumber;
 
@@ -84,13 +97,17 @@ class Hotel
      * @var string
      * 
      * @ORM\Column(name="email", type="string", length=255, unique=true, nullable=true)
+     * @Assert\Email(message="L'adresse email de l'hôtel doit être une adresse email valide")
+     * @Assert\Length(max=255, maxMessage="L'adresse email ne doit pas dépasser 255 caractères")
      */
     private $email;
     
     /**
      * @var string
      * 
-     * @ORM\Column(name="description", type="text", length=500)
+     * @ORM\Column(name="description", type="text", length=500, nullable=false) 
+     * @Assert\NotBlank(message="L'hôtel doit avoir une description.")
+     * @Assert\Length(max=500, maxMessage="La description de l'hôtel ne doit pas dépasser {{ limit }} caractères")
      */
     private $description;
     
@@ -98,6 +115,7 @@ class Hotel
      * @var integer
      * 
      * @ORM\Column(name="floor", type="integer")
+     * @Assert\Range(min=0,minMessage="Le nombre d'étages de l'hôtel doit être un entier positif ou nul",invalidMessage="Le nombre d'étages de l'hôtel doit être un entier positif ou nul")
      */
     private $floor;
 

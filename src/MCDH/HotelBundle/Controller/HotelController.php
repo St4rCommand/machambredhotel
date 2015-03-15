@@ -73,6 +73,7 @@ class HotelController extends Controller
     	
     	//instanciation de l'entité
     	$hotel = new Hotel();
+    	$hotel->setAddedDate(new \Datetime());
     	
     	//création du formulaire
     	$form = $this->get('form.factory')->create(new HotelType(), $hotel);
@@ -85,7 +86,6 @@ class HotelController extends Controller
     		 
     		//persitance de l'entité
     		$em->persist($hotel);
-    		$hotel->setAddedDate(new \Datetime());
     		 
     		//flush de l'entité
     		$em->flush();

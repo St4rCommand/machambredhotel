@@ -20,10 +20,10 @@ class HotelType extends AbstractType
             ->add('postcode',		'text')
             ->add('city',			'text')
             ->add('country',		'text')
-            ->add('website',		'url')
-            ->add('email',			'email')
+            ->add('website',		'url', array('required' => false))
+            ->add('email',			'email', array('required' => false))
             ->add('phoneNumber',	'text')
-            ->add('floor',			'integer')
+            ->add('floor',			'integer', array('required' => false))
             ->add('description',	'textarea')
             ->add('save',      		'submit')
         ;
