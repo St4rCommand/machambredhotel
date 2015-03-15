@@ -8,6 +8,10 @@
 	
 	{% block mcdh_hotel_page %}
 		{{ parent() }}
+		<img
+			src="{{ asset(hotel.image.uploadDir ~ '/' ~ hotel.image.id ~ '.' ~ hotel.image.extension) }}"
+			alt="{{ hotel.image.alt }}"
+		/>
 		<a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}">Editer</a>
 	  	<a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}">Supprimer</a>
 	  	<a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}">Ajouter une chambre</a>
