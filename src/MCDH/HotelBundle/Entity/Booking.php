@@ -38,9 +38,9 @@ class Booking
     private $endDate;
 
     /**
-     * @var string
+     * @var decimal
      *
-     * @ORM\Column(name="price", type="decimal")
+     * @ORM\Column(name="price", type="decimal", scale=2)
      * @ORM\JoinColumn(nullable=false)
      */
     private $price;

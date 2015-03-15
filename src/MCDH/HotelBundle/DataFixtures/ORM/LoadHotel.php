@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use MCDH\HotelBundle\Entity\Hotel;
 use MCDH\HotelBundle\Entity\Room;
+use MCDH\HotelBundle\Entity\Booking;
 
 class LoadHotel implements FixtureInterface{
 	
@@ -100,6 +101,35 @@ class LoadHotel implements FixtureInterface{
 		$manager->persist($cComfort);
 		$manager->persist($cComfortplus);
 		$manager->persist($cCharme);
+		
+		//instanciation réservation
+		$r1 = new Booking();
+		$r1->setBeginDate(new \DateTime('2015-04-11'));
+		$r1->setEndDate(new \DateTime('2012-04-18'));
+		$r1->setBreakfast(true);
+		$r1->setPeople(1);
+		$r1->setPrice(79.99);
+		$r1->setRoom($cComfort);
+		
+		$r2 = new Booking();
+		$r2->setBeginDate(new \DateTime('2015-04-18'));
+		$r2->setEndDate(new \DateTime('2015-04-25'));
+		$r2->setBreakfast(false);
+		$r2->setPeople(2);
+		$r2->setPrice(75);
+		$r2->setRoom($cComfort);
+		
+		$r3 = new Booking();
+		$r3->setBeginDate(new \DateTime('2015-01-05'));
+		$r3->setEndDate(new \DateTime('2015-01-07'));
+		$r3->setBreakfast(true);
+		$r3->setPeople(2);
+		$r3->setPrice(85);
+		$r3->setRoom($cCharme);
+		
+		$manager->persist($r1);
+		$manager->persist($r2);
+		$manager->persist($r3);
 		
 		$manager->flush();
 	}
