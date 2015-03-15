@@ -118,7 +118,14 @@ class Hotel
      * @Assert\Range(min=0,minMessage="Le nombre d'étages de l'hôtel doit être un entier positif ou nul",invalidMessage="Le nombre d'étages de l'hôtel doit être un entier positif ou nul")
      */
     private $floor;
-
+    
+    /**
+     * @var Image
+     *
+     * @ORM\OneToOne(targetEntity="MCDH\HotelBundle\Entity\Image", cascade={"persist"})
+     */
+    private $image;
+    
     /**
      * Get id
      *
@@ -380,5 +387,28 @@ class Hotel
     public function getFloor()
     {
         return $this->floor;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \MCDH\HotelBundle\Entity\Image $image
+     * @return Hotel
+     */
+    public function setImage(\MCDH\HotelBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \MCDH\HotelBundle\Entity\Image 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

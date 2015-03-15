@@ -76,6 +76,13 @@ class Room
      */
     private $hotel;
     
+    /**
+     * @var Image
+     * 
+     * @ORM\OneToOne(targetEntity="MCDH\HotelBundle\Entity\Image", cascade={"persist"})
+     */
+    private $image;
+    
     
     /**
      * Get id
@@ -225,5 +232,28 @@ class Room
     public function getHotel()
     {
         return $this->hotel;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \MCDH\HotelBundle\Entity\Image $image
+     * @return Room
+     */
+    public function setImage(\MCDH\HotelBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \MCDH\HotelBundle\Entity\Image 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }
