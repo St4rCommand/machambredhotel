@@ -26,6 +26,8 @@ class Room
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=15, nullable=false)
+     * @Assert\NotBlank(message="La chambre doit porter un nom")
+     * @Assert\Length(max=15, maxMessage="Le nom de la chambre ne doit pas dépasser {{ limit }} caractères")
      */
     private $name;
 
@@ -33,6 +35,7 @@ class Room
      * @var integer
      *
      * @ORM\Column(name="floor", type="integer")
+     * @Assert\Range(min=0,minMessage="L'étage de la chambre doit être un entier positif ou nul.",invalidMessage="L'étage de la chambre doit être un entier positif ou nul")
      */
     private $floor;
 
@@ -40,6 +43,8 @@ class Room
      * @var integer
      *
      * @ORM\Column(name="people", type="integer", nullable=false)
+     * @Assert\NotBlank(message="La chambre doit avoir un nombre de places défini")
+     * @Assert\Range(min=1,minMessage="Le nombre de personnes doit être un entier positif ou nul.",invalidMessage="Le nombre de personnes doit être un entier positif ou nul.")
      */
     private $people;
 
@@ -48,6 +53,8 @@ class Room
      * @var string
      *
      * @ORM\Column(name="orientation", type="string", length=10, nullable=false)
+     * @Assert\NotBlank(message="La chambre doit avoir un nombre de places défini")
+     * @Assert\Choice(choices={"north","south","east","west"}, message="La chambre peut avoir une orientation Nord, Sud, Est ou Ouest")
      */
     private $orientation;
 
@@ -55,6 +62,8 @@ class Room
      * @var decimal
      *
      * @ORM\Column(name="price", type="decimal", scale=2, nullable=false)
+     * @Assert\NotBlank(message="La chambre doit avoir un prix.")
+     * @Assert\Range(min=0,minMessage="Le prix est un nombre décimal positif.",invalidMessage="Le prix est un nombre décimal.")
      */
     private $price;
     
@@ -63,6 +72,7 @@ class Room
      * 
      * @ORM\ManyToOne(targetEntity="MCDH\HotelBundle\Entity\Hotel")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
      */
     private $hotel;
     

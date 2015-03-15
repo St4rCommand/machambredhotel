@@ -26,6 +26,8 @@ class Booking
      * @var \DateTime
      *
      * @ORM\Column(name="begin_date", type="date", nullable=false)
+     * @Assert\NotBlank(message="La réservation doit avoir une date d'arrivée.")
+     * @Assert\Date()
      */
     private $beginDate;
 
@@ -33,6 +35,8 @@ class Booking
      * @var \DateTime
      *
      * @ORM\Column(name="end_date", type="date", nullable=false)
+     * @Assert\NotBlank(message="La réservation doit avoir une date de départ.")
+     * @Assert\Date()
      */
     private $endDate;
 
@@ -40,6 +44,8 @@ class Booking
      * @var decimal
      *
      * @ORM\Column(name="price", type="decimal", scale=2, nullable=false)
+     * @Assert\NotBlank(message="La chambre doit avoir un prix.")
+     * @Assert\Range(min=0,minMessage="Le prix est un nombre décimal positif.",invalidMessage="Le prix est un nombre décimal.")
      */
     private $price;
 
@@ -47,6 +53,8 @@ class Booking
      * @var integer
      *
      * @ORM\Column(name="people", type="integer", nullable=false)
+     * @Assert\NotBlank(message="La chambre doit avoir un nombre de places défini")
+     * @Assert\Range(min=1,minMessage="Le nombre de personnes doit être un entier positif ou nul.",invalidMessage="Le nombre de personnes doit être un entier positif ou nul.")
      */
     private $people;
 
@@ -62,6 +70,7 @@ class Booking
      * 
      * @ORM\ManyToOne(targetEntity="MCDH\HotelBundle\Entity\Room")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
      */
     private $room;
 
