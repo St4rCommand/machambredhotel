@@ -8,9 +8,9 @@
 	
 	{% block mcdh_hotel_page %}
 		{{ parent() }}
-		<a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}">Editer</a>
-	  	<a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}">Supprimer</a>
-	  	<a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}">Ajouter une chambre</a>
+		<a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}">{{ 'bouton.editer'|trans }}</a>
+	  	<a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}">{{ 'bouton.supprimer' |trans }}</a>
+	  	<a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}">{{ 'room.ajout'|trans }}</a>
 	{% endblock %}
 
 	{% block mcdh_hotel_content %}
@@ -27,11 +27,11 @@
 				
 		    	{{ room.price|number_format(2, ',', ' ') }} €
 		        
-		        <a href="{{ path('mcdh_hotel_edit_room', {'idRoom': room.id}) }}">Editer</a>
-		        <a href="{{ path('mcdh_hotel_delete_room', {'idRoom': room.id}) }}">Supprimer</a>
+		        <a href="{{ path('mcdh_hotel_edit_room', {'idRoom': room.id}) }}">{{ 'bouton.editer'|trans }}</a>
+		        <a href="{{ path('mcdh_hotel_delete_room', {'idRoom': room.id}) }}">{{ 'bouton.supprimer' |trans }}</a>
 		      </li>
 		    {% else %}
-		      <li>Pas (encore !) de chambres pour cet hôtel.</li>
+		      <li>{{ 'pas.hotel'|trans }}</li>
 		    {% endfor %}
 		{% endblock %}
 	

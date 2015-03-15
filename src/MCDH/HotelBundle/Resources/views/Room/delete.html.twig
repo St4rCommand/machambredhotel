@@ -1,7 +1,7 @@
 {% extends "MCDHHotelBundle::layout.html.twig" %}
 
 {% block title %}
-	Suppression - {{ parent() }}
+	{{ 'hotel.suppressio.onglet'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block mcdh_room_body %}
@@ -9,10 +9,10 @@
 
 	{% block mcdh_hotel_content %}
 	
-		<h2>Suppression d'une chambre</h2>
+		<h2>{{ 'room.delete'|trans }}</h2>
 		
-		<p>Etes-vous sur de vouloir supprimer la chambre {{ room.name }} ?</p>
-		<a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}">Revenir à la chambre</a>
+		<p>{{ 'room.delete.message.'|trans }} {{ room.name }} ?</p>
+		<a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}">{{ 'back.room'|trans }}</a>
 		{{ form(form) }}
 	
 	{% endblock %}
