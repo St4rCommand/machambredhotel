@@ -69,7 +69,7 @@ class Booking
      * @var Room
      * 
      * @ORM\ManyToOne(targetEntity="MCDH\HotelBundle\Entity\Room")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      * @Assert\Valid()
      */
     private $room;
