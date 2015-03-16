@@ -6,6 +6,12 @@
 
 {% block body %}
 
+	{% for key, message in app.session.flashbag.all() %}
+	    <div class="alert alert-{{ key }}">
+	      {{ message|trans({}, 'FOSUserBundle') }}
+	    </div>
+  	{% endfor %}
+
 	<h1><a href="{{ path('mcdh_hotel_homepage') }}">Hôtels</a></h1>
 
 	{% block mcdh_hotel_page %}

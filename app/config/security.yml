@@ -20,11 +20,11 @@ security:
             anonymous:      true
             provider:       main
             form_login:
-                login_path: login
-                check_path: login_check
+                login_path: /hotel
+                check_path: fos_user_security_check
             logout:
-                path:       logout
-                target:     /platform
+                path:       fos_user_security_logout
+                target:     /hotel
             remember_me:
                 key:        %secret%      
 
