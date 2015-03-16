@@ -1,0 +1,4 @@
+services:
+#    mcdh_user.example:
+#        class: MCDH\UserBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

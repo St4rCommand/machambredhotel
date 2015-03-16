@@ -1,3 +1,7 @@
+mcdh_user:
+    resource: "@MCDHUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 mcdh_hotel:
     resource: "@MCDHHotelBundle/Resources/config/routing.yml"
     prefix:   /
