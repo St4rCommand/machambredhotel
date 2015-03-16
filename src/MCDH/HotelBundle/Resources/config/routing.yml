@@ -50,3 +50,43 @@ mcdh_hotel_view_room:
     defaults: { _controller: MCDHHotelBundle:Room:view }
     requirements:
       idRoom: \d+
+      
+      
+      
+      
+
+mcdh_hotel_view_booking:
+    path:     /booking/view/{idBooking}
+    defaults: { _controller: MCDHHotelBundle:Booking:view }
+    requirements:
+      idBooking: \d+
+
+mcdh_hotel_edit_booking:
+    path:     /booking/edit/{idBooking}
+    defaults: { _controller: MCDHHotelBundle:Booking:edit }
+    requirements:
+      idBooking: \d+
+
+mcdh_hotel_delete_booking:
+    path:     /booking/delete/{idBooking}
+    defaults: { _controller: MCDHHotelBundle:Booking:delete }
+    requirements:
+      idBooking: \d+
+
+mcdh_hotel_add_booking:
+    path:     /addbooking/{idRoom}
+    defaults: { _controller: MCDHHotelBundle:Booking:add }
+    requirements:
+      idRoom: \d+
+      
+#mcdh_hotel_add_hotel_booking:
+#    path:     /addbooking
+#    defaults: { _controller: MCDHHotelBundle:Booking:addFromHotel }
+#    requirements:
+#      idHotel: \d*
+
+#mcdh_room_add_room_booking:
+#    path:     /addbooking
+#    defaults: { _controller: MCDHHotelBundle:Booking:addFromRoom }
+#    requirements:
+#      idRoom: \d*

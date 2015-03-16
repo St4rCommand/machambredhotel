@@ -1,0 +1,24 @@
+{% extends "MCDHHotelBundle::layout.html.twig" %}
+
+{% block title %}
+	Annulation - {{ parent() }}
+{% endblock %}
+
+{% block mcdh_room_body %}
+
+	{% block mcdh_hotel_page %}
+		<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':booking.room.hotel.id}) }}">{{ booking.room.hotel.name }}</a></h2>
+		<h3><a href="{{ path('mcdh_hotel_view_room', {'idRoom':booking.room.id}) }}">{{ booking.room.name }}</a></h3>
+	{% endblock %}
+
+	{% block mcdh_hotel_content %}
+	
+		<h2>Annulation d'une réservation</h2>
+		
+		<p>Etes-vous sur de vouloir annuler la réservation {{ booking.id }} ?</p>
+		<a href="{{ path('mcdh_hotel_view_booking', {'idBooking':booking.id}) }}">Revenir à la réservation</a>
+		{{ form(form) }}
+	
+	{% endblock %}
+	
+{% endblock %}

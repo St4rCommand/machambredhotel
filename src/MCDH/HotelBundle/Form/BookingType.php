@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class RoomType extends AbstractType
+class BookingType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,12 +15,12 @@ class RoomType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name',			'text')
-            ->add('floor',			'integer', 	array('required' => false))
-            ->add('people',			'integer')
-            ->add('orientation',	'choice', 	array('choices' => array('north'=>'Nord','south'=>'Sud','east'=>'Est','west'=>'Ouest')))
-            ->add('price',			'money')
-            ->add('save',      		'submit')
+            ->add('beginDate',	'date')
+            ->add('endDate',	'date')
+            ->add('price',		'money')
+            ->add('people',		'integer')
+            ->add('breakfast',	'checkbox',		array('required'  => false))
+            ->add('save',      	'submit')
         ;
     }
     
@@ -30,7 +30,7 @@ class RoomType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MCDH\HotelBundle\Entity\Room'
+            'data_class' => 'MCDH\HotelBundle\Entity\Booking'
         ));
     }
 
@@ -39,6 +39,6 @@ class RoomType extends AbstractType
      */
     public function getName()
     {
-        return 'mcdh_hotelbundle_room';
+        return 'mcdh_hotelbundle_booking';
     }
 }

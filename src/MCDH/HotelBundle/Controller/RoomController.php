@@ -23,17 +23,17 @@ class RoomController extends Controller{
 	 */
 	public function editAction($idRoom, Request $request){
 		
+		//récupération de l'Entity Mangager
+		$em = $this->getDoctrine()->getManager();
+		
 		//récupération de la chmabre dans la base de données
-		$room = $this->getDoctrine()->getManager()->getRepository('MCDHHotelBundle:Room')->find($idRoom);
+		$room = $em->getRepository('MCDHHotelBundle:Room')->find($idRoom);
 		
 		//création du formulaire
 		$form = $this->get('form.factory')->create(new RoomType(), $room);
 		
 		//si le formulaire a été validé
 		if($form->handleRequest($request)->isValid()){
-			
-			//récupération de l'Entity Mangager
-			$em = $this->getDoctrine()->getManager();
 			
 			//flush de l'entité
 			$em->flush();
@@ -138,8 +138,8 @@ class RoomController extends Controller{
 			$request->getSession()->getFlashBag()->add('info', 'Chambre supprimée.');
 			
 			//retour à la page d'accueil
-			return $this->redirect($this->generateUrl('mcdh_hotel_add_room', array(
-				'idHotel'=>$idHotel
+			return $this->redirect($this->generateUrl('mcdh_hotel_view', array(
+				'idHotel'=>$room->getHotel()->getId()
 			)));
 		}
 		
@@ -158,16 +158,21 @@ class RoomController extends Controller{
 	 */
 	public function viewAction($idRoom){
 		
+		$em = $this->getDoctrine()->getManager();
+		
 		//récupération dans la base de la chambre à afficher
-		$room = $this->getDoctrine()->getManager()->getRepository("MCDHHotelBundle:Room")->find($idRoom);
+		$room = $em->getRepository("MCDHHotelBundle:Room")->find($idRoom);
 		
 		//affichage d'une erreur si la chambre n'existe pas
 		if($room == null){
 			throw new NotFoundHttpException("Aucune chambre ne porte l'identifiant ".$idRoom);
 		}
 		
+		$bookings = $em->getRepository("MCDHHotelBundle:Booking")->findBy(array('room'=>$room));
+		
 		return $this->render('MCDHHotelBundle:Room:view.html.twig', array(
-				'room' => $room
+				'room' => $room,
+				'bookings' => $bookings
 		));
 		
 	}

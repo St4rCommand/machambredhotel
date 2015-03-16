@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use MCDH\HotelBundle\Entity\Hotel;
 use MCDH\HotelBundle\Entity\Room;
+use MCDH\HotelBundle\Entity\Booking;
 
 class LoadHotel implements FixtureInterface{
 	
@@ -76,7 +77,7 @@ class LoadHotel implements FixtureInterface{
 		$cComfort = new Room();
 		$cComfort->setName("Comfort");
 		$cComfort->setFloor(1);
-		$cComfort->setPerson(2);
+		$cComfort->setPeople(2);
 		$cComfort->setOrientation("ouest");
 		$cComfort->setPrice(80);
 		$cComfort->setHotel($tribunal);
@@ -84,7 +85,7 @@ class LoadHotel implements FixtureInterface{
 		$cComfortplus = new Room();
 		$cComfortplus->setName("Comfort +");
 		$cComfortplus->setFloor(2);
-		$cComfortplus->setPerson(2);
+		$cComfortplus->setPeople(2);
 		$cComfortplus->setOrientation("ouest");
 		$cComfortplus->setPrice(83);
 		$cComfortplus->setHotel($tribunal);
@@ -92,7 +93,7 @@ class LoadHotel implements FixtureInterface{
 		$cCharme = new Room();
 		$cCharme->setName("Charme");
 		$cCharme->setFloor(3);
-		$cCharme->setPerson(2);
+		$cCharme->setPeople(2);
 		$cCharme->setOrientation("ouest");
 		$cCharme->setPrice(90);
 		$cCharme->setHotel($tribunal);
@@ -100,6 +101,35 @@ class LoadHotel implements FixtureInterface{
 		$manager->persist($cComfort);
 		$manager->persist($cComfortplus);
 		$manager->persist($cCharme);
+		
+		//instanciation réservation
+		$r1 = new Booking();
+		$r1->setBeginDate(new \DateTime('2015-04-11'));
+		$r1->setEndDate(new \DateTime('2012-04-18'));
+		$r1->setBreakfast(true);
+		$r1->setPeople(1);
+		$r1->setPrice(79.99);
+		$r1->setRoom($cComfort);
+		
+		$r2 = new Booking();
+		$r2->setBeginDate(new \DateTime('2015-04-18'));
+		$r2->setEndDate(new \DateTime('2015-04-25'));
+		$r2->setBreakfast(false);
+		$r2->setPeople(2);
+		$r2->setPrice(75);
+		$r2->setRoom($cComfort);
+		
+		$r3 = new Booking();
+		$r3->setBeginDate(new \DateTime('2015-01-05'));
+		$r3->setEndDate(new \DateTime('2015-01-07'));
+		$r3->setBreakfast(true);
+		$r3->setPeople(2);
+		$r3->setPrice(85);
+		$r3->setRoom($cCharme);
+		
+		$manager->persist($r1);
+		$manager->persist($r2);
+		$manager->persist($r3);
 		
 		$manager->flush();
 	}

@@ -6,6 +6,10 @@
 
 {% block mcdh_hotel_body %}
 
+	{% block mcdh_hotel_page %}
+		<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':room.hotel.id}) }}">{{ room.hotel.name }}</a></h2>
+	{% endblock %}
+	
 	{% block mcdh_hotel_content %}
 	
   		<h2>{{ 'room.edit'|trans }}</h2> <a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}">Revenir à la chambre</a>

@@ -5,7 +5,10 @@
 {% endblock %}
 
 {% block mcdh_hotel_body %}
-	<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':hotel.id}) }}">{{ hotel.name }}</a></h2>
+		
+	{% block mcdh_hotel_page %}
+		<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':hotel.id}) }}">{{ hotel.name }}</a></h2>
+	{% endblock %}
 	
 	{% block mcdh_hotel_content %}
   		<h2>{{ 'room.ajout'|trans }}</h2>
