@@ -1,7 +1,18 @@
-hotel.ajout.onglet: __hotel.ajout.onglet
-hotel.ajout.titre: __hotel.ajout.titre
-hotel.suppression.onglet: __hotel.suppression.onglet
-hotel.suppression.titre: __hotel.suppression.titre
-hotel.suppression.retour: __hotel.suppression.retour
-bouton.supprimer: __bouton.supprimer
-room.ajout: __room.ajout
+hotel.ajout.onglet: Ajout
+hotel.ajout.titre: Voulez vous ajouter un hotel?
+hotel.suppression.onglet: Suppression
+hotel.suppression.titre: Etes-vous sur de vouloir supprimer cet hotel?
+hotel.suppression.retour: Revenir à l''hôtel
+bouton.accueil: Retour à l''accueil
+bouton.supprimer: Supprimer
+bouton.editer: Editer
+room.ajout: ajouter une chambre
+pas.hotel: Pas (encore !) de chambres pour cet hôtel.
+
+chambre: chambre
+room.delete.message: Etes-vous sur de vouloir supprimer cette chambre?
+back.room: Revenir à la chambre
+room.delete: Suppression d'une chambre
+room.edit: Edition d'une chambre
+floor: ème étage
+people: personne(s)
