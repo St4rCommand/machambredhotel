@@ -7,10 +7,14 @@
 {% block mcdh_hotel_body %}
   	
 	{% block mcdh_hotel_content %}
-		<p>Etes-vous sur de vouloir supprimer {{ hotel.name }} ?</p>
-  	
-  		<a href="{{ path('mcdh_hotel_view',{'idHotel':hotel.id}) }}">Revenir à l'hôtel</a>
-  		{{ form(form) }}
+		{% if is_granted('ROLE_ADMIN') %}
+			<p>Etes-vous sur de vouloir supprimer {{ hotel.name }} ?</p>
+	  	
+	  		<a href="{{ path('mcdh_hotel_view',{'idHotel':hotel.id}) }}">Revenir à l'hôtel</a>
+	  		{{ form(form) }}
+	  	{% else %}
+	  		<p>Vous devez être administrateur pour pouvoir supprimer un élément</p>
+  		{% endif %}
 	{% endblock %}
   	
 {% endblock %}

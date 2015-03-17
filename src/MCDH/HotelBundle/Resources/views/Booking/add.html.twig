@@ -12,9 +12,13 @@
 	{% endblock %}
 	
 	{% block mcdh_hotel_content %}
-  		<h2>Ajout d'une réservation</h2>
-
-		{{ form(form) }}
+		
+		{% if is_granted('ROLE_CUSTOMER') %}
+	  		<h2>Ajout d'une réservation</h2>
+	
+			{{ form(form) }}
+		{% endif %}
+	
 	{% endblock %}
 	
 {% endblock %}

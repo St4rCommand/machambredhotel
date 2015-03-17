@@ -6,12 +6,14 @@
 
 {% block mcdh_hotel_body %}
 
-	{% block mcdh_hotel_page %}
-  		<h2>Ajout d'un hôtel</h2>
-  	{% endblock %}
-  	
-	{% block mcdh_hotel_content %}
-		{{ form(form) }}
-	{% endblock %}
+  	{% if is_granted('ROLE_HOTELKEEPER') %}
+		{% block mcdh_hotel_page %}
+  			<h2>Ajout d'un hôtel</h2>
+	  	{% endblock %}
+	  	
+		{% block mcdh_hotel_content %}
+			{{ form(form) }}
+		{% endblock %}
+	{% endif %}
   	
 {% endblock %}

@@ -7,7 +7,9 @@
 {% block mcdh_hotel_body %}
 
 	{% block mcdh_hotel_page %}
-		<a href="{{ path('mcdh_hotel_add') }}">Ajouter un hôtel</a>
+		{% if is_granted('ROLE_HOTELKEEPER') %}
+			<a href="{{ path('mcdh_hotel_add') }}">Ajouter un hôtel</a>
+		{% endif %}
 	{% endblock %}
 	
 	{% block mcdh_hotel_content %}
@@ -20,9 +22,16 @@
 		    	{{ hotel.city }} ({{ hotel.country }}),
 		        ajouté le {{ hotel.addedDate|date('d-m-Y') }}
 		        
-		        <a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}">Editer</a>
-		        <a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}">Supprimer</a>
-  				<a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}">Ajouter une chambre</a>
+				{% if is_granted('ROLE_HOTELKEEPER') %}
+					
+					<a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}">Editer</a>
+					
+					{% if is_granted('ROLE_ADMIN') %}
+			  			<a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}">Supprimer</a>
+			  		{% endif %}
+			  		
+			  		<a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}">Ajouter une chambre</a>
+			  	{% endif %}
 		      </li>
 		    {% else %}
 		      <li>Pas (encore !) d'hôtels</li>

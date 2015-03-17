@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use MCDH\HotelBundle\Form\BookingType;
 use MCDH\HotelBundle\Entity\Booking;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 /**
  * Main controller for HotelBundle
@@ -22,6 +24,7 @@ class BookingController extends Controller
 	 *
 	 * @param Request $request
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+	 * @Security("has_role('ROLE_CUSTOMER')")
 	 */
 	public function addAction($idRoom, Request $request){
 		
@@ -62,6 +65,7 @@ class BookingController extends Controller
 	 *
 	 * @param unknown $idRoom
 	 * @return \Symfony\Component\HttpFoundation\Response
+	 * @Security("has_role('ROLE_CUSTOMER') and has_role('ROLE_HOTELKEEPER')")
 	 */
 	public function viewAction($idBooking){
 	
@@ -83,6 +87,7 @@ class BookingController extends Controller
 	 * Edit a booking
 	 *
 	 * @param unknown $idRoom
+	 * @Security("has_role('ROLE_CUSTOMER')")
 	 */
 	public function editAction($idBooking, Request $request){
 	
@@ -111,6 +116,7 @@ class BookingController extends Controller
 	 * Delete a booking
 	 *
 	 * @param unknown $idRoom
+	 * @Security("has_role('ROLE_CUSTOMER')")
 	 */
 	public function deleteAction($idBooking, Request $request){
 	

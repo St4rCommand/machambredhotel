@@ -7,6 +7,8 @@ use MCDH\HotelBundle\Entity\Room;
 use Symfony\Component\HttpFoundation\Request;
 use MCDH\HotelBundle\Form\RoomType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 /**
  * Main controller for HotelBundle
@@ -20,6 +22,7 @@ class RoomController extends Controller{
 	 * Edit a room
 	 * 
 	 * @param unknown $idRoom
+	 * @Security("has_role('ROLE_HOTELKEEPER')")
 	 */
 	public function editAction($idRoom, Request $request){
 		
@@ -58,6 +61,7 @@ class RoomController extends Controller{
 	 * 
 	 * @param Request $request
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+	 * @Security("has_role('ROLE_HOTELKEEPER')")
 	 */
 	public function addAction($idHotel, Request $request){
 		
@@ -109,6 +113,7 @@ class RoomController extends Controller{
 	 * Delete a room
 	 * 
 	 * @param unknown $idRoom
+	 * @Security("has_role('ROLE_ADMIN')")
 	 */
 	public function deleteAction($idRoom, Request $request){
 		

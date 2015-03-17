@@ -10,10 +10,12 @@
 		<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':hotel.id}) }}">{{ hotel.name }}</a></h2>
 	{% endblock %}
 	
-	{% block mcdh_hotel_content %}
-  		<h2>Ajout d'une chambre</h2>
-
-		{{ form(form) }}
-	{% endblock %}
+	{% if is_granted('ROLE_HOTELKEEPER') %}
+		{% block mcdh_hotel_content %}
+	  		<h2>Ajout d'une chambre</h2>
+	
+			{{ form(form) }}
+		{% endblock %}
+	{% endif %}
 	
 {% endblock %}

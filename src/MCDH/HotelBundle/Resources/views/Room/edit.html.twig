@@ -12,10 +12,12 @@
 	
 	{% block mcdh_hotel_content %}
 	
-  		<h2>Edition d'une chambre</h2> <a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}">Revenir à la chambre</a>
-		<a href="{{ path('mcdh_hotel_delete_room', {'idRoom':room.id}) }}">Supprimer</a>
-
-		{{ form(form) }}
+		{% if is_granted('ROLE_HOTELKEEPER') %}
+	  		<h2>Edition d'une chambre</h2> <a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}">Revenir à la chambre</a>
+			<a href="{{ path('mcdh_hotel_delete_room', {'idRoom':room.id}) }}">Supprimer</a>
+	
+			{{ form(form) }}
+		{% endif %}
 	
 	{% endblock %}
 	
