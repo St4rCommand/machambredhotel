@@ -29,7 +29,7 @@ class BookingController extends Controller
 		
 		$room = $em->getRepository('MCDHHotelBundle:Room')->find($idRoom);
 			
-		if($room == null){
+		if($room === null){
 			throw $this->createNotFoundException("Vous ne pouvez pas faire une réservation pour une chambre qui n'existe pas !");
 		}
 		 
@@ -69,7 +69,7 @@ class BookingController extends Controller
 		$booking = $this->getDoctrine()->getManager()->getRepository("MCDHHotelBundle:Booking")->find($idBooking);
 	
 		//affichage d'une erreur si la chambre n'existe pas
-		if($booking == null){
+		if($booking === null){
 			throw new NotFoundHttpException("Aucune réservation ne porte l'identifiant ".$idBooking);
 		}
 	
@@ -118,7 +118,7 @@ class BookingController extends Controller
 	
 		$booking = $em->getRepository('MCDHHotelBundle:Booking')->find($idBooking);
 	
-		if($booking == null){
+		if($booking === null){
 			throw $this->createNotFoundException("Aucune réservation ne porte l'identifiant ".$idBooking);
 		}
 	

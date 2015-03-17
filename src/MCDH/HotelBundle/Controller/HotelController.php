@@ -118,7 +118,7 @@ class HotelController extends Controller
     	$hotel = $em->getRepository('MCDHHotelBundle:Hotel')->find($idHotel);
     	
     	//affichage d'une erreur si l'hôtel n'existe pas
-    	if($hotel == null){
+    	if($hotel === null){
     		throw $this->createNotFoundException("L'hôtel portant l'identifiant ".$idHotel." n'existe pas. ");
     	}
     	
@@ -160,7 +160,7 @@ class HotelController extends Controller
     	$hotel = $em->getRepository('MCDHHotelBundle:Hotel')->find($idHotel);
     	
     	//affichage d'une erreur si l'hôtel n'existe pas
-    	if($hotel == null){
+    	if($hotel === null){
     		throw new NotFoundHttpException("L'hôtel portant l'identifiant ".$idHotel." ne peut être affiché car il n'existe pas. ");
     	}
     	

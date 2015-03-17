@@ -68,7 +68,7 @@ class RoomController extends Controller{
 		$hotel = $em->getRepository('MCDHHotelBundle:Hotel')->find($idHotel);
 		 
 		//affichage d'une erreur si l'hôtel n'existe pas
-		if($hotel == null){
+		if($hotel === null){
 			throw $this->createNotFoundException("L'hôtel portant l'identifiant ".$idHotel." n'existe pas. ");
 		}
 		
@@ -119,7 +119,7 @@ class RoomController extends Controller{
 		$room = $em->getRepository('MCDHHotelBundle:Room')->find($idRoom);
 		
 		//affichage d'une erreur si la chambre n'existe pas
-		if($room == null){
+		if($room === null){
 			throw $this->createNotFoundException("Aucune chambre ne porte l'identifiant ".$idRoom);
 		}
 		
@@ -164,7 +164,7 @@ class RoomController extends Controller{
 		$room = $em->getRepository("MCDHHotelBundle:Room")->find($idRoom);
 		
 		//affichage d'une erreur si la chambre n'existe pas
-		if($room == null){
+		if($room === null){
 			throw new NotFoundHttpException("Aucune chambre ne porte l'identifiant ".$idRoom);
 		}
 		
