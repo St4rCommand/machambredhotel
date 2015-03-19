@@ -1,52 +1,52 @@
 mcdh_hotel_homepage:
-    path:     /{_locale}/hotel/{page}
+    path:     /hotel/{page}
     defaults: { _controller: MCDHHotelBundle:Hotel:index, page: 1 }
     requirements:
         page: \d*
     
 mcdh_hotel_add:
-    path:     /{_locale}/hotel/add
+    path:     /hotel/add
     defaults: { _controller: MCDHHotelBundle:Hotel:add }
     
 mcdh_hotel_delete:
-    path:     /{_locale}/hotel/delete/{idHotel}
+    path:     /hotel/delete/{idHotel}
     defaults: { _controller: MCDHHotelBundle:Hotel:delete }
     requirements:
         idHotel: \d+
     
 mcdh_hotel_edit:
-    path:     /{_locale}/hotel/edit/{idHotel}
+    path:     /hotel/edit/{idHotel}
     defaults: { _controller: MCDHHotelBundle:Hotel:edit }
     requirements:
         idHotel: \d+
 
 mcdh_hotel_view:
-    path:     /{_locale}/hotel/view/{idHotel}
+    path:     /hotel/view/{idHotel}
     defaults: { _controller: MCDHHotelBundle:Hotel:view }
     requirements:
         idHotel: \d+
         
 mcdh_hotel_edit_room:
-    path:     /{_locale}/room/edit/{idRoom}
+    path:     /room/edit/{idRoom}
     defaults: { _controller: MCDHHotelBundle:Room:edit}
     requirements:
       idHotel: \d+
       idRoom: \d+
  
 mcdh_hotel_add_room:
-    path:     /{_locale}/hotel/{idHotel}/addroom
+    path:     /hotel/{idHotel}/addroom
     defaults: { _controller: MCDHHotelBundle:Room:add}
     requirements:
       idRoom: \d+
 
 mcdh_hotel_delete_room:
-    path:     /{_locale}/room/delete/{idRoom}
+    path:     /room/delete/{idRoom}
     defaults: { _controller: MCDHHotelBundle:Room:delete}
     requirements:
       idRoom: \d+
     
 mcdh_hotel_view_room:
-    path:     /{_locale}/room/view/{idRoom}
+    path:     /room/view/{idRoom}
     defaults: { _controller: MCDHHotelBundle:Room:view }
     requirements:
       idRoom: \d+
@@ -56,37 +56,37 @@ mcdh_hotel_view_room:
       
 
 mcdh_hotel_view_booking:
-    path:     /{_locale}/booking/view/{idBooking}
+    path:     /booking/view/{idBooking}
     defaults: { _controller: MCDHHotelBundle:Booking:view }
     requirements:
       idBooking: \d+
 
 mcdh_hotel_edit_booking:
-    path:     /{_locale}/booking/edit/{idBooking}
+    path:     /booking/edit/{idBooking}
     defaults: { _controller: MCDHHotelBundle:Booking:edit }
     requirements:
       idBooking: \d+
 
 mcdh_hotel_delete_booking:
-    path:     /{_locale}/booking/delete/{idBooking}
+    path:     /booking/delete/{idBooking}
     defaults: { _controller: MCDHHotelBundle:Booking:delete }
     requirements:
       idBooking: \d+
 
 mcdh_hotel_add_booking:
-    path:     /{_locale}/addbooking/{idRoom}
+    path:     /addbooking/{idRoom}
     defaults: { _controller: MCDHHotelBundle:Booking:add }
     requirements:
       idRoom: \d+
       
 #mcdh_hotel_add_hotel_booking:
-#    path:     /{_locale}/addbooking
+#    path:     /addbooking
 #    defaults: { _controller: MCDHHotelBundle:Booking:addFromHotel }
 #    requirements:
 #      idHotel: \d*
 
 #mcdh_room_add_room_booking:
-#    path:     /{_locale}/addbooking
+#    path:     /addbooking
 #    defaults: { _controller: MCDHHotelBundle:Booking:addFromRoom }
 #    requirements:
 #      idRoom: \d*
