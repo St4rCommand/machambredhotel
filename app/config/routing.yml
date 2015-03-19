@@ -1,3 +1,5 @@
 mcdh_hotel:
     resource: "@MCDHHotelBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /{_locale}/
+    requirements:
+       _locale: en|fr

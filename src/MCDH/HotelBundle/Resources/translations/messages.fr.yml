@@ -8,6 +8,9 @@ bouton.supprimer: Supprimer
 bouton.editer: Editer
 room.ajout: ajouter une chambre
 pas.hotel: Pas (encore !) de chambres pour cet hôtel.
+pas.hotel2: Pas (encore !) d'hôtels
+add.hotel: Ajouter un hôtel
+added: Ajouté le
 
 chambre: chambre
 room.delete.message: Etes-vous sur de vouloir supprimer cette chambre?
@@ -17,7 +20,8 @@ room.edit: Edition d'une chambre
 floor: ème étage
 people: personne(s)
 
-add.booking: Ajout d'une réservatio
+book: Réserver
+add.booking: Ajout d'une réservation
 booking: Réservation
 cancel: Annulation
 cancel.booking: Annulation d'une réservation
@@ -30,3 +34,7 @@ checkout: Date de départ
 price: Prix
 num.people: Nombre de personnes
 breakfast: Petit déjeuner
+
+booking.number: Réservation n°
+from: du
+to: au

@@ -35,3 +35,7 @@ price: Price
 num.people: Number of people
 breakfast: Breakfast
 
+booking.number: Booking number
+from: from
+to: to
+
