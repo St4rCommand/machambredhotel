@@ -48,9 +48,8 @@
 			        <a href="{{ path('mcdh_hotel_delete_room', {'idRoom': room.id}) }}">Supprimer</a>
 	  			{% endif %}
 		        
-		        {% if is_granted('ROLE_CUSTOMER') %}
-			        <a href="{{ path('mcdh_hotel_add_booking', {'idRoom':room.id}) }}">Réserver</a>
-	 	 		{% endif %}
+			    <a href="{{ path('mcdh_hotel_add_booking', {'idRoom':room.id}) }}">Réserver</a>
+			    
 		      </li>
 		    {% else %}
 		      <li>Pas (encore !) de chambres pour cet hôtel.</li>

@@ -4,13 +4,14 @@ namespace MCDH\UserBundle\Controller;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\HttpFoundation\Request;
+use FOS\UserBundle\Event\FormEvent;
 
 class RegistrationController extends BaseController
 {
 	public function registerAction(Request $request){
-		
-		return new RedirectResponse($this->generateUrl('mcdh_hotel'));
 		
 		/** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
 		$formFactory = $this->get('fos_user.registration.form.factory');
@@ -21,6 +22,7 @@ class RegistrationController extends BaseController
 		
 		$user = $userManager->createUser();
 		$user->setEnabled(true);
+		$user->addRole('ROLE_CUSTOMER');
 		
 		$event = new GetResponseUserEvent($user, $request);
 		$dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
@@ -37,13 +39,12 @@ class RegistrationController extends BaseController
 		if ($form->isValid()) {
 			$event = new FormEvent($form, $request);
 
-			$user->addRole('ROLE_CUSTOMER');
 			$dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 		
 			$userManager->updateUser($user);
 		
 			if (null === $response = $event->getResponse()) {
-				$url = $this->generateUrl('mcdh_hotel');
+				$url = $this->generateUrl('fos_user_profile_show');
 				$response = new RedirectResponse($url);
 			}
 		
