@@ -8,11 +8,30 @@ bouton.supprimer: Delete
 bouton.editer: Edit
 room.ajout: add a room
 pas.hotel: No rooms (yet) for this hotel. 
+pas.hotel2: No hotel (yet).
+add.hotel: Add an hotel
+added: Added the
 
 chambre: room
 room.delete.message: Do you really want to delete this room?
 back.room: Back to the room
 delete.room: Room deleting
 room.edit: Room editing
-floor: st/nd/rd/th floor
+floor: floor
 people: people
+
+book: Booking
+add.booking: Add a booking
+booking: Booking
+cancel: Cancel
+cancel.booking: Cancel a booking
+cancel.certification: Do you really want to cancel this booking?
+back.booking: Back to the booking
+edit.booking: Edit a booking
+
+checkin: Check in
+checkout: Check out
+price: Price   
+num.people: Number of people
+breakfast: Breakfast
+

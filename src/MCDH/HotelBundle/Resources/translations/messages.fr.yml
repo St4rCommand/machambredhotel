@@ -16,3 +16,17 @@ room.delete: Suppression d'une chambre
 room.edit: Edition d'une chambre
 floor: ème étage
 people: personne(s)
+
+add.booking: Ajout d'une réservatio
+booking: Réservation
+cancel: Annulation
+cancel.booking: Annulation d'une réservation
+cancel.certification: Etes-vous sur de vouloir annuler la réservation?
+back.booking: Revenir à la réservation
+edit.booking: Edition d'une réservation
+
+checkin: Date d'arrivée
+checkout: Date de départ
+price: Prix
+num.people: Nombre de personnes
+breakfast: Petit déjeuner

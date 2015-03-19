@@ -7,7 +7,7 @@
 {% block mcdh_hotel_body %}
 
 	{% block mcdh_hotel_page %}
-		<a href="{{ path('mcdh_hotel_add') }}">Ajouter un hôtel</a>
+		<a href="{{ path('mcdh_hotel_add') }}">{{ 'add.hotel' | trans }}</a>
 	{% endblock %}
 	
 	{% block mcdh_hotel_content %}
@@ -18,14 +18,14 @@
 		        <a href="{{ path('mcdh_hotel_view', {'idHotel': hotel.id}) }}"> {{ hotel.name }}</a>
 				
 		    	{{ hotel.city }} ({{ hotel.country }}),
-		        ajouté le {{ hotel.addedDate|date('d-m-Y') }}
+		        {{ 'added' | trans }} {{ hotel.addedDate|date('d-m-Y') }}
 		        
-		        <a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}">Editer</a>
-		        <a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}">Supprimer</a>
-  				<a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}">Ajouter une chambre</a>
+		        <a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}">{{ 'bouton.editer' | trans }}</a>
+		        <a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}">{{ 'bouton.supprimer' | trans }}</a>
+  				<a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}">{{ 'room.ajout' | trans }}</a>
 		      </li>
 		    {% else %}
-		      <li>Pas (encore !) d'hôtels</li>
+		      <li>{{ 'pas.hotel2' | trans }}</li>
 		    {% endfor %}
 		</ul>
   

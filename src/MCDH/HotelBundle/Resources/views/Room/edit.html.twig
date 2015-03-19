@@ -12,7 +12,7 @@
 	
 	{% block mcdh_hotel_content %}
 	
-  		<h2>{{ 'room.edit'|trans }}</h2> <a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}">Revenir à la chambre</a>
+  		<h2>{{ 'room.edit'|trans }}</h2> <a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}">{{ 'back.room' | trans }}</a>
 		<a href="{{ path('mcdh_hotel_delete_room', {'idRoom':room.id}) }}">{{ 'bouton.supprimer'|trans }}</a>
 
 		{{ form(form) }}

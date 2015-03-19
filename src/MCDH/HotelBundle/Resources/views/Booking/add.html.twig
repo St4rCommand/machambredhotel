@@ -1,7 +1,7 @@
 {% extends "MCDHHotelBundle::layout.html.twig" %}
 
 {% block title %}
-	Réservation - {{ parent() }}
+	{{ 'booking' | trans }} - {{ parent() }}
 {% endblock %}
 
 {% block mcdh_hotel_body %}
@@ -12,7 +12,7 @@
 	{% endblock %}
 	
 	{% block mcdh_hotel_content %}
-  		<h2>Ajout d'une réservation</h2>
+  		<h2>{{ 'add.booking' | trans }}</h2>
 
 		{{ form(form) }}
 	{% endblock %}
