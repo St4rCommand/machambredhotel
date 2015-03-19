@@ -73,6 +73,15 @@ class Booking
      * @Assert\Valid()
      */
     private $room;
+    
+    /**
+     * @var MCDH\UserBundle\Entity\User
+     *
+     * @ORM\OneToMany(targetEntity="MCDH\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
+     */
+    private $customer;
 
 
     /**

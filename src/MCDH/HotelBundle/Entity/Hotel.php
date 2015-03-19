@@ -4,6 +4,7 @@ namespace MCDH\HotelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use MCDH\UserBundle\MCDHUserBundle;
 
 /**
  * Hotel
@@ -125,6 +126,15 @@ class Hotel
      * @ORM\OneToOne(targetEntity="MCDH\HotelBundle\Entity\Image", cascade={"persist"})
      */
     private $image;
+    
+    /**
+     * @var MCDH\UserBundle\Entity\User 
+     * 
+     * @ORM\OneToMany(targetEntity="MCDH\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
+     */
+    private $hotelKeeper;
     
     /**
      * Get id

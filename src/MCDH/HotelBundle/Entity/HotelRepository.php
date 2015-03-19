@@ -4,6 +4,7 @@ namespace MCDH\HotelBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use MCDH\UserBundle\Entity\User;
 
 /**
  * HotelRepository
@@ -34,5 +35,23 @@ class HotelRepository extends EntityRepository{
 		// Enfin, on retourne l'objet Paginator correspondant à la requête construite
 		// (n'oubliez pas le use correspondant en début de fichier)
 		return new Paginator($query, true);
+	}
+	
+	/**
+	 * Return all hotelkeeper hotels
+	 *
+	 * @param unknown $page
+	 * @param unknown $nbPerPage
+	 * @return \MCDH\HotelBundle\Entity\Paginator
+	 */
+	public function getHotelKeeperHotels($hotelkeeper)
+	{
+		$query = $this
+			->createQueryBuilder('h')
+			->leftJoin('h.hotelkeeper', 'hotels')
+			->where('a.hotelkeeper = '.$hotelkeeper->getId())
+			->getQuery();
+		
+		return $query->getResult();
 	}
 }
