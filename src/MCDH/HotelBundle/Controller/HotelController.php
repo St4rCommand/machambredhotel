@@ -127,7 +127,7 @@ class HotelController extends Controller
     	
     	//affichage d'une erreur si l'hôtel n'existe pas
     	if($hotel === null){
-    		throw $this->createNotFoundException("L'hôtel portant l'identifiant ".$idHotel." n'existe pas. ");
+    		throw new NotFoundHttpException("Aucun hôtel ne porte l'identifiant ".$idHotel.".");
     	}
     	
     	//création d'un formulaire de validation
@@ -169,7 +169,7 @@ class HotelController extends Controller
     	
     	//affichage d'une erreur si l'hôtel n'existe pas
     	if($hotel === null){
-    		throw new NotFoundHttpException("L'hôtel portant l'identifiant ".$idHotel." ne peut être affiché car il n'existe pas. ");
+    		throw new NotFoundHttpException("Aucun hôtel ne porte l'identifiant ".$idHotel.".");
     	}
     	
     	$rooms = $em->getRepository('MCDHHotelBundle:Room')->findBy(array('hotel' => $hotel));
@@ -199,13 +199,13 @@ class HotelController extends Controller
     	
     	//affichage d'une erreur si l'hôtel n'existe pas
     	if($hotel === null){
-    		throw new NotFoundHttpException("L'hôtel portant l'identifiant ".$idHotel." ne peut être affiché car il n'existe pas. ");
+    		throw new NotFoundHttpException("Aucun hôtel ne porte l'identifiant ".$idHotel.".");
     	}
 
     	$hotelkeeper = $hotel->getHotelKeeper();
     	$user = $this->getUser();
     	if($user != $hotelkeeper){
-    		throw new AccessDeniedException("Vous n'avez pas les droits suffisants pour accéder à cette réservation.");
+    		throw new AccessDeniedException("Vous n'avez pas les droits suffisants pour accéder à cet hôtel.");
     	}
     	 
     	//si le formulaire a été validé

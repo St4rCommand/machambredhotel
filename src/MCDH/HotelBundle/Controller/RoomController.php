@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use MCDH\HotelBundle\Form\RoomType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 
 
 /**
@@ -31,6 +33,17 @@ class RoomController extends Controller{
 		
 		//récupération de la chmabre dans la base de données
 		$room = $em->getRepository('MCDHHotelBundle:Room')->find($idRoom);
+		
+		//affichage d'une erreur si l'hôtel n'existe pas
+		if($room === null){
+			throw new NotFoundHttpException("Aucune chambre ne porte l'identifiant ".$idRoom.".");
+		}
+		
+		$hotelkeeper = $room->getHotel()->getHotelKeeper();
+		$user = $this->getUser();
+		if($user != $hotelkeeper){
+			throw new AccessDeniedException("Vous n'avez pas les droits suffisants pour accéder à cette chambre.");
+		}
 		
 		//création du formulaire
 		$form = $this->get('form.factory')->create(new RoomType(), $room);
@@ -73,7 +86,13 @@ class RoomController extends Controller{
 		 
 		//affichage d'une erreur si l'hôtel n'existe pas
 		if($hotel === null){
-			throw $this->createNotFoundException("L'hôtel portant l'identifiant ".$idHotel." n'existe pas. ");
+    		throw new NotFoundHttpException("Aucun hôtel ne porte l'identifiant ".$idHotel.".");
+		}
+		
+		$hotelkeeper = $hotel->getHotelKeeper();
+		$user = $this->getUser();
+		if($user != $hotelkeeper){
+			throw new AccessDeniedException("Vous n'avez pas les droits suffisants pour accéder à cette hôtel.");
 		}
 		
 		//création d'un objet room
@@ -125,7 +144,7 @@ class RoomController extends Controller{
 		
 		//affichage d'une erreur si la chambre n'existe pas
 		if($room === null){
-			throw $this->createNotFoundException("Aucune chambre ne porte l'identifiant ".$idRoom);
+			throw new NotFoundHttpException("Aucune chambre ne porte l'identifiant ".$idRoom.".");
 		}
 		
 		//création d'un formulaire de validation
@@ -170,7 +189,7 @@ class RoomController extends Controller{
 		
 		//affichage d'une erreur si la chambre n'existe pas
 		if($room === null){
-			throw new NotFoundHttpException("Aucune chambre ne porte l'identifiant ".$idRoom);
+			throw new NotFoundHttpException("Aucune chambre ne porte l'identifiant ".$idRoom.".");
 		}
 		
 		$bookings = $em->getRepository("MCDHHotelBundle:Booking")->findBy(array('room'=>$room));

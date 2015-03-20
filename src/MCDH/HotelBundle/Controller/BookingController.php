@@ -34,7 +34,7 @@ class BookingController extends Controller
 		$room = $em->getRepository("MCDHHotelBundle:Room")->find($idRoom);
 			
 		if($room === null){
-			throw $this->createNotFoundException("Vous ne pouvez pas faire une réservation pour une chambre qui n'existe pas !");
+			throw new NotFoundHttpException("Aucune chambre ne porte l'identifiant ".$idRoom.".");
 		}
 		 
 		$booking = new Booking();
@@ -87,7 +87,7 @@ class BookingController extends Controller
 	
 		//affichage d'une erreur si la chambre n'existe pas
 		if($booking === null){
-			throw new NotFoundHttpException("Aucune réservation ne porte l'identifiant ".$idBooking);
+			throw new NotFoundHttpException("Aucune réservation ne porte l'identifiant ".$idBooking.".");
 		}
 		
 		$owner = $booking->getRoom()->getHotel()->getHotelKeeper();
@@ -119,7 +119,7 @@ class BookingController extends Controller
 		$user = $this->getUser();
 
 		if($booking === null){
-			throw $this->createNotFoundException("Aucune réservation ne porte l'identifiant ".$idBooking);
+			throw new NotFoundHttpException("Aucune réservation ne porte l'identifiant ".$idBooking.".");
 		}
 		
 		if($user != $customer){
@@ -168,7 +168,7 @@ class BookingController extends Controller
 		$user = $this->getUser();
 	
 		if($booking === null){
-			throw $this->createNotFoundException("Aucune réservation ne porte l'identifiant ".$idBooking);
+			throw new NotFoundHttpException("Aucune réservation ne porte l'identifiant ".$idBooking.".");
 		}
 		
 
