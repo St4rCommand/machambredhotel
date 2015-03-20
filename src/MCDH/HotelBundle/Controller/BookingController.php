@@ -117,6 +117,10 @@ class BookingController extends Controller
 		
 		$customer = $booking->getCustomer();
 		$user = $this->getUser();
+
+		if($booking === null){
+			throw $this->createNotFoundException("Aucune réservation ne porte l'identifiant ".$idBooking);
+		}
 		
 		if($user != $customer){
 			throw new AccessDeniedException("Vous n'avez pas les droits suffisants pour accéder à cette réservation.");
@@ -162,13 +166,14 @@ class BookingController extends Controller
 		
 		$customer = $booking->getCustomer();
 		$user = $this->getUser();
-		
-		if($user != $customer){
-			throw new AccessDeniedException("Vous n'avez pas les droits suffisants pour accéder à cette réservation.");
-		}
 	
 		if($booking === null){
 			throw $this->createNotFoundException("Aucune réservation ne porte l'identifiant ".$idBooking);
+		}
+		
+
+		if($user != $customer){
+			throw new AccessDeniedException("Vous n'avez pas les droits suffisants pour accéder à cette réservation.");
 		}
 	
 		$form = $this->createFormBuilder()

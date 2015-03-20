@@ -9,6 +9,8 @@ use MCDH\HotelBundle\Entity\Hotel;
 use MCDH\HotelBundle\Form\HotelType;
 use MCDH\HotelBundle\Entity\Room;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 
 
 /**
@@ -83,6 +85,8 @@ class HotelController extends Controller
     	
     	//si le formulaire d'ajout a été validé
     	if($form->handleRequest($request)->isValid()){
+    		
+    		$hotel->setHotelKeeper($this->getUser());
     		
     		//récupréation de l'Entity Manager
     		$em = $this->getDoctrine()->getManager();
@@ -192,6 +196,17 @@ class HotelController extends Controller
     	
     	//création du formulaire
     	$form = $this->get('form.factory')->create(new HotelType(), $hotel);
+    	
+    	//affichage d'une erreur si l'hôtel n'existe pas
+    	if($hotel === null){
+    		throw new NotFoundHttpException("L'hôtel portant l'identifiant ".$idHotel." ne peut être affiché car il n'existe pas. ");
+    	}
+
+    	$hotelkeeper = $hotel->getHotelKeeper();
+    	$user = $this->getUser();
+    	if($user != $hotelkeeper){
+    		throw new AccessDeniedException("Vous n'avez pas les droits suffisants pour accéder à cette réservation.");
+    	}
     	 
     	//si le formulaire a été validé
     	if($form->handleRequest($request)->isValid()){
