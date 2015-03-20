@@ -17,6 +17,11 @@
 		{% endblock %}
 	
 		{% block mcdh_hotel_content %}
+			{% if is_granted('ROLE_HOTELKEEPER') %}
+				<a href="mailto:{{ booking.customer.email }}">Contacter le client</a>
+			{% else if is_granted('ROLE_CUSTOMER') %}
+				<a href="mailto:{{ booking.room.hotel.email }}">Contacter l'hôtel</a>
+			{% endif %}
 	  		<p>Date d'arrivée : {{ booking.beginDate|date('d-m-Y') }}</p>
 			<p>Date de départ : {{ booking.endDate|date('d-m-Y') }}</p>
 			<p>Prix : {{ booking.price|number_format(2, ',', ' ') }} €</p>

@@ -3,6 +3,7 @@
 namespace MCDH\HotelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Booking
@@ -24,40 +25,43 @@ class Booking
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="begin_date", type="date")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(name="begin_date", type="date", nullable=false)
+     * @Assert\NotBlank(message="La réservation doit avoir une date d'arrivée.")
+     * @Assert\Date()
      */
     private $beginDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="end_date", type="date")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(name="end_date", type="date", nullable=false)
+     * @Assert\NotBlank(message="La réservation doit avoir une date de départ.")
+     * @Assert\Date()
      */
     private $endDate;
 
     /**
-     * @var string
+     * @var decimal
      *
-     * @ORM\Column(name="price", type="decimal")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(name="price", type="decimal", scale=2, nullable=false)
+     * @Assert\NotBlank(message="La chambre doit avoir un prix.")
+     * @Assert\Range(min=0,minMessage="Le prix est un nombre décimal positif.",invalidMessage="Le prix est un nombre décimal.")
      */
     private $price;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="people", type="integer")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(name="people", type="integer", nullable=false)
+     * @Assert\NotBlank(message="La chambre doit avoir un nombre de places défini")
+     * @Assert\Range(min=1,minMessage="Le nombre de personnes doit être un entier positif ou nul.",invalidMessage="Le nombre de personnes doit être un entier positif ou nul.")
      */
     private $people;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="breakfast", type="boolean")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(name="breakfast", type="boolean", nullable=false)
      */
     private $breakfast;
     
@@ -66,8 +70,18 @@ class Booking
      * 
      * @ORM\ManyToOne(targetEntity="MCDH\HotelBundle\Entity\Room")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
      */
     private $room;
+    
+    /**
+     * @var MCDH\UserBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="MCDH\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
+     */
+    private $customer;
 
 
     /**
@@ -193,5 +207,28 @@ class Booking
     public function getBreakfast()
     {
         return $this->breakfast;
+    }
+
+    /**
+     * Set room
+     *
+     * @param \MCDH\HotelBundle\Entity\Room $room
+     * @return Booking
+     */
+    public function setRoom(\MCDH\HotelBundle\Entity\Room $room)
+    {
+        $this->room = $room;
+
+        return $this;
+    }
+
+    /**
+     * Get room
+     *
+     * @return \MCDH\HotelBundle\Entity\Room 
+     */
+    public function getRoom()
+    {
+        return $this->room;
     }
 }

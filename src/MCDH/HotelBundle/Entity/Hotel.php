@@ -130,7 +130,7 @@ class Hotel
     /**
      * @var MCDH\UserBundle\Entity\User 
      * 
-     * @ORM\OneToMany(targetEntity="MCDH\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="MCDH\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\Valid()
      */
@@ -420,5 +420,28 @@ class Hotel
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Set hotelKeeper
+     *
+     * @param \MCDH\UserBundle\Entity\User $hotelKeeper
+     * @return Hotel
+     */
+    public function setHotelKeeper(\MCDH\UserBundle\Entity\User $hotelKeeper)
+    {
+        $this->hotelKeeper = $hotelKeeper;
+
+        return $this;
+    }
+
+    /**
+     * Get hotelKeeper
+     *
+     * @return \MCDH\UserBundle\Entity\User 
+     */
+    public function getHotelKeeper()
+    {
+        return $this->hotelKeeper;
     }
 }

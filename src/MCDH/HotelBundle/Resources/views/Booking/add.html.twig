@@ -15,6 +15,11 @@
 		
 		{% if is_granted('ROLE_CUSTOMER') %}
 	  		<h2>Ajout d'une réservation</h2>
+	  		<h3>Prix d'une nuit : {{ booking.room.price }} €</h3>
+	
+			{% for booking in bookings %}
+				<p>Réservation du {{ booking.beginDate|date('d-m-Y') }} au {{ booking.endDate|date('d-m-Y') }}<p>
+			{% endfor %}	
 	
 			{{ form(form) }}
 		{% endif %}

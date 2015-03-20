@@ -6,11 +6,11 @@
 
 {% block body %}
 
-	{% for key, message in app.session.flashbag.all() %}
-	    <div class="alert alert-{{ key }}">
-	      {{ message|trans({}, 'FOSUserBundle') }}
+	{% for flashMessage in app.session.flashbag.get('alert') %}
+	    <div class="alert">
+	        {{ flashMessage }}
 	    </div>
-  	{% endfor %}
+	{% endfor %}
 
 	<h1><a href="{{ path('mcdh_hotel_homepage') }}">Hôtels</a></h1>
 
