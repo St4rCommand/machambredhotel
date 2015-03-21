@@ -16,7 +16,7 @@
 		<h2>{{ 'cancel.booking' | trans }}</h2>
 		
 		<p>{{ 'cancel.certification' | trans }} {{ booking.id }} ?</p>
-		<a href="{{ path('mcdh_hotel_view_booking', {'idBooking':booking.id}) }}">Revenir à la réservation</a>
+		<a href="{{ path('mcdh_hotel_view_booking', {'idBooking':booking.id}) }}">{{ 'back.booking'|trans }}</a>
 		{{ form(form) }}
 	
 	{% endblock %}
