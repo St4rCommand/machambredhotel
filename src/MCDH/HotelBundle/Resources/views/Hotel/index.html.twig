@@ -15,26 +15,28 @@
 	{% block mcdh_hotel_content %}
 
 		<ul class="row list-group">
-		    {% for hotel in hotels %}
-		      <li class="row list-group-item">
-		      <div class="col-lg-8 col-sm-6">
-		        <a href="{{ path('mcdh_hotel_view', {'idHotel': hotel.id}) }}"> {{ hotel.name }}</a>
-		    	<p>{{ hotel.city }} ({{ hotel.country }}), ajouté le {{ hotel.addedDate|date('d-m-Y') }}</p>
-		      </div>
+			{% for hotel in hotels %}
+				<li class="row list-group-item">
+					<div class="col-lg-8 col-sm-6">
+						<a href="{{ path('mcdh_hotel_view', {'idHotel': hotel.id}) }}"> {{ hotel.name }}</a>
+						<p>{{ hotel.city }} ({{ hotel.country }}), ajouté le {{ hotel.addedDate|date('d-m-Y') }}</p>
+					</div>
 		      
+		      		<div class="col-lg-4">
 		     
-				{% if is_granted('ROLE_HOTELKEEPER') %}
-					
-					 <div class="col-lg-2 col-sm-3"><a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}" class="button btn-success btn-sm active" role="button">Ajouter une chambre</a></div>
-					
-					 <div class="col-lg-1 col-sm-1"><a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}" class="button btn-warning btn-sm active" role="button">Editer</a></div>
-					
-					{% if is_granted('ROLE_ADMIN') %}
-			  			 <div class="col-lg-1 col-sm-1"><a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}" class="button btn-danger btn-sm active" role="button">Supprimer</a></div>
-			  		{% endif %}
-			  		
-			  	{% endif %}
-		      </li>
+						{% if is_granted('ROLE_HOTELKEEPER') %}
+		
+		 					<a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}" class="button btn-success btn-sm active" role="button">Ajouter une chambre</a>
+		
+							<a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}" class="button btn-warning btn-sm active" role="button">Editer</a>
+		
+							{% if is_granted('ROLE_ADMIN') %}
+			 			  		<a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}" class="button btn-danger btn-sm active" role="button">Supprimer</a>
+			  				{% endif %}
+		  		
+		  				{% endif %}
+			  		</div>
+		      	</li>
 		    {% else %}
 		      <li>Pas (encore !) d'hôtels</li>
 		    {% endfor %}
