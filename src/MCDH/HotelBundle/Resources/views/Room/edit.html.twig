@@ -1,25 +1,23 @@
-{% extends "MCDHHotelBundle::layout.html.twig" %}
+{% extends "MCDHHotelBundle:Room:layout.html.twig" %}
 
 {% block title %}
 	Chambre - {{ parent() }}
 {% endblock %}
 
-{% block mcdh_hotel_body %}
+{% block mcdh_hotel_breadcrumb_trail %}
+	{{ parent() }} > Editer
+{% endblock %}
 
-	{% if is_granted('ROLE_HOTELKEEPER') %}
-		{% block mcdh_hotel_page_title %}
-			{{ parent() }}
-		  	<h4>Edition d'une chambre</h4>
-		{% endblock %}
-		
-		{% block mcdh_hotel_page_option %}
-				<a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}" class="button btn-primary btn-sm active" role="button">Revenir à la chambre</a>
-				<a href="{{ path('mcdh_hotel_delete_room', {'idRoom':room.id}) }}" class="button btn-danger btn-sm active" role="button">Supprimer</a>
-		{% endblock %}
-		
-		{% block mcdh_hotel_content %}
-			{{ include("MCDHHotelBundle:Room:form.html.twig") }}
-		{% endblock %}
-	{% endif %}
+{% block mcdh_hotel_page_option %}
+	 {{ parent() }}
+	<a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}" class="button btn-primary btn-sm active" role="button">Revenir à la chambre</a>
+{% endblock %}
+
+
+{% block mcdh_hotel_content %}
+	{{ parent() }}
 	
+	{% if is_granted('ROLE_HOTELKEEPER') %}
+		{{ include("MCDHHotelBundle:Room:form.html.twig") }}
+	{% endif %}
 {% endblock %}

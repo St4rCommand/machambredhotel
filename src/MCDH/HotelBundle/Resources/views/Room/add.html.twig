@@ -1,23 +1,25 @@
-{% extends "MCDHHotelBundle::layout.html.twig" %}
+{% extends "MCDHHotelBundle:Hotel:layout.html.twig" %}
 
 {% block title %}
 	Chambre - {{ parent() }}
 {% endblock %}
 
-{% block mcdh_hotel_body %}
-	
-	{% if is_granted('ROLE_HOTELKEEPER') %}
-		{% block mcdh_hotel_page_title %}
-			{{ parent() }}
+{% block mcdh_hotel_breadcrumb_trail %}
+	{{ parent() }} > Ajouter une chambre
+{% endblock %}
+
+
+{% if is_granted('ROLE_HOTELKEEPER') %}
+	{% block mcdh_hotel_page_title %}
+		{{ parent() }}
 			
   			<div class="row">
   				<h2>Ajout d'une chambre</h2>
   			</div>
 	  	{% endblock %}
-	  	
-		{% block mcdh_hotel_content %}
-			{{ include("MCDHHotelBundle:Room:form.html.twig") }}
-		{% endblock %}
-	{% endif %}
-	
-{% endblock %}
+  	
+	{% block mcdh_hotel_content %}
+		{{ parent() }}
+		{{ include("MCDHHotelBundle:Room:form.html.twig") }}
+	{% endblock %}
+{% endif %}

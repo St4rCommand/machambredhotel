@@ -3,13 +3,7 @@
 
 {% block mcdh_hotel_breadcrumb_trail %}
 
-	{{ parent() }}
-	
-	{% if hotel is defined %}
-		> <a href="{{ path('mcdh_hotel_view', {'idHotel':hotel.id}) }}">{{ hotel.name }}</a>
-	{% elseif room is defined %}
-		> <a href="{{ path('mcdh_hotel_view', {'idHotel':room.hotel.id}) }}">{{ room.hotel.name }}</a>
-	{% endif %}
+	{{ parent() }} > <a href="{{ path('mcdh_hotel_view', {'idHotel':hotel.id}) }}">{{ hotel.name }}</a>
 	
 {% endblock %}
 
@@ -27,9 +21,5 @@
 {% endblock %}
 
 {% block mcdh_hotel_content %}
-	{% if hotel is defined %}
-  			<h1>{{ hotel.name }} <small>{{ hotel.city }}, {{ hotel.country }}</small></h1>
-  	{% else %}
-  			<h1>{{ room.hotel.city }} <small>{{ room.hotel.country }}</small></h1>
-	{% endif %}
+  	<h1>{{ hotel.name }} <small>{{ hotel.city }}, {{ hotel.country }}</small></h1>
 {% endblock %}
