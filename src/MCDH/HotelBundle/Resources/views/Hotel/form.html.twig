@@ -1,0 +1,130 @@
+<div class="well">
+	{{ form_start(form,{}) }}
+	{{ form_errors(form) }}
+	
+	<fieldset id="form-hotel-contact">
+		<legend>Coordonnées</legend>
+		<div class="form-group row">
+			{{ form_label(form.name, "Nom", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			
+			<div class="col-sm-4">
+				{{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			
+			{{ form_errors(form.name, {'attr': {'class': 'col-sm-3'}}) }}
+		</div>
+		
+		<div class="form-group row">
+			{{ form_label(form.address, "Adresse", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			
+			<div class="col-sm-4">
+				{{ form_widget(form.address, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			
+			{{ form_errors(form.address, {'attr': {'class': 'col-sm-3'}}) }}
+		</div>
+		
+		<div class="form-group row">
+			{{ form_label(form.postcode, "Code postal", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			
+			<div class="col-sm-4">
+				{{ form_widget(form.postcode, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			
+			{{ form_errors(form.postcode, {'attr': {'class': 'col-sm-3'}}) }}
+		</div>
+		
+		<div class="form-group row">
+			{{ form_label(form.city, "Ville", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			
+			<div class="col-sm-4">
+				{{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			
+			{{ form_errors(form.city, {'attr': {'class': 'col-sm-3'}}) }}
+		</div>
+		
+		<div class="form-group row">
+			{{ form_label(form.country, "Pays", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			
+			<div class="col-sm-4">
+				{{ form_widget(form.country, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			
+			{{ form_errors(form.country, {'attr': {'class': 'col-sm-3'}}) }}
+		</div>
+		
+		<div class="form-group row">
+			{{ form_label(form.email, "Email", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			
+			<div class="col-sm-4">
+				{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			
+			{{ form_errors(form.email, {'attr': {'class': 'col-sm-3'}}) }}
+		</div>
+		
+		<div class="form-group row">
+			{{ form_label(form.phoneNumber, "Téléphone", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			
+			<div class="col-sm-4">
+				{{ form_widget(form.phoneNumber, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			
+			{{ form_errors(form.phoneNumber, {'attr': {'class': 'col-sm-3'}}) }}
+		</div>
+	</fieldset>
+	
+	<fieldset>
+		<legend>Informations</legend>
+		
+		<div class="form-group row">
+			{{ form_label(form.floor, "Nombre d'étages", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			
+			<div class="col-sm-4">
+				{{ form_widget(form.floor, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			
+			{{ form_errors(form.floor, {'attr': {'class': 'col-sm-3'}}) }}
+		</div>
+		
+		<div class="form-group row">
+			{{ form_label(form.image, "Image", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			
+			<div class="col-sm-4">
+				{{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			
+			{{ form_errors(form.image, {'attr': {'class': 'col-sm-3'}}) }}
+		</div>
+		
+		<div class="form-group row">
+			{{ form_label(form.description, "Description", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			
+			<div class="col-sm-4">
+				{{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			
+			{{ form_errors(form.description, {'attr': {'class': 'col-sm-3'}}) }}
+		</div>
+		
+		<div class="form-group row">
+			{{ form_label(form.website, "Site internet", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			
+			<div class="col-sm-4">
+				{{ form_widget(form.website, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			
+			{{ form_errors(form.website, {'attr': {'class': 'col-sm-3'}}) }}
+		</div>
+	</fieldset>
+	
+	<fieldset>
+		<div class="form-group row">
+			{{ form_widget(form.save, {'attr': {'class': 'col-lg-offset-6 btn btn-primary'}}) }}
+		</div>
+	</fieldset>
+			
+	{{ form_rest(form) }}
+	{{ form_end(form) }}
+</div>
