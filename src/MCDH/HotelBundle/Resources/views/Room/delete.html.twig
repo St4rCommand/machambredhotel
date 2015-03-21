@@ -6,18 +6,23 @@
 
 {% block mcdh_room_body %}
 
-	{% block mcdh_hotel_page %}
-		<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':room.hotel.id}) }}">{{ room.hotel.name }}</a></h2>
-		<h3><a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}">{{ room.name }}</a></h3>
-	{% endblock %}
-
 	{% block mcdh_hotel_content %}
 		{% if is_granted('ROLE_ADMIN') %}
-			<h2>Suppression d'une chambre</h2>
-			
-			<p>Etes-vous sur de vouloir supprimer la chambre {{ room.name }} ?</p>
-			<a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}">Revenir à la chambre</a>
-			{{ form(form) }}
+			<div class="well">
+		  		<fieldset>
+		  			<legend>Suppression d'une chambre</legend>
+					{{ form_start(form,{}) }}
+					{{ form_errors(form) }}
+
+		  			<div class="form-group row">
+		  				<p>Etes-vous sur de vouloir supprimer la chambre {{ room.name }} ?</p>
+						<a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}" role="button" class="col-lg-offset-3 col-lg-3 button btn-lg btn-primary active">Revenir à la chambre</a>
+						{{ form_widget(form.delete, {'attr': {'class': 'col-lg-offset-1 btn btn-lg btn-danger'}}) }}
+					</div>
+					{{ form_rest(form) }}
+					{{ form_end(form) }}
+				</fieldset>
+	  		</div>
 		{% else %}
 	  		<p>Vous devez être administrateur pour pouvoir supprimer un élément</p>
   		{% endif %}

@@ -6,8 +6,8 @@
 
 {% block mcdh_hotel_body %}
 	
-	{% block mcdh_hotel_page %}
-		<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':room.hotel.id}) }}">{{ room.hotel.name }}</a></h2>
+	{% block mcdh_hotel_page_title %}
+		{{ parent() }}
 		{% if hotel.image.uploadDir is defined %}
 			<img
 				src="{{ asset(room.image.uploadDir ~ '/' ~ room.image.id ~ '.' ~ room.image.extension) }}"
@@ -15,23 +15,25 @@
 			/>
 		{% endif %}
 		
+		<div class="row well">
+		<a href="{{ path('mcdh_hotel_add_booking', {'idRoom':room.id}) }}" class="button btn-success btn-sm active" role="button">Réserver</a>	
+		
 		{% if is_granted('ROLE_HOTELKEEPER') %}
-			<a href="{{ path('mcdh_hotel_edit_room', {'idRoom':room.id}) }}">Editer</a>
+			<a href="{{ path('mcdh_hotel_edit_room', {'idRoom':room.id}) }}" class="button btn-warning btn-sm active" role="button">Editer</a>
 		{% endif %}
 		
 		{% if is_granted('ROLE_ADMIN') %}
-			<a href="{{ path('mcdh_hotel_delete_room', {'idRoom':room.id}) }}">Supprimer</a>
+			<a href="{{ path('mcdh_hotel_delete_room', {'idRoom':room.id}) }}" class="button btn-danger btn-sm active" role="button">Supprimer</a>
 		{% endif %}
-		
-		<a href="{{ path('mcdh_hotel_add_booking', {'idRoom':room.id}) }}">Réserver</a>	
+		</div>
 	{% endblock %}
 
 	{% block mcdh_hotel_content %}
   		
-  		{% block mcdh_hotel_room %}
+  		<div class="row well">
   			<p>Chambre {{ room.name }}, {{ room.floor }}ème étage</p>
 			<p>{{ room.people }} personne(s), {{ room.orientation }}</p>
-		{% endblock %}
+		</div> 
 		
 		{% block mcdh_hotel_bookings %}
 			{% if is_granted('ROLE_HOTELKEEPER') %}
@@ -45,7 +47,7 @@
 					<a href="{{ path('mcdh_hotel_delete_booking', {'idBooking': booking.id}) }}">Supprimer</a>
 			      </li>
 			    {% else %}
-			      <li>Pas (encore !) de chambres pour cet hôtel.</li>
+			      <li>Pas (encore !) de réservations pour cet hôtel.</li>
 			    {% endfor %}
 			{% endif %}
 		    

@@ -1,16 +1,28 @@
-{%  extends "MCDHHotelBundle::layout.html.twig" %}
+{%  extends "MCDHHotelBundle:Hotel:layout.html.twig" %}
 
 {% block title %}
   Ajout - {{ parent() }}
 {% endblock %}
 
-{% block mcdh_hotel_body %}
+{% block mcdh_hotel_breadcrumb_trail %}
+	{{ parent() }} > Supprimer
+{% endblock %}
+
+{% block mcdh_hotel_page_option %}
   	
-	{% block mcdh_hotel_content %}
-		{% if is_granted('ROLE_ADMIN') %}
-			
-	  		
-	  		<div class="well">
+  	{{ parent() }}
+  	
+  	<a href="{{ path('mcdh_hotel_view',{'idHotel':hotel.id}) }}" class="button btn-primary btn-sm active" role="button">Revenir à l'hôtel</a>
+
+{% endblock %}
+  	
+{% block mcdh_hotel_content %}
+	{{ parent() }}
+
+	{% if is_granted('ROLE_ADMIN') %}
+  		<div class="well">
+	  		<fieldset>
+	  			<legend>Suppression</legend>
 				{{ form_start(form,{}) }}
 				{{ form_errors(form) }}
 	  			
@@ -21,10 +33,10 @@
 				</div>
 				{{ form_rest(form) }}
 				{{ form_end(form) }}
-	  		</div>
-	  	{% else %}
-	  		<p>Vous devez être administrateur pour pouvoir supprimer un élément</p>
-  		{% endif %}
-	{% endblock %}
-  	
+			</fieldset>
+  		</div>
+  	{% else %}
+	  	<p>Vous devez être administrateur pour pouvoir supprimer un élément</p>
+  	{% endif %}
 {% endblock %}
+  	

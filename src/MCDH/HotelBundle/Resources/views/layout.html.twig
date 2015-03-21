@@ -7,35 +7,27 @@
 {% block body %}
 
 	{% for flashMessage in app.session.flashbag.get('alert') %}
-	    <div class="alert">
+	    <div class="alert row">
 	        {{ flashMessage }}
 	    </div>
 	{% endfor %}
 
-	<div class="row">
-		{% block mcdh_hotel_page_title %}
-			<h1><a href="{{ path('mcdh_hotel_homepage') }}">Hôtels</a></h1>
+	<div class="row ">
+		{% block mcdh_hotel_breadcrumb_trail %}
 		
-			{% if hotel is defined %}
-				<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':hotel.id}) }}">{{ hotel.name }}</a></h2>
-				<h3>{{ hotel.city }} <small>{{ hotel.country }}</small></h3>
-			{% elseif room is defined %}
-				<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':room.hotel.id}) }}">{{ room.hotel.name }}</a></h2>
-				<h3>{{ room.hotel.city }} <small>{{ room.hotel.country }}</small></h3>
-			{% else %}
-			{% endif %}
+			<a href="{{ path('mcdh_hotel_homepage') }}">Hôtels</a>
+			
 		{% endblock %}
 	</div>
 	
-	<div class="row">
+	<div class="row well">
 		{% block mcdh_hotel_page_option %}
 		
 		{% endblock %}
 	</div>
 	
-	<div class="row">
+	<div class="row well">
 		{% block mcdh_hotel_content %}
-  	
 		{% endblock %}
 	</div>  
   

@@ -4,16 +4,20 @@
   Ajout - {{ parent() }}
 {% endblock %}
 
-{% block mcdh_hotel_body %}
 
-  	{% if is_granted('ROLE_HOTELKEEPER') %}
-		{% block mcdh_hotel_page_title %}
-  			<h2>Ajout d'un hôtel</h2>
-	  	{% endblock %}
-	  	
-		{% block mcdh_hotel_content %}
-			{{ include("MCDHHotelBundle:Hotel:form.html.twig") }}
-		{% endblock %}
-	{% endif %}
-  	
+{% block mcdh_hotel_breadcrumb_trail %}
+	{{ parent() }} > Ajouter
 {% endblock %}
+
+
+{% if is_granted('ROLE_HOTELKEEPER') %}
+	{% block mcdh_hotel_page_title %}
+		{{ parent() }} > Ajout d'un hôtel
+  	{% endblock %}
+  	
+	{% block mcdh_hotel_content %}
+  			<h2>Ajout d'un hôtel</h2>
+			{{ include("MCDHHotelBundle:Hotel:form.html.twig") }}
+	{% endblock %}
+{% endif %}
+  	

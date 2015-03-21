@@ -1,25 +1,25 @@
-{%  extends "MCDHHotelBundle::layout.html.twig" %}
+{%  extends "MCDHHotelBundle:Hotel:layout.html.twig" %}
 
 {% block title %}
   {{ hotel.name }} - {{ parent() }}
 {% endblock %}
 
-{% block mcdh_hotel_body %}
-	
-	{% block mcdh_hotel_page %}
-  		{{ parent() }} <a href="{{ path('mcdh_hotel_view',{'idHotel':hotel.id}) }}">Revenir à l'hôtel</a>
-  		
-  		{% if is_granted('ROLE_ADMIN') %}
-  			<a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}">Supprimer</a>
-		{% endif %}
-  		
-  		{% if is_granted('ROLE_HOTELKEEPER') %}
-			<a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}">Ajouter une chambre</a>
-		{% endif %}
-  	{% endblock %}
-  	
-	{% block mcdh_hotel_content %}
-		{{ include("MCDHHotelBundle:Hotel:form.html.twig") }}
-	{% endblock %}
-  
+
+{% block mcdh_hotel_breadcrumb_trail %}
+	{{ parent() }} > Editer
 {% endblock %}
+  	
+{% block mcdh_hotel_page_option %}
+  	
+  	{{ parent() }}
+  	
+  	<a href="{{ path('mcdh_hotel_view',{'idHotel':hotel.id}) }}" class="button btn-primary btn-sm active" role="button">Revenir à l'hôtel</a>
+
+{% endblock %}
+  	
+{% block mcdh_hotel_content %}
+	{{ parent() }}
+
+	{{ include("MCDHHotelBundle:Hotel:form.html.twig") }}
+{% endblock %}
+  
