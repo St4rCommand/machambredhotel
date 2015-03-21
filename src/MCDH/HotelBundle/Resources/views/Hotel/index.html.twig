@@ -6,44 +6,49 @@
 
 {% block mcdh_hotel_body %}
 
-	{% block mcdh_hotel_page %}
+	{% block mcdh_hotel_page_option %}
 		{% if is_granted('ROLE_HOTELKEEPER') %}
-			<a href="{{ path('mcdh_hotel_add') }}">Ajouter un hôtel</a>
+			<a href="{{ path('mcdh_hotel_add') }}"  class="button btn-success btn-sm active" role="button">Ajouter un hôtel</a>
 		{% endif %}
 	{% endblock %}
 	
 	{% block mcdh_hotel_content %}
 
-		<ul>
+	
+		<ul class="list-group">
 		    {% for hotel in hotels %}
-		      <li>
+		      <li class="row list-group-item">
+		      <div class="col-sm-8">
 		        <a href="{{ path('mcdh_hotel_view', {'idHotel': hotel.id}) }}"> {{ hotel.name }}</a>
-				
-		    	{{ hotel.city }} ({{ hotel.country }}),
-		        ajouté le {{ hotel.addedDate|date('d-m-Y') }}
-		        
+		    	<p>{{ hotel.city }} ({{ hotel.country }}), ajouté le {{ hotel.addedDate|date('d-m-Y') }}</p>
+		      </div>
+		      
+		     
 				{% if is_granted('ROLE_HOTELKEEPER') %}
 					
-					<a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}">Editer</a>
+					 <div class="col-sm-2"><a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}" class="button btn-success btn-sm active" role="button">Ajouter une chambre</a></div>
+					
+					 <div class="col-sm-1"><a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}" class="button btn-warning btn-sm active" role="button">Editer</a></div>
 					
 					{% if is_granted('ROLE_ADMIN') %}
-			  			<a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}">Supprimer</a>
+			  			 <div class="col-sm-1"><a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}" class="button btn-danger btn-sm active" role="button">Supprimer</a></div>
 			  		{% endif %}
 			  		
-			  		<a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}">Ajouter une chambre</a>
 			  	{% endif %}
 		      </li>
 		    {% else %}
 		      <li>Pas (encore !) d'hôtels</li>
 		    {% endfor %}
 		</ul>
-  
-		<ul>
-			{% for p in range(1,nbPages) %}
-				<li {% if p == page %} class="active"{% endif %}>
-					<a href="{{ path('mcdh_hotel_homepage', {'page':p}) }}">{{ p }}</a></li>
-			{% endfor %}
-		</ul>
+		
+  		<nav>
+			<ul class="pagination pagination-md">
+				{% for p in range(1,nbPages) %}
+					<li {% if p == page %} class="active"{% endif %}>
+						<a href="{{ path('mcdh_hotel_homepage', {'page':p}) }}">{{ p }}</a></li>
+				{% endfor %}
+			</ul>
+		</nav>
 		
 	{% endblock %}
 

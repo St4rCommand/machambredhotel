@@ -12,21 +12,33 @@
 	    </div>
 	{% endfor %}
 
-	<h1><a href="{{ path('mcdh_hotel_homepage') }}">Hôtels</a></h1>
-
-	{% block mcdh_hotel_page %}
-		{% if hotel is defined %}
-			<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':hotel.id}) }}">{{ hotel.name }}</a></h2>
-		{% elseif room is defined %}
-			<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':room.hotel.id}) }}">{{ room.hotel.name }}</a></h2>
-		{% else %}
+	<div class="row">
+		{% block mcdh_hotel_page_title %}
+			<h1><a href="{{ path('mcdh_hotel_homepage') }}">Hôtels</a></h1>
 		
-		{% endif %}
-	{% endblock %}
-  
-  
-	{% block mcdh_hotel_content %}
+			{% if hotel is defined %}
+				<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':hotel.id}) }}">{{ hotel.name }}</a></h2>
+				<h3>{{ hotel.city }} <small>{{ hotel.country }}</small></h3>
+			{% elseif room is defined %}
+				<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':room.hotel.id}) }}">{{ room.hotel.name }}</a></h2>
+				<h3>{{ room.hotel.city }} <small>{{ room.hotel.country }}</small></h3>
+			{% else %}
+			{% endif %}
+		{% endblock %}
+	</div>
+	
+	<div class="row">
+		{% block mcdh_hotel_page_option %}
+		
+		{% endblock %}
+	</div>
+	
+	<div class="row">
+		{% block mcdh_hotel_content %}
   	
-	{% endblock %}
+		{% endblock %}
+	</div>  
+  
+
 
 {% endblock %}
