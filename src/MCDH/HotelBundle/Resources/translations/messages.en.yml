@@ -7,19 +7,19 @@ bouton.accueil: Homepage
 bouton.supprimer: Delete
 bouton.editer: Edit
 bouton.ajouter: Add
-room.ajout: add a room
+room.ajout: Add a room
 pas.hotel: No rooms (yet) for this hotel. 
 pas.hotel2: No hotel (yet).
 add.hotel: Add an hotel
 added: Added the
 admin.delete: You need to be an administrator to delete this element
-chambre: room
+chambre: Room
 room.delete.message: Do you really want to delete this room?
 back.room: Back to the room
 room.delete: Room deleting
 room.edit: Room editing
 floor: floor
-people: people
+people: People
 back.hotel: Back to the hotel
 book: Booking
 add.booking: Add a booking
@@ -54,12 +54,22 @@ validation: Validation
 booking.number: Booking number
 from: from
 to: to
-booking.of: Booking of
+booking.of: Booking from
 night.price: Price per night
 contact.customer: Contact customer
 contact.hotel: Contact hotel
 no.booking: No booking (yet !) fot this hotel
 hotel: Hotels
+mcdh: The website to book a room
+connect: Connect as
+disconnect: Disconnect
+connection: Connection
+subscribe: Subscription
+profil: Profil
+createdby: This website as been creadted by Simon BERNARD and Romain HUNAULT.
+ihm: It has been created as a projet for the IHM development class by studients from Licence 3 of MIAGE at the UFR Sciences et Techniques of the University of Nantes.
+home: Homepage
+submit: Submit
 
 
 

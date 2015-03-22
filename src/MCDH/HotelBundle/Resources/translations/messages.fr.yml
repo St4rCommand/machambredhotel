@@ -7,7 +7,7 @@ bouton.accueil: Retour à l''accueil
 bouton.supprimer: Supprimer
 bouton.editer: Editer
 bouton.ajouter: Ajouter
-room.ajout: ajouter une chambre
+room.ajout: Ajouter une chambre
 pas.hotel: Pas (encore !) de chambres pour cet hôtel.
 pas.hotel2: Pas (encore !) d'hôtels
 add.hotel: Ajouter un hôtel
@@ -60,6 +60,15 @@ contact.customer: Contacter le client
 contact.hotel: Contacter l'hôtel
 no.booking: Pas (encore !) de réservations pour cet hôtel
 hotel: Hôtels
+mcdh: Le site de réservation de chambre
+connect: Connecté en tant que
+disconnect: Déconnexion
+connection: Connexion
+subscribe: Inscription
+profil: Profil
+createdby: Ce site internet a été créé par Simon BERNARD et Romain HUNAULT.
+ihm: Il a été créé dans le cadre du cours Développement IHM & Client serveur de L3 MIAGE à l'UFR Sciences et Techniques de Nantes
+home: Accueil
 
 
 
