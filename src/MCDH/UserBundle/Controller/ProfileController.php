@@ -27,13 +27,25 @@ class ProfileController extends BaseProfileController
 	 */
 	public function showAction()
 	{
+		
+		$bookings = array();
+		$hotels = array();
+				
 		$user = $this->getUser();
 		if (!is_object($user) || !$user instanceof UserInterface) {
 			throw new AccessDeniedException('This user does not have access to this section.');
 		}
+		
+		if($this->get('security.context')->isGranted('ROLE_CUSTOMER'))
+			$bookings = $this->getDoctrine()->getManager()->getRepository("MCDHHotelBundle:Booking")->findUserBookings($user);
 
+		if($this->get('security.context')->isGranted('ROLE_HOTELKEEPER'))
+			$hotels = $this->getDoctrine()->getManager()->getRepository("MCDHHotelBundle:Hotel")->getHotelKeeperHotels($user);
+		
 		return $this->render('FOSUserBundle:Profile:show.html.twig', array(
-				'user' => $user
+				'user' => $user,
+				'bookings' => $bookings,
+				'hotels' => $hotels
 		));
 	}
 

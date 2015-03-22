@@ -1,7 +1,5 @@
 {% extends "::layout.html.twig" %}
 
-{% trans_default_domain 'FOSUserBundle' %}
-
 {% block body %}
 
   	{% for flashMessage in app.session.flashbag.get('alert') %}
@@ -10,62 +8,5 @@
 	    </div>
 	{% endfor %}
 	
-	<div class="row well">
-		<div class="panel panel-default col-lg-offset-3 col-lg-6">
-			{{ form_start(form,{}) }}
-			{{ form_errors(form) }}
-			
-			<fieldset>
-				<legend>Inscription</legend>
-				
-				<div class="form-group row">
-					{{ form_label(form.email, form.email, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-					
-					<div class="col-sm-6">
-						{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-					</div>
-					
-					{{ form_errors(form.email, {'attr': {'class': 'col-sm-1'}}) }}
-				</div>
-				
-				<div class="form-group row">
-					{{ form_label(form.username, form.username, {'label_attr': {'class': ' col-sm-3 control-label'}}) }}
-					
-					<div class="col-sm-6">
-						{{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
-					</div>
-					
-					{{ form_errors(form.username, {'attr': {'class': 'col-sm-1'}}) }}
-				</div>
-				
-				<div class="form-group row">
-					{{ form_label(form.plainPassword.first, null, {'label_attr': {'class': ' col-sm-3 control-label'}}) }}
-					
-					<div class="col-sm-6">
-						{{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control'}}) }}
-					</div>
-					
-					{{ form_errors(form.plainPassword.first, {'attr': {'class': 'col-sm-1'}}) }}
-				</div>
-				
-				<div class="form-group row">
-					{{ form_label(form.plainPassword.second, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-					
-					<div class="col-sm-6">
-						{{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
-					</div>
-					
-					{{ form_errors(form.plainPassword.second, {'attr': {'class': 'col-sm-1'}}) }}
-				</div>
-							
-				<div class="form-group row">
-					<input type="submit" id="_submit" name="_submit" value="{{ 'registration.submit'|trans }}"  class="btn btn-success btn-sm active col-lg-offset-5" role="button" />
-				</div>
-			</fieldset>
-			
-			
-			{{ form_rest(form) }}
-			{{ form_end(form) }}
-		</div>
-	</div>
+	{% include 'MCDHUserBundle:Registration:form.html.twig' %}
 {% endblock %}
