@@ -2,10 +2,10 @@
 	{{ form_start(form,{}) }}
 	{{ form_errors(form) }}
 	
-	<fieldset>
-		<legend>Coordonnées</legend>
+	<fieldset id="form-hotel-contact">
+		<legend>{{ 'coords'|trans }}</legend>
 		<div class="form-group row">
-			{{ form_label(form.name, "Nom", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			{{ form_label(form.name, "name"|trans, {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
 			
 			<div class="col-sm-4">
 				{{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
@@ -15,7 +15,7 @@
 		</div>
 		
 		<div class="form-group row">
-			{{ form_label(form.address, "Adresse", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			{{ form_label(form.address, "adress"|trans, {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
 			
 			<div class="col-sm-4">
 				{{ form_widget(form.address, {'attr': {'class': 'form-control'}}) }}
@@ -25,7 +25,7 @@
 		</div>
 		
 		<div class="form-group row">
-			{{ form_label(form.postcode, "Code postal", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			{{ form_label(form.postcode, "post.code"|trans, {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
 			
 			<div class="col-sm-4">
 				{{ form_widget(form.postcode, {'attr': {'class': 'form-control'}}) }}
@@ -35,7 +35,7 @@
 		</div>
 		
 		<div class="form-group row">
-			{{ form_label(form.city, "Ville", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			{{ form_label(form.city, "city"|trans, {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
 			
 			<div class="col-sm-4">
 				{{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
@@ -45,7 +45,7 @@
 		</div>
 		
 		<div class="form-group row">
-			{{ form_label(form.country, "Pays", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			{{ form_label(form.country, "country"|trans, {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
 			
 			<div class="col-sm-4">
 				{{ form_widget(form.country, {'attr': {'class': 'form-control'}}) }}
@@ -55,7 +55,7 @@
 		</div>
 		
 		<div class="form-group row">
-			{{ form_label(form.email, "Email", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			{{ form_label(form.email, "email"|trans, {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
 			
 			<div class="col-sm-4">
 				{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
@@ -65,7 +65,7 @@
 		</div>
 		
 		<div class="form-group row">
-			{{ form_label(form.phoneNumber, "Téléphone", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			{{ form_label(form.phoneNumber, "phone"|trans, {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
 			
 			<div class="col-sm-4">
 				{{ form_widget(form.phoneNumber, {'attr': {'class': 'form-control'}}) }}
@@ -76,10 +76,10 @@
 	</fieldset>
 	
 	<fieldset>
-		<legend>Informations</legend>
+		<legend>{{ 'details'|trans }}</legend>
 		
 		<div class="form-group row">
-			{{ form_label(form.floor, "Nombre d'étages", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			{{ form_label(form.floor, 'num.floor'|trans, {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
 			
 			<div class="col-sm-4">
 				{{ form_widget(form.floor, {'attr': {'class': 'form-control'}}) }}
@@ -89,7 +89,7 @@
 		</div>
 		
 		<div class="form-group row">
-			{{ form_label(form.image, "Image", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			{{ form_label(form.image, "picture"|trans, {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
 			
 			<div class="col-sm-4">
 				{{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
@@ -99,7 +99,7 @@
 		</div>
 		
 		<div class="form-group row">
-			{{ form_label(form.description, "Description", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			{{ form_label(form.description, "description"|trans, {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
 			
 			<div class="col-sm-4">
 				{{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
@@ -109,7 +109,7 @@
 		</div>
 		
 		<div class="form-group row">
-			{{ form_label(form.website, "Site internet", {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
+			{{ form_label(form.website, "website"|trans, {'label_attr': {'class': 'col-lg-offset-1 col-sm-2 control-label'}}) }}
 			
 			<div class="col-sm-4">
 				{{ form_widget(form.website, {'attr': {'class': 'form-control'}}) }}
@@ -120,7 +120,7 @@
 	</fieldset>
 	
 	<fieldset>
-		<legend>Validation</legend>
+		<legend>{{ 'validation'|trans }}</legend>
 		<div class="form-group row">
 			{{ form_widget(form.save, {'attr': {'class': 'col-lg-offset-6 btn btn-primary'}}) }}
 		</div>
