@@ -14,8 +14,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
+use FOS\UserBundle\Controller\RegistrationController as BaseRegistrationController;
 
-class RegistrationController extends BaseController
+class RegistrationController extends BaseRegistrationController
 {
 	/**
 	 * Surcharge de la méthode du bundle FOS user afin d'ajouter le rôle ROLE_CUSTOMER à chaque nouvel utilisateur inscrit

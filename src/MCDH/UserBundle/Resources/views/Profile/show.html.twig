@@ -1,5 +1,25 @@
 {% extends "MCDHUserBundle::layout.html.twig" %}
 
+	{% block mcdh_user_page_option %}
+		
+	
+		<a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}" class="button btn-warning btn-sm active" role="button">Editer</a>	
+	{% endblock %}
+
 	{% block mcdh_user_content %}
-		<p>je suis dans show</p>
+		<div class="row">
+    		<p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
+    		<p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+    	</div>
+    	
+    	<!-- affichage pour un client -->
+    	{% id is_granted('ROLE_CUSTOMER') %}
+	   		{% include 'MCDHUserBundle:Profile:show_content_customer.html.twig' %}
+    	{% endif %}
+    	
+    	<!-- affichage pour un gérant -->
+    	{% if is_granted('ROLE_HOTELKEEPER') %}
+	   		{%  include 'MCDHUserBundle:Profile:show_content_hotelkeeper.html.twig' %}
+		{% endif %}
+	
 	{% endblock %}

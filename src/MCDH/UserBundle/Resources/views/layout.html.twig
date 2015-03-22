@@ -1,6 +1,7 @@
 {% extends "::layout.html.twig" %}
 
-  	
+{% block body %}
+
   	{% for flashMessage in app.session.flashbag.get('alert') %}
 	    <div class="alert row">
 	        {{ flashMessage }}
@@ -26,4 +27,6 @@
 		{% block mcdh_user_content %}
 		{% endblock %}
 	</div>
+	
+{% endblock %}
 

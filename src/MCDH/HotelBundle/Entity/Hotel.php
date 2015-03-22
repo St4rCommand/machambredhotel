@@ -124,7 +124,7 @@ class Hotel
     /**
      * @var Image Image associée à l'hôtel
      *
-     * @ORM\OneToOne(targetEntity="MCDH\HotelBundle\Entity\Image", cascade={"persist"})
+     ** @ORM\OneToOne(targetEntity="MCDH\HotelBundle\Entity\Image", cascade={"persist"})
      */
     private $image;
     
