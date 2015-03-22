@@ -1,30 +1,33 @@
-{% extends "MCDHHotelBundle:Booking:layout.html.twig" %}
+{% extends "MCDHHotelBundle::layout.html.twig" %}
 
 {% block title %}
-	Réservation - {{ parent() }}
+	{{ 'booking' | trans }} - {{ parent() }}
 {% endblock %}
 
-{% block mcdh_hotel_breadcrumb_trail %}
-	{{ parent() }} > Editer
-{% endblock %}
+{% block mcdh_hotel_body %}
 
-{% block mcdh_hotel_page_option %}
-	 {{ parent() }}
-	<a href="{{ path('mcdh_hotel_view_booking', {'idBooking':booking.id}) }}" class="button btn-primary btn-sm active" role="button">Revenir à la réservation</a>{% endblock %}
+	{% block mcdh_hotel_page %}
+		<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':booking.room.hotel.id}) }}">{{ booking.room.hotel.name }}</a></h2>
+		<h3><a href="{{ path('mcdh_hotel_view_room', {'idRoom':booking.room.id}) }}">{{ booking.room.name }}</a></h3>
+	{% endblock %}
+	
+	{% block mcdh_hotel_content %}
+	
 
-{% block mcdh_hotel_content %}
-
-	{% if is_granted('ROLE_CUSTOMER') %}
-
-  		<ul>
+		{% if is_granted('ROLE_CUSTOMER') %}
+		
+	  		<h2>{{ 'edit.booking'|trans }}</h2> <a href="{{ path('mcdh_hotel_view_booking', {'idBooking':booking.id}) }}">{{ 'back.booking'|trans }}</a>
+			<a href="{{ path('mcdh_hotel_delete_booking', {'idBooking':booking.id}) }}">{{ 'bouton.supprimer'|trans }}</a>
+	
 			{% for booking in bookings %}
-				<li>Réservation du {{ booking.beginDate|date('d-m-Y') }} au {{ booking.endDate|date('d-m-Y') }}</li>
+				<p>Réservation du {{ booking.beginDate|date('d-m-Y') }} au {{ booking.endDate|date('d-m-Y') }}<p>
 			{% endfor %}
-		</ul>	
-
-		{{ include("MCDHHotelBundle:Booking:form.html.twig") }}
 	
-	{% endif %}
+			{{ form(form) }}
+		
+		{% endif %}
 
+	
+	{% endblock %}
+	
 {% endblock %}
-	

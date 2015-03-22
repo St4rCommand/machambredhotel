@@ -1,22 +1,23 @@
 {%  extends "MCDHHotelBundle::layout.html.twig" %}
 
 {% block title %}
-  Ajout - {{ parent() }}
+  {{ 'hotel.ajout.onglet'|trans}} - {{ parent() }}
 {% endblock %}
 
 
 {% block mcdh_hotel_breadcrumb_trail %}
-	{{ parent() }} > Ajouter
+	{{ parent() }} > {{ 'bouton.ajouter'|trans }}
 {% endblock %}
 
 
 {% if is_granted('ROLE_HOTELKEEPER') %}
 	{% block mcdh_hotel_page_title %}
-		{{ parent() }} > Ajout d'un hôtel
+		{{ parent() }} > {{ 'add.an.hotel'|trans }}
+
   	{% endblock %}
   	
 	{% block mcdh_hotel_content %}
-  			<h2>Ajout d'un hôtel</h2>
+  			<h2>{{ 'hotel.ajout.titre'|trans }}</h2>
 			{{ include("MCDHHotelBundle:Hotel:form.html.twig") }}
 	{% endblock %}
 {% endif %}

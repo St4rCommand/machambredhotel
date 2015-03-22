@@ -10,12 +10,12 @@
 {% block mcdh_hotel_page_option %}
 	{% if is_granted('ROLE_HOTELKEEPER') %}
   		
-  		<a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}" class="button btn-success btn-sm active" role="button">Ajouter une chambre</a>
+  		<a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}" class="button btn-success btn-sm active" role="button">{{ 'room.ajout'|trans }}</a>
 		
-		<a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}" class="button btn-warning btn-sm active" role="button">Editer</a>
+		<a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}" class="button btn-warning btn-sm active" role="button">{{ 'bouton.editer'|trans }}</a>
 		
 		{% if is_granted('ROLE_ADMIN') %}
-  			<a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}" class="button btn-danger btn-sm active" role="button">Supprimer</a>
+  			<a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}" class="button btn-danger btn-sm active" role="button">{{ 'bouton.supprimer'|trans }}</a>
   		{% endif %}
   	{% endif %}
 {% endblock %}

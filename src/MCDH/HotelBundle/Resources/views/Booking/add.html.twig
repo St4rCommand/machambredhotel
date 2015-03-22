@@ -1,28 +1,31 @@
-{% extends "MCDHHotelBundle:Room:layout.html.twig" %}
+{% extends "MCDHHotelBundle::layout.html.twig" %}
 
 {% block title %}
-	Réservation - {{ parent() }}
+	{{ 'booking' | trans }} - {{ parent() }}
 {% endblock %}
 
-{% block mcdh_hotel_breadcrumb_trail %}
-	{{ parent() }} > Réserver
-{% endblock %}
-	
-{% block mcdh_hotel_content %}
-	
-	{{ parent() }}
-	
-	{% if is_granted('ROLE_CUSTOMER') %}
-  		<p>Prix d'une nuit : {{ room.price }} €</p>
+{% block mcdh_hotel_body %}
 
-  		<ul>
+	{% block mcdh_hotel_page %}
+		<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':booking.room.hotel.id}) }}">{{ booking.room.hotel.name }}</a></h2>
+		<h3><a href="{{ path('mcdh_hotel_view_room', {'idRoom':booking.room.id}) }}">{{ booking.room.name }}</a></h3>
+	{% endblock %}
+	
+	{% block mcdh_hotel_content %}
+
+		
+		{% if is_granted('ROLE_CUSTOMER') %}
+	  		<h2>{{ 'add.booking'|trans }}</h2>
+	  		<h3>{{ 'night.price'|trans }} {{ booking.room.price }} €</h3>
+	
 			{% for booking in bookings %}
-				<li>Réservation du {{ booking.beginDate|date('d-m-Y') }} au {{ booking.endDate|date('d-m-Y') }}</li>
-			{% endfor %}
-		</ul>	
-
-		{{ include("MCDHHotelBundle:Booking:form.html.twig") }}
-	{% endif %}
-
-{% endblock %}
+				<p>{{ 'booking.of'|trans  }} {{ booking.beginDate|date('d-m-Y') }} {{ 'to'|trans }} {{ booking.endDate|date('d-m-Y') }}<p>
+			{% endfor %}	
 	
+			{{ form(form) }}
+		{% endif %}
+	
+
+	{% endblock %}
+	
+{% endblock %}

@@ -5,15 +5,17 @@
 {% endblock %}
 
 
+
 {% block mcdh_hotel_breadcrumb_trail %}
-	{{ parent() }} > Editer
+	{{ parent() }} > {{ 'bouton.editer'|trans }}
 {% endblock %}
   	
 {% block mcdh_hotel_page_option %}
+
   	
   	{{ parent() }}
   	
-  	<a href="{{ path('mcdh_hotel_view',{'idHotel':hotel.id}) }}" class="button btn-primary btn-sm active" role="button">Revenir à l'hôtel</a>
+  	<a href="{{ path('mcdh_hotel_view',{'idHotel':hotel.id}) }}" class="button btn-primary btn-sm active" role="button">{{ 'back.hotel'|trans }}</a>
 
 {% endblock %}
   	

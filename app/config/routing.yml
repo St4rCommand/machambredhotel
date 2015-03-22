@@ -1,6 +1,8 @@
 mcdh_hotel:
     resource: "@MCDHHotelBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   
+    requirements:
+
     
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
