@@ -11,13 +11,13 @@
 		{% if is_granted('ROLE_ADMIN') %}
 			<div class="well">
 		  		<fieldset>
-		  			<legend>Suppression d'une chambre</legend>
+		  			<legend>{{ 'room.delete'|trans }}</legend>
 					{{ form_start(form,{}) }}
 					{{ form_errors(form) }}
 
 		  			<div class="form-group row">
-		  				<p>Etes-vous sur de vouloir supprimer la chambre {{ room.name }} ?</p>
-						<a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}" role="button" class="col-lg-offset-3 col-lg-3 button btn-lg btn-primary active">Revenir à la chambre</a>
+		  				<p>{{ 'room.delete.suppression'|trans }} {{ room.name }} ?</p>
+						<a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}" role="button" class="col-lg-offset-3 col-lg-3 button btn-lg btn-primary active">{{ 'back.room'|trans }}</a>
 						{{ form_widget(form.delete, {'attr': {'class': 'col-lg-offset-1 btn btn-lg btn-danger'}}) }}
 					</div>
 					{{ form_rest(form) }}
@@ -25,7 +25,7 @@
 				</fieldset>
 	  		</div>
 		{% else %}
-	  		<p>Vous devez être administrateur pour pouvoir supprimer un élément</p>
+	  		<p>{{ 'admin.delete'|trans }}</p>
   		{% endif %}
 
 	{% endblock %}

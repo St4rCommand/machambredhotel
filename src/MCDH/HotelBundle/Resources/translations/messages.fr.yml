@@ -20,7 +20,7 @@ room.delete: Suppression d'une chambre
 room.edit: Edition d'une chambre
 floor: ème étage
 people: personne(s)
-add.an.hotel: Ajout d'un hôtel
+back.hotel: Retour à l'hôtel
 book: Réserver
 add.booking: Ajout d'une réservation
 booking: Réservation
@@ -29,21 +29,21 @@ cancel.booking: Annulation d'une réservation
 cancel.certification: Etes-vous sur de vouloir annuler la réservation?
 back.booking: Revenir à la réservation
 edit.booking: Edition d'une réservation
-back.hotel: Retour à l'hôtel
+add.an.hotel: Ajout d'un hôtel
 checkin: Date d'arrivée
 checkout: Date de départ
 price: Prix
 num.people: Nombre de personnes
-breakfast: Petit déjeuner
 num.floor: Nombre d'étages
+breakfast: Petit déjeuner
 added.the: ajouté le
-booking.number: Réservation n°
-from: du
-to: au
-name : Nom
+coords: Coordonnées
+orientation: Orientation
+name: Nom
 adress: Adresse
 post.code: Code postal
-city: Pays
+city: Ville
+country: Pays
 email: Courriel
 phone: Téléphone
 details: Informations
@@ -51,3 +51,17 @@ picture: Image
 description: Description
 website: Site internet
 validation: Validation
+booking.number: Réservation n°
+from: du
+to: au
+booking.of: Réservation du
+night.price: Prix d'une nuit
+contact.customer: Contacter le client
+contact.hotel: Contacter l'hôtel
+no.booking: Pas (encore !) de réservations pour cet hôtel
+hotel: Hôtels
+
+
+
+
+

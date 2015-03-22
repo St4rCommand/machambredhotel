@@ -16,7 +16,7 @@ admin.delete: You need to be an administrator to delete this element
 chambre: room
 room.delete.message: Do you really want to delete this room?
 back.room: Back to the room
-delete.room: Room deleting
+room.delete: Room deleting
 room.edit: Room editing
 floor: floor
 people: people
@@ -30,14 +30,15 @@ cancel.certification: Do you really want to cancel this booking?
 back.booking: Back to the booking
 edit.booking: Edit a booking
 add.an.hotel: Add an hotel
-added.the: Added the
 checkin: Check in
 checkout: Check out
 price: Price   
 num.people: Number of people
 num.floor: Number of floor
 breakfast: Breakfast
+added.the: Added the
 coords: Contact details
+orientation: orientation
 name: Name
 adress: Adress
 post.code: Post code
@@ -47,11 +48,26 @@ email: Email
 phone: Phone
 details: Details
 picture: Picture
-discription: Description
+description: Description
 website: Website
 validation: Validation
-
 booking.number: Booking number
 from: from
 to: to
+booking.of: Booking of
+night.price: Price per night
+contact.customer: Contact customer
+contact.hotel: Contact hotel
+no.booking: No booking (yet !) fot this hotel
+hotel: Hotels
+
+
+
+
+
+
+
+
+
+
 

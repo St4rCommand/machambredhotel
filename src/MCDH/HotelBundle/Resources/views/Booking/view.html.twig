@@ -12,22 +12,22 @@
 			<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':booking.room.hotel.id}) }}">{{ booking.room.hotel.name }}</a></h2>
 			<h3><a href="{{ path('mcdh_hotel_view_room', {'idRoom':booking.room.id}) }}">{{ booking.room.name }}</a></h3>
 			{% if is_granted('ROLE_CUSTOMER') %}
-				<a href="{{ path('mcdh_hotel_edit_booking', {'idBooking': booking.id}) }}">Editer</a>
-				<a href="{{ path('mcdh_hotel_delete_booking', {'idBooking': booking.id}) }}">Supprimer</a>
+				<a href="{{ path('mcdh_hotel_edit_booking', {'idBooking': booking.id}) }}">{{ 'bouton.editer'|trans }}</a>
+				<a href="{{ path('mcdh_hotel_delete_booking', {'idBooking': booking.id}) }}">{{ 'bouton.supprimer'|trans }}</a>
 			{% endif %}
 		{% endblock %}
 	
 		{% block mcdh_hotel_content %}
 			{% if is_granted('ROLE_HOTELKEEPER') %}
-				<a href="mailto:{{ booking.customer.email }}">Contacter le client</a>
+				<a href="mailto:{{ booking.customer.email }}">{{ 'contact.customer'|trans }}</a>
 			{% else if is_granted('ROLE_CUSTOMER') %}
-				<a href="mailto:{{ booking.room.hotel.email }}">Contacter l'hôtel</a>
+				<a href="mailto:{{ booking.room.hotel.email }}">{{ 'contact.hotel'|trans }}</a>
 			{% endif %}
-	  		<p>Date d'arrivée : {{ booking.beginDate|date('d-m-Y') }}</p>
-			<p>Date de départ : {{ booking.endDate|date('d-m-Y') }}</p>
-			<p>Prix : {{ booking.price|number_format(2, ',', ' ') }} €</p>
-			<p>Nombre de personnes : {{ booking.people }}</p>
-			<p>Petit déjeuner : {% if booking.breakfast == true %}Oui{% else %}Non{% endif %}</p>
+	  		<p>{{ 'checkin'|trans }} {{ booking.beginDate|date('d-m-Y') }}</p>
+			<p>{{ 'checkout'|trans }} {{ booking.endDate|date('d-m-Y') }}</p>
+			<p>{{ 'price'|trans }} {{ booking.price|number_format(2, ',', ' ') }} €</p>
+			<p>{{ 'num.people'|trans }} {{ booking.people }}</p>
+			<p>{{ 'breakfast'|trans }} {% if booking.breakfast == true %}Oui{% else %}Non{% endif %}</p>
 		{% endblock %}
 	{% endif %}
 
