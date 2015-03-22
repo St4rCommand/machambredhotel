@@ -4,7 +4,6 @@
   {{ parent() }}
 {% endblock %}
 
-{% block mcdh_hotel_body %}
 
 
 	{% block mcdh_hotel_page_option %}
@@ -28,12 +27,12 @@
 		     
 				{% if is_granted('ROLE_HOTELKEEPER') %}
 					
-					 <div class="col-lg-2 col-sm-3"><a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}" class="button btn-success btn-sm active" role="button">{{ 'room.ajout'|trans }}</a></div>
+					<a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}" class="button btn-success btn-sm active" role="button">{{ 'room.ajout'|trans }}</a>
 					
-					 <div class="col-lg-1 col-sm-1"><a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}" class="button btn-warning btn-sm active" role="button">{{ 'bouton.editer'|trans }}</a></div>
+					 <a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}" class="button btn-warning btn-sm active" role="button">{{ 'bouton.editer'|trans }}</a>
 					
 					{% if is_granted('ROLE_ADMIN') %}
-			  			 <div class="col-lg-1 col-sm-1"><a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}" class="button btn-danger btn-sm active" role="button">{{ 'bouton.supprimer'|trans }}</a></div>
+			  			<a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}" class="button btn-danger btn-sm active" role="button">{{ 'bouton.supprimer'|trans }}</a>
 			  		{% endif %}
 			  		
 			  	{% endif %}
@@ -54,5 +53,3 @@
 		</nav>
 		
 	{% endblock %}
-
-{% endblock %}
