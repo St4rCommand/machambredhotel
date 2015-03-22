@@ -6,15 +6,29 @@
 
 {% block mcdh_hotel_content %}
 	
-	{% if hotel.image.uploadDir is defined %}
-		<img
-			src="{{ asset(room.image.uploadDir ~ '/' ~ room.image.id ~ '.' ~ room.image.extension) }}"
-			alt="{{ room.image.alt }}"
-		/>
-	{% endif %}
+	{{ parent() }}
+	
+
+  	
+  	<div class="row media">
   		
-  	<p>Chambre {{ room.name }}, {{ room.floor }}ème étage</p>
-	<p>{{ room.people }} personne(s), {{ room.orientation }}</p>
+		  	{% if room.image.uploadDir is defined %}
+			  	<div class="media-left col-lg-3 col-sm-5">
+				  	<div class="thumbnail">
+						<img
+							src="{{ asset(room.image.uploadDir ~ '/' ~ room.image.id ~ '.' ~ room.image.extension) }}"
+							alt="{{ room.image.alt }}"
+							class="media-object img-responsive"
+						/>
+					</div>
+	  			</div>
+			{% endif %}		
+  		
+  		<div class="media-body col-lg-9 col-sm-7">
+  			<p>Chambre {{ room.name }}, {{ room.floor }}ème étage</p>
+			<p>{{ room.people }} personne(s), {{ room.orientation }}</p>
+  		</div>
+  	</div>
 	
 	<ul class="row list-group">
 		{% if is_granted('ROLE_HOTELKEEPER') %}
