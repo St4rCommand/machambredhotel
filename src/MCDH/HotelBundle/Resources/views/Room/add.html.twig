@@ -8,15 +8,7 @@
 	{{ parent() }} > Ajouter une chambre
 {% endblock %}
 
-
 {% if is_granted('ROLE_HOTELKEEPER') %}
-	{% block mcdh_hotel_page_title %}
-		{{ parent() }}
-			
-  			<div class="row">
-  				<h2>Ajout d'une chambre</h2>
-  			</div>
-	  	{% endblock %}
   	
 	{% block mcdh_hotel_content %}
 		{{ parent() }}

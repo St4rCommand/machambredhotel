@@ -2,7 +2,7 @@
 
 {% block mcdh_hotel_breadcrumb_trail %}
 	{{ parent() }} > <a href="{{ path('mcdh_hotel_view', {'idHotel':room.hotel.id}) }}">{{ room.hotel.name }}</a>
-	 > <a href="{{ path('mcdh_hotel_view', {'idHotel':room.id}) }}">{{ room.name }}</a>
+	 > <a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}">{{ room.name }}</a>
 {% endblock %}
 
 {% block mcdh_hotel_page_option %}

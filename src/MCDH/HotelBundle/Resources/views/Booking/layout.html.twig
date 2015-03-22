@@ -1,0 +1,22 @@
+{%  extends "MCDHHotelBundle::layout.html.twig" %}
+
+{% block mcdh_hotel_breadcrumb_trail %}
+	{{ parent() }} 
+	> <a href="{{ path('mcdh_hotel_view', {'idHotel':booking.room.hotel.id}) }}">{{ booking.room.hotel.name }}</a>
+	> <a href="{{ path('mcdh_hotel_view', {'idHotel':booking.room.id}) }}">{{ booking.room.name }}</a>
+	> <a href="{{ path('mcdh_hotel_view', {'idHotel':booking.room.id}) }}">Réservation {{ booking.id }}</a>
+{% endblock %}
+
+{% block mcdh_hotel_page_option %}
+
+	{% if is_granted('ROLE_CUSTOMER') %}
+		<a href="{{ path('mcdh_hotel_edit_booking', {'idBooking': booking.id}) }}" class="button btn-warning btn-sm active" role="button">Editer</a>
+		<a href="{{ path('mcdh_hotel_delete_booking', {'idBooking': booking.id}) }}" class="button btn-danger btn-sm active" role="button">Supprimer</a>
+	{% endif %}
+
+{% endblock %}
+
+{% block mcdh_hotel_content %}
+	  <h1>{{ booking.room.hotel.name }} <small>{{ booking.room.hotel.city }}, {{ booking.room.hotel.country }}</small></h1>
+	  <h2>Chambre {{ booking.room.name }}</h2>
+{% endblock %}

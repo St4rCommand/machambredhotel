@@ -64,7 +64,7 @@ class BookingController extends Controller
 		
 		return $this->render('MCDHHotelBundle:Booking:add.html.twig', array(
 				'form' => $form->createView(),
-				'booking' => $booking,
+				'room' => $room,
 				'bookings' => $bookings
 		));
 		
