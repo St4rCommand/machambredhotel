@@ -58,7 +58,7 @@ class LoadHotel implements FixtureInterface{
 		$carlton->setPostcode("59000");
 		$carlton->setCity("Lille");
 		$carlton->setCountry("France");
-		$carlton->setEmail("contact@carltonlille.com");
+		$carlton->setEmail("carlton@mail.com");
 		$carlton->setWebsite("http://www.carltonlille.com/index.php");
 		$carlton->setPhoneNumber("0320133313");
 		$carlton->setDescription("L'hôtel Carlton est situé en plein centre ville de Lille. Il vous propose 59 chambres et suites, des Salons de réceptions et des salles de séminaires. Cet hôtel de luxe 4 étoiles vous permet d'organiser vos repas d'affaires, cocktails ou banquets.");
@@ -72,7 +72,7 @@ class LoadHotel implements FixtureInterface{
 		$tribunal->setPostcode("61400");
 		$tribunal->setCity("Mortagne au Perche");
 		$tribunal->setCountry("France");
-		$tribunal->setEmail(" hotel.du.tribunal@wanadoo.fr");
+		$tribunal->setEmail("hoteldutribunal@mail.com");
 		$tribunal->setWebsite("http://www.hotel-tribunal.fr/");
 		$tribunal->setPhoneNumber("0233250477");
 		$tribunal->setDescription("Hôtel - Restaurant dans une demeure des 13è et 18è siècles admirablement située au coeur du vieux Mortagne et des douces collines du Perche. A cheval, à pied, à vélo, de routes ombragées en sentiers balisés, de collines en prairies, de manoirs en haras, vous découvrirez notre belle région du Parc naturel Régional du Perche.");
@@ -86,7 +86,7 @@ class LoadHotel implements FixtureInterface{
 		$thebryantparkhotel->setPostcode("NY 10018");
 		$thebryantparkhotel->setCity("New York");
 		$thebryantparkhotel->setCountry("USA");
-		$thebryantparkhotel->setEmail("info@bryantparkhotel.com");
+		$thebryantparkhotel->setEmail("thebryantparkhotel@mail.com");
 		$thebryantparkhotel->setWebsite("http://www.bryantparkhotel.com/#!");
 		$thebryantparkhotel->setPhoneNumber("2128690100");
 		$thebryantparkhotel->setDescription("The Bryant Park Hotel has emerged since opening in 2001 as a “Designer Luxury Hotel” receiving countless awards for service and accommodations. The hotel caters to the fashion culturati, Hollywood and Film Industry, as well as cosmopolitans, both native and transient.");
