@@ -1,24 +1,17 @@
-{% extends "MCDHHotelBundle::layout.html.twig" %}
+{% extends "MCDHHotelBundle:Hotel:layout.html.twig" %}
 
 {% block title %}
 	{{ 'chambre'|trans }} - {{ parent() }}
 {% endblock %}
 
-{% block mcdh_hotel_body %}
-	
-	{% if is_granted('ROLE_HOTELKEEPER') %}
-		{% block mcdh_hotel_page_title %}
-			{{ parent() }}
-			
-  			<div class="row">
-  				<h2>{{ 'room.ajout'|trans }}</h2>
-  			</div>
-	  	{% endblock %}
-	  	
-		{% block mcdh_hotel_content %}
-			{{ include("MCDHHotelBundle:Room:form.html.twig") }}
-		{% endblock %}
-	{% endif %}
-
-	
+{% block mcdh_hotel_breadcrumb_trail %}
+	{{ parent() }} > {{ 'room.ajout'|trans }}
 {% endblock %}
+
+
+{% if is_granted('ROLE_HOTELKEEPER') %}
+	{% block mcdh_hotel_content %}
+		{{ parent() }}
+		{{ include("MCDHHotelBundle:Room:form.html.twig") }}
+	{% endblock %}
+{% endif %}

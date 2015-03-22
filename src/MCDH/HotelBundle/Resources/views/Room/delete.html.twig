@@ -1,33 +1,38 @@
-{% extends "MCDHHotelBundle::layout.html.twig" %}
+
+{% extends "MCDHHotelBundle:Room:layout.html.twig" %}
 
 {% block title %}
 	{{ 'hotel.suppressio.onglet'|trans }} - {{ parent() }}
 {% endblock %}
 
-{% block mcdh_room_body %}
+{% block mcdh_hotel_breadcrumb_trail %}
+	{{ parent() }} > Supprimer
+{% endblock %}
 
-	{% block mcdh_hotel_content %}
+{% block mcdh_hotel_page_option %}
+	{{ parent() }}
+	<a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}" class="button btn-primary btn-sm active" role="button">{{ 'back.room'|trans }}</a>
+{% endblock %}
 
-		{% if is_granted('ROLE_ADMIN') %}
-			<div class="well">
-		  		<fieldset>
-		  			<legend>{{ 'room.delete'|trans }}</legend>
-					{{ form_start(form,{}) }}
-					{{ form_errors(form) }}
-
-		  			<div class="form-group row">
-		  				<p>{{ 'room.delete.suppression'|trans }} {{ room.name }} ?</p>
-						<a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}" role="button" class="col-lg-offset-3 col-lg-3 button btn-lg btn-primary active">{{ 'back.room'|trans }}</a>
-						{{ form_widget(form.delete, {'attr': {'class': 'col-lg-offset-1 btn btn-lg btn-danger'}}) }}
-					</div>
-					{{ form_rest(form) }}
-					{{ form_end(form) }}
-				</fieldset>
-	  		</div>
-		{% else %}
-	  		<p>{{ 'admin.delete'|trans }}</p>
-  		{% endif %}
-
-	{% endblock %}
+{% block mcdh_hotel_content %}
+	{{ parent() }}
 	
+	{% if is_granted('ROLE_ADMIN') %}
+	<div class="well">
+		<fieldset>
+			<legend>{{ 'room.delete'|trans }}</legend>
+			{{ form_start(form,{}) }}
+			{{ form_errors(form) }}
+			<p>{{ 'room.delete.suppression'|trans }} {{ room.name }} ?</p>
+			<div class="form-group row">
+			<a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}" role="button" class="col-lg-offset-3 col-lg-3 button btn-lg btn-primary active">Revenir à la chambre</a>
+			{{ form_widget(form.delete, {'attr': {'class': 'col-lg-offset-1 btn btn-lg btn-danger'}}) }}
+			</div>
+			{{ form_rest(form) }}
+			{{ form_end(form) }}
+		</fieldset>
+	</div>
+	{% else %}
+	<p>{{ 'admin.delete'|trans }}</p>
+	{% endif %}
 {% endblock %}

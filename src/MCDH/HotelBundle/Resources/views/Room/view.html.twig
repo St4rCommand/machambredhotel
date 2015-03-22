@@ -1,61 +1,51 @@
-{% extends "MCDHHotelBundle::layout.html.twig" %}
+{% extends "MCDHHotelBundle:Room:layout.html.twig" %}
 
 {% block title %}
 	{{ 'chambre'|trans }} {{ room.name }} - {{ parent() }}
 {% endblock %}
 
-{% block mcdh_hotel_body %}
+{% block mcdh_hotel_content %}
+	{{ parent() }}
 	
-
-	{% block mcdh_hotel_page_title %}
-		{{ parent() }}
-		{% if hotel.image.uploadDir is defined %}
-			<img
-				src="{{ asset(room.image.uploadDir ~ '/' ~ room.image.id ~ '.' ~ room.image.extension) }}"
-				alt="{{ room.image.alt }}"
-			/>
+	<div class="row media">
+		{% if room.image.uploadDir is defined %}
+			<div class="media-left col-lg-3 col-sm-5">
+				<div class="thumbnail">
+					<img
+					src="{{ asset(room.image.uploadDir ~ '/' ~ room.image.id ~ '.' ~ room.image.extension) }}"
+					alt="{{ room.image.alt }}"
+					class="media-object img-responsive"
+					/>
+				</div>
+			</div>
 		{% endif %}
 		
-		<div class="row well">
-		<a href="{{ path('mcdh_hotel_add_booking', {'idRoom':room.id}) }}" class="button btn-success btn-sm active" role="button">{{ 'book'|trans }}</a>	
-		
-		{% if is_granted('ROLE_HOTELKEEPER') %}
-			<a href="{{ path('mcdh_hotel_edit_room', {'idRoom':room.id}) }}" class="button btn-warning btn-sm active" role="button">{{ 'bouton.editer'|trans }}</a>
-		{% endif %}
-		
-		{% if is_granted('ROLE_ADMIN') %}
-			<a href="{{ path('mcdh_hotel_delete_room', {'idRoom':room.id}) }}" class="button btn-danger btn-sm active" role="button">{{ 'bouton.supprimer'|trans }}</a>
-		{% endif %}
-		</div>
-
-	{% endblock %}
-
-	{% block mcdh_hotel_content %}
-  		
-
-  		<div class="row well">
-  			<p>{{ 'chambre'|trans }} {{ room.name }}, {{ room.floor }}{{ 'floor'|trans }}</p>
+		<div class="media-body col-lg-9 col-sm-7">
+			<p>Chambre {{ room.name }}, {{ room.floor }}ème étage</p>
 			<p>{{ room.people }} personne(s), {{ room.orientation }}</p>
-		</div> 
-		
-		{% block mcdh_hotel_bookings %}
-			{% if is_granted('ROLE_HOTELKEEPER') %}
-				{% for booking in bookings %}
-			      <li>
-			        <a href="{{ path('mcdh_hotel_view_booking', {'idBooking': booking.id}) }}"> {{ 'booking.number'|trans }} {{ booking.id }}</a>
-					
-			    	du {{ booking.beginDate|date('d-m-Y') }} au {{ booking.endDate|date('d-m-Y') }}
-			        
-					<a href="{{ path('mcdh_hotel_edit_booking', {'idBooking': booking.id}) }}">{{ 'bouton.editer'|trans }}</a>
-					<a href="{{ path('mcdh_hotel_delete_booking', {'idBooking': booking.id}) }}">{{ 'bouton.supprimer'|trans }}</a>
-			      </li>
-			    {% else %}
-			      <li>{{ 'no.booking'|trans }}</li>
-			    {% endfor %}
-			{% endif %}
-		    
-
-		{% endblock %}
-	{% endblock %}
+		</div>
+	</div>
 	
+	<ul class="row list-group">
+		{% if is_granted('ROLE_HOTELKEEPER') %}
+			{% for booking in bookings %}
+				<li class="row list-group-item">
+					<div class="col-lg-10 col-sm-9">
+						<a href="{{ path('mcdh_hotel_view_booking', {'idBooking': booking.id}) }}"> {{ 'book'|trans }} {{ booking.id }}</a>
+						{{ 'booking.of'|trans  }} {{ booking.beginDate|date('d-m-Y') }}  {{ 'to'|trans }}  {{ booking.endDate|date('d-m-Y') }}
+					</div>
+					{% if is_granted('ROLE_ADMIN') %}
+						<div class="col-lg-2 col-sm-3">
+							<a href="{{ path('mcdh_hotel_edit_booking', {'idBooking': booking.id}) }}" class="button btn-warning btn-sm active" role="button">{{ 'bouton.editer'|trans }}</a>
+							<a href="{{ path('mcdh_hotel_delete_booking', {'idBooking': booking.id}) }}" class="button btn-danger btn-sm active" role="button">{{ 'bouton.supprimer'|trans }}</a>
+						</div>
+					{% endif %}
+				</li>
+			{% else %}
+				<li class="row list-group-item">{{ 'no.booking'|trans }}.</li>
+			{% endfor %}
+		{% endif %}
+	</ul>
 {% endblock %}
+
+
