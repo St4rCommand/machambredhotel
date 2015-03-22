@@ -55,6 +55,10 @@ Changer la variable d'environnement pour pouvoir executer les commandes Git dans
 - Choisissez le dossier où vous voulez cloner votre projet (par exemple *C:\wamp\www*)
 
 
-##5. Mettre à jour symfony
+##5. Installation du projet
+###5.1 Mise à jour de symfony
 Il est nécessaire de télécharger les bibliothèques de Symfony afin que le projet fonctionne sur votre ordinateur.
 Pour cela, il faut se placer dans le dossier de votre projet et executer la commande `php ..\composer.phar install` (dans le cas où composer est installer une branche plus haut que le projet).
+###5.2 Création de la base
+###5.3 Création des tables
+###5.4 Insertion de données pour les tests
