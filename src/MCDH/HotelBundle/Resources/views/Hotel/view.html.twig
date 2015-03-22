@@ -1,41 +1,49 @@
-{%  extends "MCDHHotelBundle::layout.html.twig" %}
+{%  extends "MCDHHotelBundle:Hotel:layout.html.twig" %}
 
 {% block title %}
   {{ hotel.name }} - {{ parent() }}
 {% endblock %}
 
-{% block mcdh_hotel_body %}
-	
-	{% block mcdh_hotel_page %}
-		{{ parent() }}
-		<a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}">{{ 'bouton.editer'|trans }}</a>
-	  	<a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}">{{ 'bouton.supprimer' |trans }}</a>
-	  	<a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}">{{ 'room.ajout'|trans }}</a>
-	{% endblock %}
 
-	{% block mcdh_hotel_content %}
+{% block mcdh_hotel_content %}
+
+	{{ parent() }}
 	
-		{% block mcdh_hotel_description %}
-			<h3>{{ hotel.city }}, {{ hotel.country }}</h3>
-			<p>{{ hotel.description }}</p>
-		{% endblock %}
+	{% if hotel.image.uploadDir is defined %}
+		<img
+			src="{{ asset(hotel.image.uploadDir ~ '/' ~ hotel.image.id ~ '.' ~ hotel.image.extension) }}"
+			alt="{{ hotel.image.alt }}"
+		/>
+	{% endif %}
+	
+	<p>{{ hotel.description }}</p>
 		
-		{% block mcdh_hotel_rooms %}
-			{% for room in rooms %}
-		      <li>
-		        <a href="{{ path('mcdh_hotel_view_room', {'idRoom': room.id}) }}"> {{ room.name }}</a>
-				
-		    	{{ room.price|number_format(2, ',', ' ') }} €
-		        
-		        <a href="{{ path('mcdh_hotel_edit_room', {'idRoom': room.id}) }}">{{ 'bouton.editer'|trans }}</a>
-		        <a href="{{ path('mcdh_hotel_delete_room', {'idRoom': room.id}) }}">{{ 'bouton.supprimer' |trans }}</a>
-		        <a href="{{ path('mcdh_hotel_add_booking', {'idRoom':room.id}) }}">{{ 'book' | trans }}</a>
-		      </li>
-		    {% else %}
-		      <li>{{ 'pas.hotel'|trans }}</li>
-		    {% endfor %}
-		{% endblock %}
+	<ul class="row list-group">
+		{% for room in rooms %}
+	      <li class="row list-group-item">
+	        
+	        <div class="col-lg-9 col-sm-7">
+	        	<a href="{{ path('mcdh_hotel_view_room', {'idRoom': room.id}) }}"> {{ room.name }}</a>
+				{{ room.price|number_format(2, ',', ' ') }} €
+	        </div>
+	        
+	        {% if is_granted('ROLE_CUSTOMER') %}
+		    	<div class="col-lg-1 col-sm-2"><a href="{{ path('mcdh_hotel_add_booking', {'idRoom':room.id}) }}" class="button btn-success btn-sm active" role="button">{{ 'book'|trans }}</a></div>
+  			{% endif %}
+	        
+	        {% if is_granted('ROLE_HOTELKEEPER') %}
+		       <div class="col-lg-1 col-sm-1"><a href="{{ path('mcdh_hotel_edit_room', {'idRoom': room.id}) }}" class="button btn-warning btn-sm active" role="button">{{ 'bouton.editer'|trans }}</a></div>
+  			{% endif %}
+  			
+	        {% if is_granted('ROLE_ADMIN') %}
+		        <div class="col-lg-1 col-sm-1"><a href="{{ path('mcdh_hotel_delete_room', {'idRoom': room.id}) }}" class="button btn-danger btn-sm active" role="button">{{ 'bouton.supprimer'|trans }}</a></div>
+  			{% endif %}
+		    
+	      </li>
+	    {% else %}
+	      <li>{{ 'pas.hotel'|trans }}.</li>
+	    {% endfor %}
+	</ul>
 	
-	{% endblock %}
-  
 {% endblock %}
+  

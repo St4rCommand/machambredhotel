@@ -6,12 +6,13 @@ hotel.suppression.retour: Revenir à l''hôtel
 bouton.accueil: Retour à l''accueil
 bouton.supprimer: Supprimer
 bouton.editer: Editer
+bouton.ajouter: Ajouter
 room.ajout: ajouter une chambre
 pas.hotel: Pas (encore !) de chambres pour cet hôtel.
 pas.hotel2: Pas (encore !) d'hôtels
 add.hotel: Ajouter un hôtel
 added: Ajouté le
-
+admin.delete: Vous devez être administrateur pour pouvoir supprimer un élément
 chambre: chambre
 room.delete.message: Etes-vous sur de vouloir supprimer cette chambre?
 back.room: Revenir à la chambre
@@ -19,7 +20,7 @@ room.delete: Suppression d'une chambre
 room.edit: Edition d'une chambre
 floor: ème étage
 people: personne(s)
-
+add.an.hotel: Ajout d'un hôtel
 book: Réserver
 add.booking: Ajout d'une réservation
 booking: Réservation
@@ -28,13 +29,25 @@ cancel.booking: Annulation d'une réservation
 cancel.certification: Etes-vous sur de vouloir annuler la réservation?
 back.booking: Revenir à la réservation
 edit.booking: Edition d'une réservation
-
+back.hotel: Retour à l'hôtel
 checkin: Date d'arrivée
 checkout: Date de départ
 price: Prix
 num.people: Nombre de personnes
 breakfast: Petit déjeuner
-
+num.floor: Nombre d'étages
+added.the: ajouté le
 booking.number: Réservation n°
 from: du
 to: au
+name : Nom
+adress: Adresse
+post.code: Code postal
+city: Pays
+email: Courriel
+phone: Téléphone
+details: Informations
+picture: Image
+description: Description
+website: Site internet
+validation: Validation

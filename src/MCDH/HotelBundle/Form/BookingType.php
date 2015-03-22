@@ -14,10 +14,11 @@ class BookingType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+    	$year = (new \DateTime())->format('y');
+    	
         $builder
-            ->add('beginDate',	'date')
+            ->add('beginDate',	'date', 		array('years' => range($year,$year+2)))
             ->add('endDate',	'date')
-            ->add('price',		'money')
             ->add('people',		'integer')
             ->add('breakfast',	'checkbox',		array('required'  => false))
             ->add('save',      	'submit')

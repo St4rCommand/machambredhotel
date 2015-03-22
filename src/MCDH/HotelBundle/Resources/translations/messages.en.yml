@@ -6,12 +6,13 @@ hotel.suppression.retour: Return hotel
 bouton.accueil: Homepage
 bouton.supprimer: Delete
 bouton.editer: Edit
+bouton.ajouter: Add
 room.ajout: add a room
 pas.hotel: No rooms (yet) for this hotel. 
 pas.hotel2: No hotel (yet).
 add.hotel: Add an hotel
 added: Added the
-
+admin.delete: You need to be an administrator to delete this element
 chambre: room
 room.delete.message: Do you really want to delete this room?
 back.room: Back to the room
@@ -19,7 +20,7 @@ delete.room: Room deleting
 room.edit: Room editing
 floor: floor
 people: people
-
+back.hotel: Back to the hotel
 book: Booking
 add.booking: Add a booking
 booking: Booking
@@ -28,12 +29,27 @@ cancel.booking: Cancel a booking
 cancel.certification: Do you really want to cancel this booking?
 back.booking: Back to the booking
 edit.booking: Edit a booking
-
+add.an.hotel: Add an hotel
+added.the: Added the
 checkin: Check in
 checkout: Check out
 price: Price   
 num.people: Number of people
+num.floor: Number of floor
 breakfast: Breakfast
+coords: Contact details
+name: Name
+adress: Adress
+post.code: Post code
+city: City
+country: Country
+email: Email
+phone: Phone
+details: Details
+picture: Picture
+discription: Description
+website: Website
+validation: Validation
 
 booking.number: Booking number
 from: from

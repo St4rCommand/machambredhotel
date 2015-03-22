@@ -71,10 +71,17 @@ class Room
      * @var Hotel
      * 
      * @ORM\ManyToOne(targetEntity="MCDH\HotelBundle\Entity\Hotel")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      * @Assert\Valid()
      */
     private $hotel;
+    
+    /**
+     * @var Image
+     * 
+     * @ORM\OneToOne(targetEntity="MCDH\HotelBundle\Entity\Image", cascade={"persist"})
+     */
+    private $image;
     
     
     /**
@@ -225,5 +232,28 @@ class Room
     public function getHotel()
     {
         return $this->hotel;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \MCDH\HotelBundle\Entity\Image $image
+     * @return Room
+     */
+    public function setImage(\MCDH\HotelBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \MCDH\HotelBundle\Entity\Image 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

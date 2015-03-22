@@ -6,17 +6,21 @@
 
 {% block mcdh_hotel_body %}
 
-	{% block mcdh_hotel_page %}
-		<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':room.hotel.id}) }}">{{ room.hotel.name }}</a></h2>
-	{% endblock %}
-	
-	{% block mcdh_hotel_content %}
-	
-  		<h2>{{ 'room.edit'|trans }}</h2> <a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}">{{ 'back.room' | trans }}</a>
-		<a href="{{ path('mcdh_hotel_delete_room', {'idRoom':room.id}) }}">{{ 'bouton.supprimer'|trans }}</a>
 
-		{{ form(form) }}
-	
-	{% endblock %}
-	
+	{% if is_granted('ROLE_HOTELKEEPER') %}
+		{% block mcdh_hotel_page_title %}
+			{{ parent() }}
+		  	<h4>Edition d'une chambre</h4>
+		{% endblock %}
+		
+		{% block mcdh_hotel_page_option %}
+				<a href="{{ path('mcdh_hotel_view_room', {'idRoom':room.id}) }}" class="button btn-primary btn-sm active" role="button">Revenir à la chambre</a>
+				<a href="{{ path('mcdh_hotel_delete_room', {'idRoom':room.id}) }}" class="button btn-danger btn-sm active" role="button">Supprimer</a>
+		{% endblock %}
+		
+		{% block mcdh_hotel_content %}
+			{{ include("MCDHHotelBundle:Room:form.html.twig") }}
+		{% endblock %}
+	{% endif %}
+
 {% endblock %}

@@ -1,0 +1,35 @@
+{%  extends "MCDHHotelBundle::layout.html.twig" %}
+
+
+{% block mcdh_hotel_breadcrumb_trail %}
+
+	{{ parent() }}
+	
+	{% if hotel is defined %}
+		> <a href="{{ path('mcdh_hotel_view', {'idHotel':hotel.id}) }}">{{ hotel.name }}</a>
+	{% elseif room is defined %}
+		> <a href="{{ path('mcdh_hotel_view', {'idHotel':room.hotel.id}) }}">{{ room.hotel.name }}</a>
+	{% endif %}
+	
+{% endblock %}
+
+{% block mcdh_hotel_page_option %}
+	{% if is_granted('ROLE_HOTELKEEPER') %}
+  		
+  		<a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}" class="button btn-success btn-sm active" role="button">{{ 'room.ajout'|trans }}</a>
+		
+		<a href="{{ path('mcdh_hotel_edit', {'idHotel':hotel.id}) }}" class="button btn-warning btn-sm active" role="button">{{ 'bouton.editer'|trans }}</a>
+		
+		{% if is_granted('ROLE_ADMIN') %}
+  			<a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}" class="button btn-danger btn-sm active" role="button">{{ 'bouton.supprimer'|trans }}</a>
+  		{% endif %}
+  	{% endif %}
+{% endblock %}
+
+{% block mcdh_hotel_content %}
+	{% if hotel is defined %}
+  			<h1>{{ hotel.name }} <small>{{ hotel.city }}, {{ hotel.country }}</small></h1>
+  	{% else %}
+  			<h1>{{ room.hotel.city }} <small>{{ room.hotel.country }}</small></h1>
+	{% endif %}
+{% endblock %}

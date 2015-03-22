@@ -20,6 +20,7 @@ class RoomType extends AbstractType
             ->add('people',			'integer')
             ->add('orientation',	'choice', 	array('choices' => array('north'=>'Nord','south'=>'Sud','east'=>'Est','west'=>'Ouest')))
             ->add('price',			'money')
+            ->add('image', 			new ImageType(), 	array('required' => false))
             ->add('save',      		'submit')
         ;
     }

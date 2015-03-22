@@ -6,21 +6,31 @@
 
 {% block body %}
 
-	<h1><a href="{{ path('mcdh_hotel_homepage') }}">Hôtels</a></h1>
+	{% for flashMessage in app.session.flashbag.get('alert') %}
+	    <div class="alert row">
+	        {{ flashMessage }}
+	    </div>
+	{% endfor %}
 
-	{% block mcdh_hotel_page %}
-		{% if hotel is defined %}
-			<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':hotel.id}) }}">{{ hotel.name }}</a></h2>
-		{% elseif room is defined %}
-			<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':room.hotel.id}) }}">{{ room.hotel.name }}</a></h2>
-		{% else %}
+	<div class="row ">
+		{% block mcdh_hotel_breadcrumb_trail %}
 		
-		{% endif %}
-	{% endblock %}
+			<a href="{{ path('mcdh_hotel_homepage') }}">Hôtels</a>
+			
+		{% endblock %}
+	</div>
+	
+	<div class="row well">
+		{% block mcdh_hotel_page_option %}
+		
+		{% endblock %}
+	</div>
+	
+	<div class="row well">
+		{% block mcdh_hotel_content %}
+		{% endblock %}
+	</div>  
   
-  
-	{% block mcdh_hotel_content %}
-  	
-	{% endblock %}
+
 
 {% endblock %}

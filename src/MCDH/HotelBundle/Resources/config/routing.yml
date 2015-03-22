@@ -1,6 +1,6 @@
 mcdh_hotel_homepage:
     path:     /hotel/{page}
-    defaults: { _controller: MCDHHotelBundle:Hotel:index, page: 1 }
+    defaults: { _controller: MCDHHotelBundle:Hotel:index , page: 1 }
     requirements:
         page: \d*
     

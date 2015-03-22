@@ -13,11 +13,18 @@
 
 	{% block mcdh_hotel_content %}
 	
-		<h2>{{ 'cancel.booking' | trans }}</h2>
+
+		{% if is_granted('ROLE_CUSTOMER') %}
+	
+			<h2>Annulation d'une réservation</h2>
+			
+			<p>Etes-vous sur de vouloir annuler la réservation {{ booking.id }} ?</p>
+			<a href="{{ path('mcdh_hotel_view_booking', {'idBooking':booking.id}) }}">Revenir à la réservation</a>
+			{{ form(form) }}
 		
-		<p>{{ 'cancel.certification' | trans }} {{ booking.id }} ?</p>
-		<a href="{{ path('mcdh_hotel_view_booking', {'idBooking':booking.id}) }}">{{ 'back.booking'|trans }}</a>
-		{{ form(form) }}
+		{% endif %}
+		
+
 	
 	{% endblock %}
 	

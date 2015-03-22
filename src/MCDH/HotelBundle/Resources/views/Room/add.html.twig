@@ -5,15 +5,20 @@
 {% endblock %}
 
 {% block mcdh_hotel_body %}
-		
-	{% block mcdh_hotel_page %}
-		<h2><a href="{{ path('mcdh_hotel_view', {'idHotel':hotel.id}) }}">{{ hotel.name }}</a></h2>
-	{% endblock %}
 	
-	{% block mcdh_hotel_content %}
-  		<h2>{{ 'room.ajout'|trans }}</h2>
+	{% if is_granted('ROLE_HOTELKEEPER') %}
+		{% block mcdh_hotel_page_title %}
+			{{ parent() }}
+			
+  			<div class="row">
+  				<h2>Ajout d'une chambre</h2>
+  			</div>
+	  	{% endblock %}
+	  	
+		{% block mcdh_hotel_content %}
+			{{ include("MCDHHotelBundle:Room:form.html.twig") }}
+		{% endblock %}
+	{% endif %}
 
-		{{ form(form) }}
-	{% endblock %}
 	
 {% endblock %}

@@ -4,6 +4,7 @@ namespace MCDH\HotelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use MCDH\UserBundle\MCDHUserBundle;
 
 /**
  * Hotel
@@ -118,7 +119,23 @@ class Hotel
      * @Assert\Range(min=0,minMessage="Le nombre d'étages de l'hôtel doit être un entier positif ou nul",invalidMessage="Le nombre d'étages de l'hôtel doit être un entier positif ou nul")
      */
     private $floor;
-
+    
+    /**
+     * @var Image
+     *
+     * @ORM\OneToOne(targetEntity="MCDH\HotelBundle\Entity\Image", cascade={"persist"})
+     */
+    private $image;
+    
+    /**
+     * @var MCDH\UserBundle\Entity\User 
+     * 
+     * @ORM\ManyToOne(targetEntity="MCDH\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
+     */
+    private $hotelKeeper;
+    
     /**
      * Get id
      *
@@ -380,5 +397,51 @@ class Hotel
     public function getFloor()
     {
         return $this->floor;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \MCDH\HotelBundle\Entity\Image $image
+     * @return Hotel
+     */
+    public function setImage(\MCDH\HotelBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \MCDH\HotelBundle\Entity\Image 
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set hotelKeeper
+     *
+     * @param \MCDH\UserBundle\Entity\User $hotelKeeper
+     * @return Hotel
+     */
+    public function setHotelKeeper(\MCDH\UserBundle\Entity\User $hotelKeeper)
+    {
+        $this->hotelKeeper = $hotelKeeper;
+
+        return $this;
+    }
+
+    /**
+     * Get hotelKeeper
+     *
+     * @return \MCDH\UserBundle\Entity\User 
+     */
+    public function getHotelKeeper()
+    {
+        return $this->hotelKeeper;
     }
 }

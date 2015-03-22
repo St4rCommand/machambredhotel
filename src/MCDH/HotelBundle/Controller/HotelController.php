@@ -8,6 +8,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use MCDH\HotelBundle\Entity\Hotel;
 use MCDH\HotelBundle\Form\HotelType;
 use MCDH\HotelBundle\Entity\Room;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
+
 
 /**
  * Main controller for HotelBundle
@@ -68,6 +72,7 @@ class HotelController extends Controller
      * 
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_HOTELKEEPER')")
      */
     public function addAction(Request $request){
     	
@@ -80,6 +85,8 @@ class HotelController extends Controller
     	
     	//si le formulaire d'ajout a été validé
     	if($form->handleRequest($request)->isValid()){
+    		
+    		$hotel->setHotelKeeper($this->getUser());
     		
     		//récupréation de l'Entity Manager
     		$em = $this->getDoctrine()->getManager();
@@ -108,6 +115,7 @@ class HotelController extends Controller
      * 
      * @param unknown $idHotel
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteAction($idHotel, Request $request){
     	
@@ -118,8 +126,8 @@ class HotelController extends Controller
     	$hotel = $em->getRepository('MCDHHotelBundle:Hotel')->find($idHotel);
     	
     	//affichage d'une erreur si l'hôtel n'existe pas
-    	if($hotel == null){
-    		throw $this->createNotFoundException("L'hôtel portant l'identifiant ".$idHotel." n'existe pas. ");
+    	if($hotel === null){
+    		throw new NotFoundHttpException("Aucun hôtel ne porte l'identifiant ".$idHotel.".");
     	}
     	
     	//création d'un formulaire de validation
@@ -160,8 +168,8 @@ class HotelController extends Controller
     	$hotel = $em->getRepository('MCDHHotelBundle:Hotel')->find($idHotel);
     	
     	//affichage d'une erreur si l'hôtel n'existe pas
-    	if($hotel == null){
-    		throw new NotFoundHttpException("L'hôtel portant l'identifiant ".$idHotel." ne peut être affiché car il n'existe pas. ");
+    	if($hotel === null){
+    		throw new NotFoundHttpException("Aucun hôtel ne porte l'identifiant ".$idHotel.".");
     	}
     	
     	$rooms = $em->getRepository('MCDHHotelBundle:Room')->findBy(array('hotel' => $hotel));
@@ -179,6 +187,7 @@ class HotelController extends Controller
      * @param unknown $idHotel
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_HOTELKEEPER')")
      */
     public function editAction($idHotel, Request $request){
     	
@@ -187,6 +196,17 @@ class HotelController extends Controller
     	
     	//création du formulaire
     	$form = $this->get('form.factory')->create(new HotelType(), $hotel);
+    	
+    	//affichage d'une erreur si l'hôtel n'existe pas
+    	if($hotel === null){
+    		throw new NotFoundHttpException("Aucun hôtel ne porte l'identifiant ".$idHotel.".");
+    	}
+
+    	$hotelkeeper = $hotel->getHotelKeeper();
+    	$user = $this->getUser();
+    	if($user != $hotelkeeper){
+    		throw new AccessDeniedException("Vous n'avez pas les droits suffisants pour accéder à cet hôtel.");
+    	}
     	 
     	//si le formulaire a été validé
     	if($form->handleRequest($request)->isValid()){

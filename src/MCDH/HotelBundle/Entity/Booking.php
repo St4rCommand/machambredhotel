@@ -73,6 +73,15 @@ class Booking
      * @Assert\Valid()
      */
     private $room;
+    
+    /**
+     * @var MCDH\UserBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="MCDH\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
+     */
+    private $customer;
 
 
     /**
@@ -221,5 +230,28 @@ class Booking
     public function getRoom()
     {
         return $this->room;
+    }
+
+    /**
+     * Set customer
+     *
+     * @param \MCDH\UserBundle\Entity\User $customer
+     * @return Booking
+     */
+    public function setCustomer(\MCDH\UserBundle\Entity\User $customer)
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    /**
+     * Get customer
+     *
+     * @return \MCDH\UserBundle\Entity\User 
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
     }
 }

@@ -1,19 +1,27 @@
-{%  extends "MCDHHotelBundle::layout.html.twig" %}
+{%  extends "MCDHHotelBundle:Hotel:layout.html.twig" %}
 
 {% block title %}
   {{ hotel.name }} - {{ parent() }}
 {% endblock %}
 
-{% block mcdh_hotel_body %}
-	
-	{% block mcdh_hotel_page %}
-  		{{ parent() }} <a href="{{ path('mcdh_hotel_view',{'idHotel':hotel.id}) }}">{% trans %}hotel.suppression.retour{% endtrans %}</a>
-  		<a href="{{ path('mcdh_hotel_delete', {'idHotel':hotel.id}) }}">{{ 'bouton.supprimer'|trans}}</a>
-		<a href="{{ path('mcdh_hotel_add_room', {'idHotel':hotel.id}) }}">{{ 'room.ajout'|trans}}</a>
-  	{% endblock %}
-  	
-	{% block mcdh_hotel_content %}
-		{{ form(form) }}
-	{% endblock %}
-  
+
+
+{% block mcdh_hotel_breadcrumb_trail %}
+	{{ parent() }} > {{ 'bouton.editer'|trans }}
 {% endblock %}
+  	
+{% block mcdh_hotel_page_option %}
+
+  	
+  	{{ parent() }}
+  	
+  	<a href="{{ path('mcdh_hotel_view',{'idHotel':hotel.id}) }}" class="button btn-primary btn-sm active" role="button">{{ 'back.hotel'|trans }}</a>
+
+{% endblock %}
+  	
+{% block mcdh_hotel_content %}
+	{{ parent() }}
+
+	{{ include("MCDHHotelBundle:Hotel:form.html.twig") }}
+{% endblock %}
+  

@@ -12,4 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class BookingRepository extends EntityRepository
 {
+	public function findFuturBookings($room){
+		$queryBuilder = $this->createQueryBuilder('b');
+		
+		return $queryBuilder->getQuery()->getResult();
+	}
+	
 }
