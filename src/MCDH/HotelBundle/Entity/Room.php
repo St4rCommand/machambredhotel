@@ -3,9 +3,11 @@
 namespace MCDH\HotelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Room
+ * Représente les chambres de chaque hôtel
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="MCDH\HotelBundle\Entity\RoomRepository")
@@ -13,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Room
 {
     /**
-     * @var integer
+     * @var integer Identifiant de la chambre
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -22,48 +24,65 @@ class Room
     private $id;
 
     /**
-     * @var string
+     * @var string Nom de la chambre
      *
-     * @ORM\Column(name="name", type="string", length=15)
+     * @ORM\Column(name="name", type="string", length=15, nullable=false)
+     * @Assert\NotBlank(message="La chambre doit porter un nom")
+     * @Assert\Length(max=15, maxMessage="Le nom de la chambre ne doit pas dépasser {{ limit }} caractères")
      */
     private $name;
 
     /**
-     * @var integer
+     * @var integer Etage de la chambre
      *
      * @ORM\Column(name="floor", type="integer")
+     * @Assert\Range(min=0,minMessage="L'étage de la chambre doit être un entier positif ou nul.",invalidMessage="L'étage de la chambre doit être un entier positif ou nul")
      */
     private $floor;
 
     /**
-     * @var integer
+     * @var integer Capacité d'accueil de la chambre
      *
-     * @ORM\Column(name="person", type="integer")
+     * @ORM\Column(name="people", type="integer", nullable=false)
+     * @Assert\NotBlank(message="La chambre doit avoir un nombre de places défini")
+     * @Assert\Range(min=1,minMessage="Le nombre de personnes doit être un entier positif ou nul.",invalidMessage="Le nombre de personnes doit être un entier positif ou nul.")
      */
-    private $person;
+    private $people;
 
 
     /**
-     * @var string
+     * @var string Orientation cardinale de la chambre
      *
-     * @ORM\Column(name="orientation", type="string", length=10)
+     * @ORM\Column(name="orientation", type="string", length=10, nullable=false)
+     * @Assert\NotBlank(message="La chambre doit avoir un nombre de places défini")
+     * @Assert\Choice(choices={"north","south","east","west"}, message="La chambre peut avoir une orientation Nord, Sud, Est ou Ouest")
      */
     private $orientation;
 
     /**
-     * @var decimal
+     * @var decimal Prix d'une nuité
      *
-     * @ORM\Column(name="price", type="decimal", scale=2)
+     * @ORM\Column(name="price", type="decimal", scale=2, nullable=false)
+     * @Assert\NotBlank(message="La chambre doit avoir un prix.")
+     * @Assert\Range(min=0,minMessage="Le prix est un nombre décimal positif.",invalidMessage="Le prix est un nombre décimal.")
      */
     private $price;
     
     /**
-     * @var hotel
+     * @var Hotel Hotel auquel appartient la chambre
      * 
      * @ORM\ManyToOne(targetEntity="MCDH\HotelBundle\Entity\Hotel")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     * @Assert\Valid()
      */
     private $hotel;
+    
+    /**
+     * @var Image Image associée à la chambre
+     * 
+     * @ORM\OneToOne(targetEntity="MCDH\HotelBundle\Entity\Image", cascade={"persist"})
+     */
+    private $image;
     
     
     /**
@@ -123,26 +142,26 @@ class Room
     }
 
     /**
-     * Set person
+     * Set people
      *
-     * @param integer $person
+     * @param integer $people
      * @return Room
      */
-    public function setPerson($person)
+    public function setPeople($people)
     {
-        $this->person = $person;
+        $this->people = $people;
 
         return $this;
     }
 
     /**
-     * Get person
+     * Get people
      *
      * @return integer 
      */
-    public function getPerson()
+    public function getPeople()
     {
-        return $this->person;
+        return $this->people;
     }
 
       /**
@@ -214,5 +233,28 @@ class Room
     public function getHotel()
     {
         return $this->hotel;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \MCDH\HotelBundle\Entity\Image $image
+     * @return Room
+     */
+    public function setImage(\MCDH\HotelBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \MCDH\HotelBundle\Entity\Image 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

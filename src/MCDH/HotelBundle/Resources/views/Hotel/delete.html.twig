@@ -1,16 +1,44 @@
-{%  extends "MCDHHotelBundle::layout.html.twig" %}
+{%  extends "MCDHHotelBundle:Hotel:layout.html.twig" %}
 
 {% block title %}
-  Ajout - {{ parent() }}
+  {{ 'hotel.suppression.onglet'|trans}} - {{ parent() }}
 {% endblock %}
 
-{% block mcdh_hotel_body %}
-  	
-	{% block mcdh_hotel_content %}
-		<p>Etes-vous sur de vouloir supprimer {{ hotel.name }} ?</p>
-  	
-  		<a href="{{ path('mcdh_hotel_view',{'idHotel':hotel.id}) }}">Revenir à l'hôtel</a>
-  		{{ form(form) }}
-	{% endblock %}
-  	
+{% block mcdh_hotel_breadcrumb_trail %}
+	{{ parent() }} > {{ 'bouton.supprimer'|trans }}
 {% endblock %}
+
+{% block mcdh_hotel_page_option %}
+  	
+
+  	{{ parent() }}
+  	
+  	<a href="{{ path('mcdh_hotel_view',{'idHotel':hotel.id}) }}" class="button btn-primary btn-sm active" role="button">{{ 'back.hotel'|trans }}</a>
+
+{% endblock %}
+  	
+{% block mcdh_hotel_content %}
+	{{ parent() }}
+
+	{% if is_granted('ROLE_ADMIN') %}
+  		<div class="well">
+	  		<fieldset>
+	  			<legend>{{ 'hotel.suppression.onglet'|trans}}</legend>
+				{{ form_start(form,{}) }}
+				{{ form_errors(form) }}
+	  			
+	  			<p>{{ 'hotel.suppression.titre'|trans }} {{ hotel.name }} ?</p>
+	  			<div class="form-group row">
+	  				<a href="{{ path('mcdh_hotel_view',{'idHotel':hotel.id}) }}" role="button" class="col-lg-offset-4 col-lg-2 button btn-lg btn-primary active">{{ 'back.hotel'|trans }}</a>
+					{{ form_widget(form.delete, {'attr': {'class': 'col-lg-offset-1 btn btn-lg btn-danger'}}) }}
+				</div>
+				{{ form_rest(form) }}
+				{{ form_end(form) }}
+			</fieldset>
+  		</div>
+  	{% else %}
+	  	<p>{{ 'admin.delete'|trans }}</p>
+  	{% endif %}
+{% endblock %}
+
+  	

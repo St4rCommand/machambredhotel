@@ -1,0 +1,78 @@
+hotel.ajout.onglet: Ajout
+hotel.ajout.titre: Voulez vous ajouter un hotel?
+hotel.suppression.onglet: Suppression
+hotel.suppression.titre: Etes-vous sur de vouloir supprimer cet hotel?
+hotel.suppression.retour: Revenir à l''hôtel
+bouton.accueil: Retour à l''accueil
+bouton.supprimer: Supprimer
+bouton.editer: Editer
+bouton.ajouter: Ajouter
+room.ajout: Ajouter une chambre
+pas.hotel: Pas (encore !) de chambres pour cet hôtel.
+pas.hotel2: Pas (encore !) d'hôtels
+add.hotel: Ajouter un hôtel
+added: Ajouté le
+admin.delete: Vous devez être administrateur pour pouvoir supprimer un élément
+chambre: chambre
+room.delete.message: Etes-vous sur de vouloir supprimer cette chambre?
+back.room: Revenir à la chambre
+room.delete: Suppression d'une chambre
+room.edit: Edition d'une chambre
+floor: ème étage
+people: personne(s)
+back.hotel: Retour à l'hôtel
+book: Réserver
+add.booking: Ajout d'une réservation
+booking: Réservation
+cancel: Annulation
+cancel.booking: Annulation d'une réservation
+cancel.certification: Etes-vous sur de vouloir annuler la réservation?
+back.booking: Revenir à la réservation
+edit.booking: Edition d'une réservation
+add.an.hotel: Ajout d'un hôtel
+checkin: Date d'arrivée
+checkout: Date de départ
+price: Prix
+num.people: Nombre de personnes
+num.floor: Nombre d'étages
+breakfast: Petit déjeuner
+added.the: ajouté le
+coords: Coordonnées
+orientation: Orientation
+name: Nom
+adress: Adresse
+post.code: Code postal
+city: Ville
+country: Pays
+email: Courriel
+phone: Téléphone
+details: Informations
+picture: Image
+description: Description
+website: Site internet
+validation: Validation
+booking.number: Réservation n°
+from: du
+to: au
+booking.of: Réservation du
+night.price: Prix d'une nuit
+contact.customer: Contacter le client
+contact.hotel: Contacter l'hôtel
+no.booking: Pas (encore !) de réservations pour cet hôtel
+hotel: Hôtels
+mcdh: Le site de réservation de chambre
+connect: Connecté en tant que
+disconnect: Déconnexion
+connection: Connexion
+subscribe: Inscription
+profil: Profil
+createdby: Ce site internet a été créé par Simon BERNARD et Romain HUNAULT.
+ihm: Il a été créé dans le cadre du cours Développement IHM & Client serveur de L3 MIAGE à l'UFR Sciences et Techniques de Nantes
+home: Accueil
+submit: Envoyer
+yes: Oui
+no: Non
+
+
+
+

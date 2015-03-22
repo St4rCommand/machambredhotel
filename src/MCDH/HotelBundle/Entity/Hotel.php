@@ -3,12 +3,12 @@
 namespace MCDH\HotelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Translation\Tests\String;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Config\Definition\IntegerNode;
+use MCDH\UserBundle\MCDHUserBundle;
 
 /**
  * Hotel
+ * Représente les hôtels
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="MCDH\HotelBundle\Entity\HotelRepository")
@@ -16,7 +16,7 @@ use Symfony\Component\Config\Definition\IntegerNode;
 class Hotel
 {
     /**
-     * @var integer
+     * @var integer Identifiant de l'hôtel
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -25,82 +25,118 @@ class Hotel
     private $id;
 
     /**
-     * @var string
+     * @var string Nom de l'hotel
      *
-     * @ORM\Column(name="name", type="string", length=50)
+     * @ORM\Column(name="name", type="string", length=50, nullable=false)
+     * @Assert\NotBlank(message="L'hôtel doit porter un nom")
+     * @Assert\Length(max=50, maxMessage="Le nom de l'hôtel ne doit pas dépasser {{ limit }} caractères.")
      */
     private $name;
 
     /**
-     * @var string
+     * @var string Adresse de l'hôtel
      *
-     * @ORM\Column(name="address", type="string", length=50)
+     * @ORM\Column(name="address", type="string", length=50, nullable=false)
+     * @Assert\NotBlank(message="L'hôtel doit avoir une adresse.")
+     * @Assert\Length(max=50, maxMessage="L'adresse de l'hôtel ne doit pas excéder {{ limit }} caractères.")
      */
     private $address;
 
     /**
-     * @var string
+     * @var string Code postal de l'hôtel
      *
-     * @ORM\Column(name="postcode", type="string", length=10)
+     * @ORM\Column(name="postcode", type="string", length=10, nullable=false)
+     * @Assert\NotBlank(message="L'hôtel doit avoir un code postal.")
+     * @Assert\Length(max=10, maxMessage="Le code postal de l'hôtel ne doit pas dépasser {{ limit }} caractères.")
      */
     private $postcode;
     
     /**
-     * @var string
+     * @var string Ville de l'hôtel
      * 
-     * @ORM\Column(name="city", type="string", length=50)
+     * @ORM\Column(name="city", type="string", length=50, nullable=false)
+     * @Assert\NotBlank(message="L'hôtel doit avoir une ville.")
+     * @Assert\Length(max=50, maxMessage="La ville de l'hôtel ne doit pas dépasser {{ limit }} caractères.")
      */
     private $city;
 
     /**
-     * @var string
+     * @var string Pays de l'hôtel
      *
-     * @ORM\Column(name="country", type="string", length=25)
+     * @ORM\Column(name="country", type="string", length=25, nullable=false)
+     * @Assert\NotBlank(message="L'hôtel doit avoir un pays.")
+     * @Assert\Length(max=25, maxMessage="Le pays de l'hôtel ne doit pas dépasser {{ limit }} caractères.")
      */
     private $country;
     
     /**
-     * @var date
+     * @var \DateTime Date d'ajout de l'hôtel
      * 
-     * @ORM\Column(name="added_date", type="date")
+     * @ORM\Column(name="added_date", type="date", nullable=false)
+     * @Assert\NotBlank(message="L'hôtel doit avoir une date d'ajout.")
+     * @Assert\Date()
      */
     private $addedDate;
     
    	/**
-   	 * @var string
+   	 * @var string URL du site internet de l'hôtel
    	 * 
    	 * @ORM\Column(name="website", type="string", length=255, unique=true, nullable=true)
+   	 * @Assert\Url(message="L'adresse du site internet de l'hôtel doit être une url valide")
    	 */
     private $website;
     
     /**
-     * @var string
+     * @var string Numéro de téléphone de l'hôtel
      * 
-     * @ORM\Column(name="phone_number", type="string", length=15, nullable=true)
+     * @ORM\Column(name="phone_number", type="string", length=15, nullable=false)
+     * @Assert\NotBlank(message="L'hôtel doit avoir un numéro de téléphone.")
+     * @Assert\Length(max=15, maxMessage="Le numéro de téléphone de l'hôtel ne doit pas dépasser {{ limit }} caractères.")
      */
     private $phoneNumber;
 
     /**
-     * @var string
+     * @var string Adresse email principale de l'hôtel
      * 
      * @ORM\Column(name="email", type="string", length=255, unique=true, nullable=true)
+     * @Assert\Email(message="L'adresse email de l'hôtel doit être une adresse email valide")
+     * @Assert\Length(max=255, maxMessage="L'adresse email ne doit pas dépasser 255 caractères")
      */
     private $email;
     
     /**
-     * @var string
+     * @var string Description de l'hôtel
      * 
-     * @ORM\Column(name="description", type="text", length=500)
+     * @ORM\Column(name="description", type="text", length=500, nullable=false) 
+     * @Assert\NotBlank(message="L'hôtel doit avoir une description.")
+     * @Assert\Length(max=500, maxMessage="La description de l'hôtel ne doit pas dépasser {{ limit }} caractères")
      */
     private $description;
     
     /**
-     * @var integer
+     * @var integer Nombre d'étages de l'hôtel
      * 
      * @ORM\Column(name="floor", type="integer")
+     * @Assert\Range(min=0,minMessage="Le nombre d'étages de l'hôtel doit être un entier positif ou nul",invalidMessage="Le nombre d'étages de l'hôtel doit être un entier positif ou nul")
      */
     private $floor;
-
+    
+    /**
+     * @var Image Image associée à l'hôtel
+     *
+     * @ORM\OneToOne(targetEntity="MCDH\HotelBundle\Entity\Image", cascade={"persist"})
+     */
+    private $image;
+    
+    /**
+     * @var MCDH\UserBundle\Entity\User Propriétaire de l'hôtel
+     * 
+     * @ORM\ManyToOne(targetEntity="MCDH\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
+     */
+    private $hotelKeeper;
+    
     /**
      * Get id
      *
@@ -362,5 +398,51 @@ class Hotel
     public function getFloor()
     {
         return $this->floor;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \MCDH\HotelBundle\Entity\Image $image
+     * @return Hotel
+     */
+    public function setImage(\MCDH\HotelBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \MCDH\HotelBundle\Entity\Image 
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set hotelKeeper
+     *
+     * @param \MCDH\UserBundle\Entity\User $hotelKeeper
+     * @return Hotel
+     */
+    public function setHotelKeeper(\MCDH\UserBundle\Entity\User $hotelKeeper)
+    {
+        $this->hotelKeeper = $hotelKeeper;
+
+        return $this;
+    }
+
+    /**
+     * Get hotelKeeper
+     *
+     * @return \MCDH\UserBundle\Entity\User 
+     */
+    public function getHotelKeeper()
+    {
+        return $this->hotelKeeper;
     }
 }
