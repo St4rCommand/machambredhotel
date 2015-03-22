@@ -29,9 +29,8 @@
 	        
 	        <div class="col-lg-3">
 	        
-	        {% if is_granted('ROLE_CUSTOMER') %}
-		    	<a href="{{ path('mcdh_hotel_add_booking', {'idRoom':room.id}) }}" class="button btn-success btn-sm active" role="button">Réserver</a>
-  			{% endif %}
+	        
+		    <a href="{{ path('mcdh_hotel_add_booking', {'idRoom':room.id}) }}" class="button btn-success btn-sm active" role="button">Réserver</a>
 	        
 	        {% if is_granted('ROLE_HOTELKEEPER') %}
 		       <a href="{{ path('mcdh_hotel_edit_room', {'idRoom': room.id}) }}" class="button btn-warning btn-sm active" role="button">Editer</a>

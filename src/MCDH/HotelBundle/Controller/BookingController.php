@@ -110,7 +110,7 @@ class BookingController extends Controller
 		$owner = $booking->getRoom()->getHotel()->getHotelKeeper();
 		$customer = $booking->getCustomer();
 		$user = $this->getUser();
-		if($user != $owner and $user != $customer or !$this->get('security.context')->isGranted('ROLE_ADMIN')){
+		if($user != $owner and $user != $customer and !$this->get('security.context')->isGranted('ROLE_ADMIN')){
 			throw new AccessDeniedException("Vous n'avez pas les droits suffisants pour accéder à cette réservation.");
 		}
 	
@@ -148,7 +148,7 @@ class BookingController extends Controller
 		//vérification de l'identité du client
 		$customer = $booking->getCustomer();
 		$user = $this->getUser();
-		if($user != $customer or !$this->get('security.context')->isGranted('ROLE_ADMIN')){
+		if($user != $customer and !$this->get('security.context')->isGranted('ROLE_ADMIN')){
 			throw new AccessDeniedException("Vous n'avez pas les droits suffisants pour accéder à cette réservation.");
 		}
 		
@@ -215,7 +215,7 @@ class BookingController extends Controller
 		//vérification de l'identité du client
 		$customer = $booking->getCustomer();
 		$user = $this->getUser();
-		if($user != $customer or !$this->get('security.context')->isGranted('ROLE_ADMIN')){
+		if($user != $customer and !$this->get('security.context')->isGranted('ROLE_ADMIN')){
 			throw new AccessDeniedException("Vous n'avez pas les droits suffisants pour accéder à cette réservation.");
 		}
 	

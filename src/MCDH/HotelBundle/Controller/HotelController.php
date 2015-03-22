@@ -157,7 +157,7 @@ class HotelController extends Controller
     	$em = $this->getDoctrine()->getManager();
     	
     	//récupération dans la base de données de l'hôtel à éditer
-    	$hotel = $$em->getRepository('MCDHHotelBundle:Hotel')->find($idHotel);
+    	$hotel = $em->getRepository('MCDHHotelBundle:Hotel')->find($idHotel);
     	
     	//création du formulaire
     	$form = $this->get('form.factory')->create(new HotelType(), $hotel);
@@ -170,7 +170,7 @@ class HotelController extends Controller
     	//vérification que le propriétaire courant est soit le propriétaire, soit l'administrateur
     	$hotelkeeper = $hotel->getHotelKeeper();
     	$user = $this->getUser();
-    	if($user != $hotelkeeper){
+    	if($user != $hotelkeeper and !$this->get('security.context')->isGranted('ROLE_ADMIN')){
     		throw new AccessDeniedException("Vous n'avez pas les droits suffisants pour accéder à cet hôtel.");
     	}
     	 

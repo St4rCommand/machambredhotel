@@ -26,7 +26,7 @@
 				
 				<p>Etes-vous sur de vouloir supprimer la réservation {{ booking.id }} du {{ booking.beginDate|date('d-m-Y') }} au {{ booking.endDate|date('d-m-Y') }} ?</p>
 	  			<div class="form-group row">
-					<a href="{{ path('mcdh_hotel_view_booking', {'idBooking':booking.id}) }}" role="button" class="col-lg-offset-3 col-lg-3 button btn-lg btn-primary active">>Revenir à la réservation</a>
+					<a href="{{ path('mcdh_hotel_view_booking', {'idBooking':booking.id}) }}" role="button" class="col-lg-offset-3 col-lg-3 button btn-lg btn-primary active">Revenir à la réservation</a>
 					{{ form_widget(form.delete, {'attr': {'class': 'col-lg-offset-1 btn btn-lg btn-danger'}}) }}
 				</div>
 				{{ form_rest(form) }}

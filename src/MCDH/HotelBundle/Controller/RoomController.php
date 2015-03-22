@@ -45,7 +45,7 @@ class RoomController extends Controller{
     	//vérification que le propriétaire courant est soit le propriétaire, soit l'administrateur
 		$hotelkeeper = $hotel->getHotelKeeper();
 		$user = $this->getUser();
-		if($user != $hotelkeeper or !$this->get('security.context')->isGranted('ROLE_ADMIN')){
+		if($user != $hotelkeeper and !$this->get('security.context')->isGranted('ROLE_ADMIN')){
 			throw new AccessDeniedException("Vous n'avez pas les droits suffisants pour accéder à cette hôtel.");
 		}
 		
@@ -141,7 +141,7 @@ class RoomController extends Controller{
     	//vérification que le propriétaire courant est soit le propriétaire, soit l'administrateur
 		$hotelkeeper = $room->getHotel()->getHotelKeeper();
 		$user = $this->getUser();
-		if($user != $hotelkeeper or !$this->get('security.context')->isGranted('ROLE_ADMIN')){
+		if($user != $hotelkeeper and !$this->get('security.context')->isGranted('ROLE_ADMIN')){
 			throw new AccessDeniedException("Vous n'avez pas les droits suffisants pour accéder à cette chambre.");
 		}
 		

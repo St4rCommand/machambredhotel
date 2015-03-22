@@ -20,12 +20,18 @@
 		{% if is_granted('ROLE_HOTELKEEPER') %}
 			{% for booking in bookings %}
 		      <li class="row list-group-item">
-		        <a href="{{ path('mcdh_hotel_view_booking', {'idBooking': booking.id}) }}"> Réservation n° {{ booking.id }}</a>
+		      	<div class="col-lg-9 col-sm-7">
+		       		<a href="{{ path('mcdh_hotel_view_booking', {'idBooking': booking.id}) }}"> Réservation n° {{ booking.id }}</a>
 				
-		    	du {{ booking.beginDate|date('d-m-Y') }} au {{ booking.endDate|date('d-m-Y') }}
+		    		du {{ booking.beginDate|date('d-m-Y') }} au {{ booking.endDate|date('d-m-Y') }}
+		        </div>
 		        
-				<a href="{{ path('mcdh_hotel_edit_booking', {'idBooking': booking.id}) }}">Editer</a>
-				<a href="{{ path('mcdh_hotel_delete_booking', {'idBooking': booking.id}) }}">Supprimer</a>
+		        {% if is_granted('ROLE_ADMIN') %}
+		        <div class="col-lg-3">
+					<a href="{{ path('mcdh_hotel_edit_booking', {'idBooking': booking.id}) }}" class="button btn-warning btn-sm active" role="button">Editer</a>
+					<a href="{{ path('mcdh_hotel_delete_booking', {'idBooking': booking.id}) }}" class="button btn-danger btn-sm active" role="button">Supprimer</a>
+				</div>
+				{% endif %}
 		      </li>
 		    {% else %}
 		      <li class="row list-group-item">Pas (encore !) de réservations pour cet hôtel.</li>
