@@ -5,7 +5,11 @@ mcdh_hotel_homepage:
         page: \d*
     
 mcdh_hotel_add:
+<<<<<<< HEAD
     path:     /hotel/add
+=======
+    path:     /addhotel
+>>>>>>> origin/master
     defaults: { _controller: MCDHHotelBundle:Hotel:add }
     
 mcdh_hotel_delete:
@@ -74,7 +78,7 @@ mcdh_hotel_delete_booking:
       idBooking: \d+
 
 mcdh_hotel_add_booking:
-    path:     /addbooking/{idRoom}
+    path:     /room/{idRoom}/addbooking
     defaults: { _controller: MCDHHotelBundle:Booking:add }
     requirements:
       idRoom: \d+

@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Booking
+ * Représente la réservation d'une chambre d'un hôtel par un client
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="MCDH\HotelBundle\Entity\BookingRepository")
@@ -14,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Booking
 {
     /**
-     * @var integer
+     * @var integer Identifiant de la réservation
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -23,7 +24,7 @@ class Booking
     private $id;
 
     /**
-     * @var \DateTime
+     * @var \DateTime Date de début de la réservation
      *
      * @ORM\Column(name="begin_date", type="date", nullable=false)
      * @Assert\NotBlank(message="La réservation doit avoir une date d'arrivée.")
@@ -32,7 +33,7 @@ class Booking
     private $beginDate;
 
     /**
-     * @var \DateTime
+     * @var \DateTime Date de fin de la réservation
      *
      * @ORM\Column(name="end_date", type="date", nullable=false)
      * @Assert\NotBlank(message="La réservation doit avoir une date de départ.")
@@ -41,7 +42,7 @@ class Booking
     private $endDate;
 
     /**
-     * @var decimal
+     * @var decimal Prix total de la réservation
      *
      * @ORM\Column(name="price", type="decimal", scale=2, nullable=false)
      * @Assert\NotBlank(message="La chambre doit avoir un prix.")
@@ -50,7 +51,7 @@ class Booking
     private $price;
 
     /**
-     * @var integer
+     * @var integer Nombre de personnes de la réservation
      *
      * @ORM\Column(name="people", type="integer", nullable=false)
      * @Assert\NotBlank(message="La chambre doit avoir un nombre de places défini")
@@ -59,14 +60,14 @@ class Booking
     private $people;
 
     /**
-     * @var boolean
+     * @var boolean Prise du petit déjeuner au restaurant de l'hôtel
      *
      * @ORM\Column(name="breakfast", type="boolean", nullable=false)
      */
     private $breakfast;
     
     /**
-     * @var Room
+     * @var MCDH\HotelBundle\Entity\Room Chambre de la réservation
      * 
      * @ORM\ManyToOne(targetEntity="MCDH\HotelBundle\Entity\Room")
      * @ORM\JoinColumn(nullable=false)
@@ -75,7 +76,7 @@ class Booking
     private $room;
     
     /**
-     * @var MCDH\UserBundle\Entity\User
+     * @var MCDH\UserBundle\Entity\User Client de la réservation
      *
      * @ORM\ManyToOne(targetEntity="MCDH\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)

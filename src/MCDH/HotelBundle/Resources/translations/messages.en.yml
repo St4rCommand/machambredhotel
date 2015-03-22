@@ -54,7 +54,7 @@ validation: Validation
 booking.number: Booking number
 from: from
 to: to
-booking.of: Booking from
+bookingof: Booking from
 night.price: Price per night
 contact.customer: Contact customer
 contact.hotel: Contact hotel

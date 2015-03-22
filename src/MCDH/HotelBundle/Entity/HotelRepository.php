@@ -15,43 +15,43 @@ use MCDH\UserBundle\Entity\User;
 class HotelRepository extends EntityRepository{
 	
 	/**
-	 * Return all hotels with pagination
+	 * Sélectionner l'ensemble des hôtel, et les retourner avec une pagination
 	 * 
-	 * @param unknown $page
-	 * @param unknown $nbPerPage
-	 * @return \MCDH\HotelBundle\Entity\Paginator
+	 * @param integer $page
+	 * @param integer $nbPerPage
+	 * @return Paginator
 	 */
 	public function getHotels($page, $nbPerPage)
 	{
+		//récupération de la requête sur l'hôtel
 		$query = $this->createQueryBuilder('h')->getQuery();
 	
+		//définition de la requête
 		$query
-		// On définit l'annonce à partir de laquelle commencer la liste
 		->setFirstResult(($page-1) * $nbPerPage)
-		// Ainsi que le nombre d'annonce à afficher sur une page
 		->setMaxResults($nbPerPage)
 		;
 	
-		// Enfin, on retourne l'objet Paginator correspondant à la requête construite
-		// (n'oubliez pas le use correspondant en début de fichier)
+		//retourne les hotels avec la pagination
 		return new Paginator($query, true);
 	}
 	
 	/**
-	 * Return all hotelkeeper hotels
+	 * Sélectionner l'ensemble des hôtels d'un propriétaire
 	 *
-	 * @param unknown $page
-	 * @param unknown $nbPerPage
-	 * @return \MCDH\HotelBundle\Entity\Paginator
+	 * @param \MCDH\UserBundle\Entity\User
+	 * @return multitype
 	 */
 	public function getHotelKeeperHotels($hotelkeeper)
 	{
+		//création de la requête
 		$query = $this
 			->createQueryBuilder('h')
 			->leftJoin('h.hotelkeeper', 'hotels')
 			->where('a.hotelkeeper = '.$hotelkeeper->getId())
 			->getQuery();
 		
+		//renvoie des résultats
 		return $query->getResult();
 	}
 }

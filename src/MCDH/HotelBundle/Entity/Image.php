@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Image
+ * Représente les fichiers images uploadés
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="MCDH\HotelBundle\Entity\ImageRepository")
@@ -15,7 +16,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class Image
 {
     /**
-     * @var integer
+     * @var integer Identifiant de l'image
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -24,14 +25,14 @@ class Image
     private $id;
 
     /**
-     * @var string
+     * @var string Extension de l'image
      *
      * @ORM\Column(name="extension", type="string", length=255)
      */
     private $extension;
 
     /**
-     * @var string
+     * @var string Texte de remplacement de l'image
      *
      * @ORM\Column(name="alt", type="string", length=255)
      */

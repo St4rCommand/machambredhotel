@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Room
+ * Représente les chambres de chaque hôtel
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="MCDH\HotelBundle\Entity\RoomRepository")
@@ -14,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Room
 {
     /**
-     * @var integer
+     * @var integer Identifiant de la chambre
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -23,7 +24,7 @@ class Room
     private $id;
 
     /**
-     * @var string
+     * @var string Nom de la chambre
      *
      * @ORM\Column(name="name", type="string", length=15, nullable=false)
      * @Assert\NotBlank(message="La chambre doit porter un nom")
@@ -32,7 +33,7 @@ class Room
     private $name;
 
     /**
-     * @var integer
+     * @var integer Etage de la chambre
      *
      * @ORM\Column(name="floor", type="integer")
      * @Assert\Range(min=0,minMessage="L'étage de la chambre doit être un entier positif ou nul.",invalidMessage="L'étage de la chambre doit être un entier positif ou nul")
@@ -40,7 +41,7 @@ class Room
     private $floor;
 
     /**
-     * @var integer
+     * @var integer Capacité d'accueil de la chambre
      *
      * @ORM\Column(name="people", type="integer", nullable=false)
      * @Assert\NotBlank(message="La chambre doit avoir un nombre de places défini")
@@ -50,7 +51,7 @@ class Room
 
 
     /**
-     * @var string
+     * @var string Orientation cardinale de la chambre
      *
      * @ORM\Column(name="orientation", type="string", length=10, nullable=false)
      * @Assert\NotBlank(message="La chambre doit avoir un nombre de places défini")
@@ -59,7 +60,7 @@ class Room
     private $orientation;
 
     /**
-     * @var decimal
+     * @var decimal Prix d'une nuité
      *
      * @ORM\Column(name="price", type="decimal", scale=2, nullable=false)
      * @Assert\NotBlank(message="La chambre doit avoir un prix.")
@@ -68,7 +69,7 @@ class Room
     private $price;
     
     /**
-     * @var Hotel
+     * @var Hotel Hotel auquel appartient la chambre
      * 
      * @ORM\ManyToOne(targetEntity="MCDH\HotelBundle\Entity\Hotel")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
@@ -77,7 +78,7 @@ class Room
     private $hotel;
     
     /**
-     * @var Image
+     * @var Image Image associée à la chambre
      * 
      * @ORM\OneToOne(targetEntity="MCDH\HotelBundle\Entity\Image", cascade={"persist"})
      */

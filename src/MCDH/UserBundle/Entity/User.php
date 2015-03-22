@@ -7,6 +7,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * User
+ * Représente les différents rôles d'utilisateur
  *
  * @ORM\Table()
  * @ORM\Entity
@@ -14,7 +15,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 class User extends BaseUser
 {
     /**
-     * @var integer
+     * @var integer Identifiant de l'utilisateur
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
