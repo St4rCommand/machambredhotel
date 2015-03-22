@@ -54,7 +54,7 @@ validation: Validation
 booking.number: Booking number
 from: from
 to: to
-bookingof: Booking from
+booking.of: Booking from
 night.price: Price per night
 contact.customer: Contact customer
 contact.hotel: Contact hotel
@@ -70,7 +70,8 @@ createdby: This website as been creadted by Simon BERNARD and Romain HUNAULT.
 ihm: It has been created as a projet for the IHM development class by studients from Licence 3 of MIAGE at the UFR Sciences et Techniques of the University of Nantes.
 home: Homepage
 submit: Submit
-
+yes: Yes
+no: No
 
 
 
