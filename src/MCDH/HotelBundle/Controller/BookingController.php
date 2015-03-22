@@ -279,11 +279,11 @@ class BookingController extends Controller
 			$request->getSession()->getFlashBag()->add('notice','Vous ne pouvez pas réserver plus de 2 ans à l\'avance');
 		}
 		
-		//réservation ne dure pas plus de 30 jours
-		if($end->diff($begin)->format('days')>30){
+		//réservation ne dure pas plus de 30 jours : ne fonctionne pas
+		/*if($end->diff($begin)->format('days')>30){
 			$valid = false;
 			$request->getSession()->getFlashBag()->add('notice','Votre réservation ne peux pas avoir une durée supérieur à 30 jours');
-		}
+		}*/
 		
 		//réservation correspond à la capacité de la chambre
 		if($booking->getPeople() > $booking->getRoom()->getPeople()){
@@ -296,8 +296,11 @@ class BookingController extends Controller
 			$currentBegin = $b->getBeginDate();
 			$currentEnd = $b->getEndDate();
 			
-			if(($begin>=$currentBegin and $begin < $currentEnd)
-				or ($end >$currentBegin and $end <= $currentEnd)){
+			if($booking->getId() != $b->getId() and (($begin>=$currentBegin and $begin < $currentEnd)
+				or ($end >$currentBegin and $end <= $currentEnd)
+				or ($begin <= $currentBegin and $end >= $currentEnd)
+				or ($begin >= $currentBegin and $end <= $currentEnd)
+			)){
 				$request->getSession()->getFlashBag()->add('notice','Date de réservation à cheval sur une autre réservation : veuillez choisir une autre date ou une autre chambre pour votre réservation.');
 				$valid = false;
 			}

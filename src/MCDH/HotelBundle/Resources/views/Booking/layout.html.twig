@@ -3,8 +3,8 @@
 {% block mcdh_hotel_breadcrumb_trail %}
 	{{ parent() }} 
 	> <a href="{{ path('mcdh_hotel_view', {'idHotel':booking.room.hotel.id}) }}">{{ booking.room.hotel.name }}</a>
-	> <a href="{{ path('mcdh_hotel_view', {'idHotel':booking.room.id}) }}">{{ booking.room.name }}</a>
-	> <a href="{{ path('mcdh_hotel_view', {'idHotel':booking.room.id}) }}">Réservation {{ booking.id }}</a>
+	> <a href="{{ path('mcdh_hotel_view_room', {'idRoom':booking.room.id}) }}">{{ booking.room.name }}</a>
+	> <a href="{{ path('mcdh_hotel_view_booking', {'idBooking':booking.id}) }}">Réservation {{ booking.id }}</a>
 {% endblock %}
 
 {% block mcdh_hotel_page_option %}
