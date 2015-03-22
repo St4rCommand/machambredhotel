@@ -8,11 +8,18 @@ use MCDH\HotelBundle\Entity\Hotel;
 use MCDH\HotelBundle\Entity\Room;
 use MCDH\HotelBundle\Entity\Booking;
 use MCDH\UserBundle\Entity\User;
-
+/**
+ * Insertions de données dans la base
+ * Insert des données dans la base afin de pouvoir tester rapidemment le projet
+ *
+ */
 class LoadHotel implements FixtureInterface{
 	
 	public function load(ObjectManager $manager){
 		
+		/* ---- Utilisateurs ---- */
+		
+		//utilisateur administrateur
 		$adminUser = new User;
 		$adminUser->setUserName('admin');
 		$adminUser->setPlainPassword('admin');
@@ -22,6 +29,7 @@ class LoadHotel implements FixtureInterface{
 		$manager->persist($adminUser);
 		$manager->flush();
 		 
+		//utilisateur client
 		$customerUser = new User;
 		$customerUser->setUserName('customer');
 		$customerUser->setPlainPassword('customer');
@@ -30,7 +38,8 @@ class LoadHotel implements FixtureInterface{
 		$customerUser->setRoles(array('ROLE_CUSTOMER'));
 		$manager->persist($customerUser);
 		$manager->flush();
-		 
+		
+		//utilisateur propriétaire
 		$hotelKeeperUser = new User;
 		$hotelKeeperUser->setUserName('hotelkeeper');
 		$hotelKeeperUser->setPlainPassword('hotelkeeper');
@@ -40,17 +49,9 @@ class LoadHotel implements FixtureInterface{
 		$manager->persist($hotelKeeperUser);
 		$manager->flush();
 		
-		$romain = new User;
-		$romain->setUserName('romain');
-		$romain->setPlainPassword('romain');
-		$romain->setEmail('romain@mail.com');
-		$romain->setEnabled(true);
-		$romain->setRoles(array('ROLE_CUSTOMER'));
-		$manager->persist($romain);
-		$manager->flush();
 		
+		/* ---- Hôtels ---- */
 		
-		//instanciation des hôtels
 		$carlton = new Hotel();
 		$carlton->setName("Carlton");
 		$carlton->setAddress("3, rue de Paris");
@@ -115,7 +116,7 @@ class LoadHotel implements FixtureInterface{
 		
 		
 		
-		//instanciation des chambres
+		/* ---- Chambres ---- */
 		$cComfort = new Room();
 		$cComfort->setName("Confort");
 		$cComfort->setFloor(1);
@@ -144,7 +145,7 @@ class LoadHotel implements FixtureInterface{
 		$manager->persist($cComfortplus);
 		$manager->persist($cCharme);
 		
-		//instanciation réservation
+		/* ---- Réservations ---- */
 		$r1 = new Booking();
 		$r1->setBeginDate(new \DateTime('2015-04-11'));
 		$r1->setEndDate(new \DateTime('2012-04-18'));

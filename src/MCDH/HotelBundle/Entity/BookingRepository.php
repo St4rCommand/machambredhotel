@@ -12,6 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class BookingRepository extends EntityRepository
 {
+	/**
+	 * Sélectionner l'ensemble des réservations pour une chambre ayant une date de début supérieur à la date du jour
+	 * 
+	 * @param MCDH\HotelBundle\Entity\Room $room
+	 * @return multitype:
+	 */
 	public function findFuturBookings($room){
 		$queryBuilder = $this->createQueryBuilder('b');
 		

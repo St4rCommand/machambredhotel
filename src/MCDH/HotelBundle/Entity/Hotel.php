@@ -8,6 +8,7 @@ use MCDH\UserBundle\MCDHUserBundle;
 
 /**
  * Hotel
+ * Représente les hôtels
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="MCDH\HotelBundle\Entity\HotelRepository")
@@ -15,7 +16,7 @@ use MCDH\UserBundle\MCDHUserBundle;
 class Hotel
 {
     /**
-     * @var integer
+     * @var integer Identifiant de l'hôtel
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -24,7 +25,7 @@ class Hotel
     private $id;
 
     /**
-     * @var string
+     * @var string Nom de l'hotel
      *
      * @ORM\Column(name="name", type="string", length=50, nullable=false)
      * @Assert\NotBlank(message="L'hôtel doit porter un nom")
@@ -33,7 +34,7 @@ class Hotel
     private $name;
 
     /**
-     * @var string
+     * @var string Adresse de l'hôtel
      *
      * @ORM\Column(name="address", type="string", length=50, nullable=false)
      * @Assert\NotBlank(message="L'hôtel doit avoir une adresse.")
@@ -42,7 +43,7 @@ class Hotel
     private $address;
 
     /**
-     * @var string
+     * @var string Code postal de l'hôtel
      *
      * @ORM\Column(name="postcode", type="string", length=10, nullable=false)
      * @Assert\NotBlank(message="L'hôtel doit avoir un code postal.")
@@ -51,7 +52,7 @@ class Hotel
     private $postcode;
     
     /**
-     * @var string
+     * @var string Ville de l'hôtel
      * 
      * @ORM\Column(name="city", type="string", length=50, nullable=false)
      * @Assert\NotBlank(message="L'hôtel doit avoir une ville.")
@@ -60,7 +61,7 @@ class Hotel
     private $city;
 
     /**
-     * @var string
+     * @var string Pays de l'hôtel
      *
      * @ORM\Column(name="country", type="string", length=25, nullable=false)
      * @Assert\NotBlank(message="L'hôtel doit avoir un pays.")
@@ -69,7 +70,7 @@ class Hotel
     private $country;
     
     /**
-     * @var \DateTime
+     * @var \DateTime Date d'ajout de l'hôtel
      * 
      * @ORM\Column(name="added_date", type="date", nullable=false)
      * @Assert\NotBlank(message="L'hôtel doit avoir une date d'ajout.")
@@ -78,7 +79,7 @@ class Hotel
     private $addedDate;
     
    	/**
-   	 * @var string
+   	 * @var string URL du site internet de l'hôtel
    	 * 
    	 * @ORM\Column(name="website", type="string", length=255, unique=true, nullable=true)
    	 * @Assert\Url(message="L'adresse du site internet de l'hôtel doit être une url valide")
@@ -86,7 +87,7 @@ class Hotel
     private $website;
     
     /**
-     * @var string
+     * @var string Numéro de téléphone de l'hôtel
      * 
      * @ORM\Column(name="phone_number", type="string", length=15, nullable=false)
      * @Assert\NotBlank(message="L'hôtel doit avoir un numéro de téléphone.")
@@ -95,7 +96,7 @@ class Hotel
     private $phoneNumber;
 
     /**
-     * @var string
+     * @var string Adresse email principale de l'hôtel
      * 
      * @ORM\Column(name="email", type="string", length=255, unique=true, nullable=true)
      * @Assert\Email(message="L'adresse email de l'hôtel doit être une adresse email valide")
@@ -104,7 +105,7 @@ class Hotel
     private $email;
     
     /**
-     * @var string
+     * @var string Description de l'hôtel
      * 
      * @ORM\Column(name="description", type="text", length=500, nullable=false) 
      * @Assert\NotBlank(message="L'hôtel doit avoir une description.")
@@ -113,7 +114,7 @@ class Hotel
     private $description;
     
     /**
-     * @var integer
+     * @var integer Nombre d'étages de l'hôtel
      * 
      * @ORM\Column(name="floor", type="integer")
      * @Assert\Range(min=0,minMessage="Le nombre d'étages de l'hôtel doit être un entier positif ou nul",invalidMessage="Le nombre d'étages de l'hôtel doit être un entier positif ou nul")
@@ -121,14 +122,14 @@ class Hotel
     private $floor;
     
     /**
-     * @var Image
+     * @var Image Image associée à l'hôtel
      *
      * @ORM\OneToOne(targetEntity="MCDH\HotelBundle\Entity\Image", cascade={"persist"})
      */
     private $image;
     
     /**
-     * @var MCDH\UserBundle\Entity\User 
+     * @var MCDH\UserBundle\Entity\User Propriétaire de l'hôtel
      * 
      * @ORM\ManyToOne(targetEntity="MCDH\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)

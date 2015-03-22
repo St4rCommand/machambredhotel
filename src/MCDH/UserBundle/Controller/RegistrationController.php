@@ -17,17 +17,22 @@ use FOS\UserBundle\Model\UserInterface;
 
 class RegistrationController extends BaseController
 {
+	/**
+	 * Surcharge de la méthode du bundle FOS user afin d'ajouter le rôle ROLE_CUSTOMER à chaque nouvel utilisateur inscrit
+	 * 
+	 * @param Request $request
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+	 */
 	public function registerAction(Request $request){
 		
-		/** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
 		$formFactory = $this->get('fos_user.registration.form.factory');
-		/** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
 		$userManager = $this->get('fos_user.user_manager');
-		/** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
 		$dispatcher = $this->get('event_dispatcher');
 		
 		$user = $userManager->createUser();
 		$user->setEnabled(true);
+		
+		//ajout du rôle
 		$user->addRole('ROLE_CUSTOMER');
 		
 		$event = new GetResponseUserEvent($user, $request);
