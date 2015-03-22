@@ -77,15 +77,14 @@ class HotelController extends Controller
     	
     	//instanciation d'un hôtel
     	$hotel = new Hotel();
-    	$hotel->setAddedDate(new \Datetime());
+    	$hotel->setAddedDate(new \DateTime());
+    	$hotel->setHotelKeeper($this->getUser());
     	
     	//création du formulaire
     	$form = $this->get('form.factory')->create(new HotelType(), $hotel);
     	
     	//si le formulaire a été validé
     	if($form->handleRequest($request)->isValid()){
-    		
-    		$hotel->setHotelKeeper($this->getUser());
     		
     		//récupréation de l'Entity Manager
     		$em = $this->getDoctrine()->getManager();

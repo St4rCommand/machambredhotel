@@ -1,5 +1,23 @@
 {% extends "MCDHUserBundle::layout.html.twig" %}
 
+{% trans_default_domain 'FOSUserBundle' %}
+
 	{% block mcdh_user_content %}
-		<p>je suis dans show</p>
+
+    	<h1>Profil de {{ user.username }} <small>{{ user.email }}</small></h1>
+
+    	<!-- affichage pour un client -->
+    	{% if is_granted('ROLE_CUSTOMER') %}
+    		<div class="well">
+	   			{% include 'MCDHUserBundle:Profile:show_content_customer.html.twig' %}
+	   		</div>
+    	{% endif %}
+    	
+    	<!-- affichage pour un gérant -->
+    	{% if is_granted('ROLE_HOTELKEEPER') %}
+    		<div class="well">
+	   			{%  include 'MCDHUserBundle:Profile:show_content_hotelkeeper.html.twig' %}
+	   		</div>
+		{% endif %}
+	
 	{% endblock %}

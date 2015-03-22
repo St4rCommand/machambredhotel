@@ -42,13 +42,15 @@ class HotelRepository extends EntityRepository{
 	 * @param \MCDH\UserBundle\Entity\User
 	 * @return multitype
 	 */
-	public function getHotelKeeperHotels($hotelkeeper)
+	public function getHotelKeeperHotels($user)
 	{
 		//création de la requête
-		$query = $this
-			->createQueryBuilder('h')
-			->leftJoin('h.hotelkeeper', 'hotels')
-			->where('a.hotelkeeper = '.$hotelkeeper->getId())
+		$query = $this->createQueryBuilder('h')
+
+			->where('h.hotelKeeper = :hotelkeeper')
+				->setParameter('hotelkeeper', $user)
+			
+			->orderBy('h.name', 'ASC')
 			->getQuery();
 		
 		//renvoie des résultats

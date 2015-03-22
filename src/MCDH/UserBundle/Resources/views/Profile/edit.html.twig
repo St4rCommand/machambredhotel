@@ -1,5 +1,26 @@
 {% extends "MCDHUserBundle::layout.html.twig" %}
 
-	{% block mcdh_user_content %}
-		<p>je suis dans edit</p>
-	{% endblock %}
+{% block mcdh_user_breadcrumb_trail %}
+
+	{{ parent() }} > Editer
+	
+{% endblock %}
+
+
+{% block mcdh_user_page_option %}
+	{{ parent () }}
+	<a href="{{ path('fos_user_profile_show') }}" class="button btn-primary btn-sm active" role="button">Revenir au profil</a>
+{% endblock %}
+
+{% block mcdh_user_content %}
+
+  	{% for flashMessage in app.session.flashbag.get('alert') %}
+	    <div class="alert row">
+	        {{ flashMessage }}
+	    </div>
+	{% endfor %}
+		
+	{% include 'MCDHUserBundle:Profile:form.html.twig' %}
+{% endblock %}
+
+

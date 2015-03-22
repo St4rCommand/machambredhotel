@@ -1,6 +1,7 @@
 {% extends "::layout.html.twig" %}
 
-  	
+{% block body %}
+
   	{% for flashMessage in app.session.flashbag.get('alert') %}
 	    <div class="alert row">
 	        {{ flashMessage }}
@@ -18,7 +19,7 @@
   	
   	<div class="row well">
 		{% block mcdh_user_page_option %}
-		
+			<a href="{{ path('fos_user_profile_edit') }}" class="button btn-warning btn-sm active" role="button">Editer</a>	
 		{% endblock %}
 	</div>
 	
@@ -26,4 +27,6 @@
 		{% block mcdh_user_content %}
 		{% endblock %}
 	</div>
+	
+{% endblock %}
 

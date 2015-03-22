@@ -1,0 +1,21 @@
+<h2>Mes réservations</h2>
+
+<ul class="row list-group">
+	{% for booking in bookings %}
+	<li class="row list-group-item">
+		<div class="col-lg-10 col-sm-9">
+			<a href="{{ path('mcdh_hotel_view_booking', {'idBooking': booking.id}) }}"> Réservation n° {{ booking.id }}</a>
+		
+			du {{ booking.beginDate|date('d-m-Y') }} au {{ booking.endDate|date('d-m-Y') }}
+		</div>
+
+		<div class="col-lg-2 col-sm-3">
+			<a href="{{ path('mcdh_hotel_edit_booking', {'idBooking': booking.id}) }}" class="button btn-warning btn-sm active" role="button">Editer</a>
+			<a href="{{ path('mcdh_hotel_delete_booking', {'idBooking': booking.id}) }}" class="button btn-danger btn-sm active" role="button">Supprimer</a>
+		</div>
+
+		</li>
+	{% else %}
+		<li class="row list-group-item">Vous n'avez pas (encore !) de réservations.</li>
+	{% endfor %}
+</ul>

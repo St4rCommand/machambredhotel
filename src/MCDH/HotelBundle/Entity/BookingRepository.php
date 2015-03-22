@@ -33,4 +33,24 @@ class BookingRepository extends EntityRepository
 		return $query->getResult();
 	}
 	
+	/**
+	 * Sélectionner l'ensemble des réservations pour une chambre ayant une date de début supérieur à la date du jour
+	 * 
+	 * @param MCDH\HotelBundle\Entity\Room $room
+	 * @return multitype:
+	 */
+	public function findUserBookings($user){
+		$query = $this->createQueryBuilder('b')
+
+			->where('b.beginDate >= :today')
+				->setParameter('today', new \DateTime())
+				
+			->andWhere('b.customer = :customer')
+				->setParameter('customer', $user)
+			
+			->orderBy('b.beginDate', 'ASC')
+			->getQuery();
+		
+		return $query->getResult();
+	}
 }
