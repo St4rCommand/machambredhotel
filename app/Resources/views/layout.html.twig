@@ -29,8 +29,8 @@
 						    	<a href="{{ path('fos_user_security_logout') }}" class="button btn-warning btn-sm active" role="button"><span class="glyphicon glyphicon-remove-circle"></span>Déconnexion</a>
 						    </div>
 						{% else %}
-						    <a href="{{ path('fos_user_security_login') }}">Connexion</a>
-						    <a href="{{ path('fos_user_registration_register') }}">Inscription</a>
+						    <a href="{{ path('fos_user_security_login') }}" class="button btn-primary btn-sm active" role="button">Connexion</a>
+						    <a href="{{ path('fos_user_registration_register') }}" class="button btn-success btn-sm active" role="button">Inscription</a>
 						{% endif %}
 					</div>
 				</div>

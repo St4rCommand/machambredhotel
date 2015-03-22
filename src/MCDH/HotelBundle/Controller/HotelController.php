@@ -14,30 +14,28 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 
 /**
- * Main controller for HotelBundle
- * 
- * @author Romain
+ * Contrôleur pour la gestion des hôtels
  *
  */
 class HotelController extends Controller
 {
 	/**
-	 * Homepage for HotelBundle
+	 * Page d'accueil de l'onglet "Hotel"
+	 * Affichage de la liste des hôtels proposés
 	 * 
-	 * @param unknown $page
+	 * @param int $page
 	 * @throws NotFoundHttpException
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
     public function indexAction($page){
     	
-    	//si la page demandée n'existe pas
+    	//si la page demandée n'existe pas, exception levée
     	if ($page < 1) {
-    	
-    		//exception levée
-    		throw new NotFoundHttpException('Page "'.$page.'" inexistante.'); // Traduction ?
+    		throw new NotFoundHttpException('Page "'.$page.'" inexistante.');
     	}
     	
-    	$nbPerPage = 4;
+    	//définition du nombre d'hôtels à afficher par page
+    	$nbPerPage = 10;
 
     	//récupération des hotels de la base de données
     	$hotels = $this
@@ -56,7 +54,7 @@ class HotelController extends Controller
     	
     	//si la page demandée est supérieur au nombre de page
     	if ($page > $nbPages) {
-    		throw $this->createNotFoundException("Page ".$page." inexistante.");
+    		throw new NotFoundHttpException("Page ".$page." inexistante.");
     	}
     	
     	//affichage de la liste des hôtels
@@ -68,7 +66,8 @@ class HotelController extends Controller
     }
     
     /**
-     * Add a new hotel
+     * Ajouter un nouvel hôtel
+     * Seul les utilisateurs ayant le role ROLE_HOTELKEEPER et l'administrateur peuvent executer cette fonction
      * 
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -76,14 +75,14 @@ class HotelController extends Controller
      */
     public function addAction(Request $request){
     	
-    	//instanciation de l'entité
+    	//instanciation d'un hôtel
     	$hotel = new Hotel();
     	$hotel->setAddedDate(new \Datetime());
     	
     	//création du formulaire
     	$form = $this->get('form.factory')->create(new HotelType(), $hotel);
     	
-    	//si le formulaire d'ajout a été validé
+    	//si le formulaire a été validé
     	if($form->handleRequest($request)->isValid()){
     		
     		$hotel->setHotelKeeper($this->getUser());
@@ -104,16 +103,103 @@ class HotelController extends Controller
     		
     	}
     	
-    	//affichage du formulaire
+    	//sinon affichage du formulaire
     	return $this->render('MCDHHotelBundle:Hotel:add.html.twig',array(
     			'form' => $form->createView(),
     	));
     }
     
     /**
-     * Delete an hotel
+     * Voir les détails d'un hôtel
+     * Les détails de l'hôtel ainsi que les éventuelles chambres sont affichées
+     * Tous les utilisateurs peuvent accéder à cette fonction
      * 
-     * @param unknown $idHotel
+     * @param int $idHotel
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function viewAction($idHotel){
+    	
+    	//récupréation de l'Entity Manager
+    	$em = $this->getDoctrine()->getManager();
+    	
+    	//récupération dans la base de l'hôtel à afficher
+    	$hotel = $em->getRepository('MCDHHotelBundle:Hotel')->find($idHotel);
+    	
+    	//affichage d'une erreur si l'hôtel n'existe pas
+    	if($hotel === null){
+    		throw new NotFoundHttpException("Aucun hôtel ne porte l'identifiant ".$idHotel.".");
+    	}
+    	
+    	//sélection des chambres de cet hôtel
+    	$rooms = $em->getRepository('MCDHHotelBundle:Room')->findBy(array('hotel' => $hotel));
+    	
+    	//affichage des caractéristiques de l'hôtel
+    	return $this->render('MCDHHotelBundle:Hotel:view.html.twig', array(
+      		'hotel' => $hotel,
+    		'rooms' => $rooms
+   		));
+    }
+    
+    /**
+     * Editer un hôtel
+     * Le propriétaire de l'hôtel et l'administrateur peuvent executer cette fonction
+     * 
+     * @param int $idHotel
+     * @param Request $request
+	 * @throws NotFoundHttpException
+	 * @throws AccessDeniedException
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_HOTELKEEPER')")
+     */
+    public function editAction($idHotel, Request $request){
+
+    	//récupréation de l'Entity Manager
+    	$em = $this->getDoctrine()->getManager();
+    	
+    	//récupération dans la base de données de l'hôtel à éditer
+    	$hotel = $$em->getRepository('MCDHHotelBundle:Hotel')->find($idHotel);
+    	
+    	//création du formulaire
+    	$form = $this->get('form.factory')->create(new HotelType(), $hotel);
+    	
+    	//affichage d'une erreur si l'hôtel n'existe pas
+    	if($hotel === null){
+    		throw new NotFoundHttpException("Aucun hôtel ne porte l'identifiant ".$idHotel.".");
+    	}
+
+    	//vérification que le propriétaire courant est soit le propriétaire, soit l'administrateur
+    	$hotelkeeper = $hotel->getHotelKeeper();
+    	$user = $this->getUser();
+    	if($user != $hotelkeeper){
+    		throw new AccessDeniedException("Vous n'avez pas les droits suffisants pour accéder à cet hôtel.");
+    	}
+    	 
+    	//si le formulaire a été validé
+    	if($form->handleRequest($request)->isValid()){
+    		 
+    		//flush de l'entité
+    		$em->flush();
+    	
+    		//affichage d'un message pour confirmer la prise en compte des modifications de l'hôtel
+    		$request->getSession()->getFlashBag()->add('notice','Les modifications ont bien été prise en compte.');
+    	
+    		//redirection vers la page affichant l'hôtel
+    		return $this->redirect($this->generateUrl('mcdh_hotel_view', array('idHotel' => $hotel->getId())));
+    	
+    	}
+    	//sinon affichage du formulaire d'édition
+    	return $this->render('MCDHHotelBundle:Hotel:edit.html.twig',array(
+    			'form' => $form->createView(),
+    			'hotel' => $hotel
+    	));
+    }
+    
+    /**
+     * Supprimer un hôtel
+     * Pour des raisons de sécurité, seul les administrateur peuvent supprimer des hôtels
+     *  
+     * @param int $idHotel
+	 * @throws NotFoundHttpException
      * @return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_ADMIN')")
      */
@@ -137,6 +223,7 @@ class HotelController extends Controller
     	
     	//si le formulaire a été validé
     	if($form->handleRequest($request)->isValid()){
+    		
     		//suppression de l'hôtel
     		$em->remove($hotel);
     		$em->flush();
@@ -148,86 +235,10 @@ class HotelController extends Controller
     		return $this->redirect($this->generateUrl('mcdh_hotel_homepage'));
     	}
 
+    	//sinon affichage du formulaire de validation
     	return $this->render('MCDHHotelBundle:Hotel:delete.html.twig',array(
     		'hotel'=>$hotel,
     		'form'=>$form->createView()
-    	));
-    }
-    
-    /**
-     * View an hotel
-     * 
-     * @param unknown $idHotel
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function viewAction($idHotel){
-    	
-    	$em = $this->getDoctrine()->getManager();
-    	
-    	//récupération dans la base de l'hôtel à afficher
-    	$hotel = $em->getRepository('MCDHHotelBundle:Hotel')->find($idHotel);
-    	
-    	//affichage d'une erreur si l'hôtel n'existe pas
-    	if($hotel === null){
-    		throw new NotFoundHttpException("Aucun hôtel ne porte l'identifiant ".$idHotel.".");
-    	}
-    	
-    	$rooms = $em->getRepository('MCDHHotelBundle:Room')->findBy(array('hotel' => $hotel));
-    	
-    	//affichage des caractéristiques de l'hôtel
-    	return $this->render('MCDHHotelBundle:Hotel:view.html.twig', array(
-      		'hotel' => $hotel,
-    		'rooms' => $rooms
-   		));
-    }
-    
-    /**
-     * Edit an hotel
-     * 
-     * @param unknown $idHotel
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @Security("has_role('ROLE_HOTELKEEPER')")
-     */
-    public function editAction($idHotel, Request $request){
-    	
-    	//récupération dans la base de données de l'hôtel à éditer
-    	$hotel = $this->getDoctrine()->getManager()->getRepository('MCDHHotelBundle:Hotel')->find($idHotel);
-    	
-    	//création du formulaire
-    	$form = $this->get('form.factory')->create(new HotelType(), $hotel);
-    	
-    	//affichage d'une erreur si l'hôtel n'existe pas
-    	if($hotel === null){
-    		throw new NotFoundHttpException("Aucun hôtel ne porte l'identifiant ".$idHotel.".");
-    	}
-
-    	$hotelkeeper = $hotel->getHotelKeeper();
-    	$user = $this->getUser();
-    	if($user != $hotelkeeper){
-    		throw new AccessDeniedException("Vous n'avez pas les droits suffisants pour accéder à cet hôtel.");
-    	}
-    	 
-    	//si le formulaire a été validé
-    	if($form->handleRequest($request)->isValid()){
-    	
-    		//récupréation de l'Entity Manager
-    		$em = $this->getDoctrine()->getManager();
-    		 
-    		//flush de l'entité
-    		$em->flush();
-    	
-    		//affichage d'un message pour confirmer la prise en compte des modification de l'hôtel
-    		$request->getSession()->getFlashBag()->add('notice','Les modifications ont bien été prise en compte.');
-    	
-    		//redirection vers la page affichant l'hôtel
-    		return $this->redirect($this->generateUrl('mcdh_hotel_view', array('idHotel' => $hotel->getId())));
-    	
-    	}
-    	
-    	return $this->render('MCDHHotelBundle:Hotel:edit.html.twig',array(
-    			'form' => $form->createView(),
-    			'hotel' => $hotel
     	));
     }
 }

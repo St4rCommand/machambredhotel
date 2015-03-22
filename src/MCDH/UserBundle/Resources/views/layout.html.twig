@@ -1,14 +1,33 @@
 {% extends "::layout.html.twig" %}
 
 {% block body %}
+  	
+  	{% for flashMessage in app.session.flashbag.get('alert') %}
+	    <div class="alert row">
+	        {{ flashMessage }}
+	    </div>
+	{% endfor %}
 
-	{% for key, message in app.session.flashbag.all() %}
-	    <div class="alert alert-{{ key }}">
-	      {#{ message|trans({}, 'FOSUserBundle') }#}
-	    </div> 
-  	{% endfor %}
+	<div class="row ">
+		{% block mcdh_user_breadcrumb_trail %}
+		
+			<a href="{{ path('fos_user_profile_show') }}">Profil</a>
+			
+		{% endblock %}
+	</div>
   	
   	{% block fos_user_content %}
   	{% endblock fos_user_content %}
+  	
+  	<div class="row well">
+		{% block mcdh_user_page_option %}
+		
+		{% endblock %}
+	</div>
+	
+	<div class="row well">
+		{% block mcdh_user_content %}
+		{% endblock %}
+	</div>
 
 {% endblock %}
